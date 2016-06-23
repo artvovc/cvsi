@@ -63,7 +63,47 @@
             <artifactId>spring-tx</artifactId>
             <version>4.3.0.RELEASE</version>
         </dependency>
+
+        <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+
     </dependencies>
 
+    <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>3.0.5</version>
+                    <configuration>
+                        <propertyFileWillOverride>true</propertyFileWillOverride>
+                        <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>update</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <finalName>cvsi-db</finalName>
+    </build>
 
 </project>

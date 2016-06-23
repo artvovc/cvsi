@@ -36,6 +36,8 @@
           <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.2.4.Final" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.liquibase:liquibase-core:3.5.0" />
+          <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.13" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.5.8" />
@@ -64,6 +66,10 @@
           <element id="library" level="project" name="Maven: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" />
           <element id="library" level="project" name="Maven: io.springfox:springfox-swagger-ui:2.4.0" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:4.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:4.1.0.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">
