@@ -8,7 +8,7 @@
     <changeSet id="1" author="artiom">
         <comment>test</comment>
         <sqlFile encoding="UTF-8"
-                 path=""
+                 path="src/main/resources/sqlscript/test.sql"
                  splitStatements="true"
                  stripComments="true"/>
     </changeSet>

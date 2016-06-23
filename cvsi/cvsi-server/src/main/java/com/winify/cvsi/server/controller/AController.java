@@ -24,12 +24,15 @@ public class AController {
 
     @GetMapping(path = "/me/{modelId}")
     public HttpEntity<CvsiResponse> getAModel(@PathVariable Long modelId){
+        log.info("get by id try to get something");
+
         return new ResponseEntity(aFacade.getASimpleDto(modelId), HttpStatus.OK);
     }
 
     @PostMapping (path = "/me")
     public HttpEntity<CvsiResponse> saveAModel(){
         aFacade.saveAModel();
+        log.info("post me not work :D");
 
         return new ResponseEntity(new CvsiResponse(), HttpStatus.OK);
     }
