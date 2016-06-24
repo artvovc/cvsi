@@ -78,28 +78,28 @@
     </dependencies>
 
     <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
-    <!--<build>-->
-            <!--<plugins>-->
-                <!--<plugin>-->
-                    <!--<groupId>org.liquibase</groupId>-->
-                    <!--<artifactId>liquibase-maven-plugin</artifactId>-->
-                    <!--<version>3.0.5</version>-->
-                    <!--<configuration>-->
-                        <!--<propertyFileWillOverride>true</propertyFileWillOverride>-->
-                        <!--<propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>-->
-                    <!--</configuration>-->
-                    <!--<executions>-->
-                        <!--<execution>-->
-                            <!--<phase>process-resources</phase>-->
-                            <!--<goals>-->
-                                <!--<goal>update</goal>-->
-                            <!--</goals>-->
-                        <!--</execution>-->
-                    <!--</executions>-->
-                <!--</plugin>-->
-            <!--</plugins>-->
+    <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>3.0.5</version>
+                    <configuration>
+                        <propertyFileWillOverride>true</propertyFileWillOverride>
+                        <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>update</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
 
-        <!--<finalName>cvsi-db</finalName>-->
-    <!--</build>-->
+        <finalName>cvsi-db</finalName>
+    </build>
 
 </project>
