@@ -11,6 +11,10 @@
 
     <artifactId>cvsi-core</artifactId>
 
+    <properties>
+        <dir>..</dir>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.winify.cvsi</groupId>
@@ -20,6 +24,5 @@
 
 
     </dependencies>
-
 
 </project>

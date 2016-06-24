@@ -1,10 +1,10 @@
 package com.winify.cvsi.server.controller;
 
-import com.sun.istack.internal.logging.Logger;
 import com.winify.cvsi.core.dto.ASimpleDto;
 import com.winify.cvsi.core.dto.CvsiResponse;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.server.facade.AFacade;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;

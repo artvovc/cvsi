@@ -1,0 +1,5 @@
+com\winify\cvsi\db\dao\impl\AModelDaoImpl.class
+com\winify\cvsi\db\model\AModel.class
+com\winify\cvsi\db\dao\impl\AbstractDao.class
+com\winify\cvsi\db\dao\AModelDao.class
+com\winify\cvsi\db\dao\CrudOperations.class

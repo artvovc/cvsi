@@ -29,11 +29,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cvsi" target="1.5" />
-      <module name="cvsi-core" target="1.5" />
+      <module name="cvsi" target="1.8" />
+      <module name="cvsi-core" target="1.8" />
       <module name="cvsi-dao" target="1.5" />
-      <module name="cvsi-db" target="1.5" />
-      <module name="cvsi-server" target="1.5" />
+      <module name="cvsi-db" target="1.8" />
+      <module name="cvsi-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

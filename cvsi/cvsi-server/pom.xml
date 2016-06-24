@@ -17,6 +17,7 @@
     <properties>
         <springframework.version>4.3.0.RELEASE</springframework.version>
         <jackson.library>2.7.5</jackson.library>
+        <dir>..</dir>
     </properties>
 
     <dependencies>
@@ -129,42 +130,46 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.1</version>
-                </plugin>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+            </plugin>
 
-                <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.6</version>
-                    <configuration>
-                        <webResources>
-                            <resource>
-                                <!--<filtering>true</filtering>-->
-                                <directory>src/main/webapp</directory>
-                                <includes>
-                                    <include>**/web.xml</include>
-                                </includes>
-                            </resource>
-                        </webResources>
-
-                        <!--<warSourceDirectory>src/main/webapp/WEB-INF/dist</warSourceDirectory>-->
-                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
-        <finalName>cvsi-server</finalName>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+
+
+
+    <profiles>
+
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>dev</id>
+
+            <build>
+                <finalName>cvsi-server</finalName>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+
+            <properties>
+                <environment>dev</environment>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
