@@ -8,82 +8,80 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>cvsi-db</artifactId>
-
     <properties>
+        <liquibase-maven-plugin.version>3.0.5</liquibase-maven-plugin.version>
+        <liquibase-core.version>3.5.0</liquibase-core.version>
+        <spring-tx.version>4.3.0.RELEASE</spring-tx.version>
+        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+        <validator-api.version>1.1.0.Final</validator-api.version>
+        <mysql-connector-java.version>6.0.2</mysql-connector-java.version>
+        <hibernate-core.version>5.2.0.Final</hibernate-core.version>
+        <spring-context.version>4.3.0.RELEASE</spring-context.version>
+        <spring-orm.version>4.3.0.RELEASE</spring-orm.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>
         <dir>..</dir>
     </properties>
-
     <dependencies>
         <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
+            <version>${commons-dbcp.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.0.RELEASE</version>
+            <version>${spring-context.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>4.3.0.RELEASE</version>
+            <version>${spring-orm.version}</version>
         </dependency>
-
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.0.Final</version>
+            <version>${hibernate-core.version}</version>
         </dependency>
-
         <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.2</version>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
-
         <!-- jsr303 validation -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <version>${validator-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.2.4.Final</version>
+            <version>${hibernate-validator.version}</version>
         </dependency>
-
         <!--23.06.2016 Vovc Artiom Changed: moved from cvsi-core to cvsi-db-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.3.0.RELEASE</version>
+            <version>${spring-tx.version}</version>
         </dependency>
-
         <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
-            <version>3.5.0</version>
+            <version>${liquibase-core.version}</version>
         </dependency>
-
     </dependencies>
-
     <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
     <build>
             <plugins>
                 <plugin>
                     <groupId>org.liquibase</groupId>
                     <artifactId>liquibase-maven-plugin</artifactId>
-                    <version>3.0.5</version>
+                    <version>${liquibase-maven-plugin.version}</version>
                     <configuration>
                         <propertyFileWillOverride>true</propertyFileWillOverride>
                         <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
@@ -98,8 +96,6 @@
                     </executions>
                 </plugin>
             </plugins>
-
         <finalName>cvsi-db</finalName>
     </build>
-
 </project>

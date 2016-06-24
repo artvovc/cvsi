@@ -12,21 +12,21 @@
     <artifactId>cvsi-server</artifactId>
     <packaging>war</packaging>
     <name>cvsi-server Maven Webapp</name>
-
-
     <properties>
         <springframework.version>4.3.0.RELEASE</springframework.version>
         <jackson.library>2.7.5</jackson.library>
+        <security.version>4.1.0.RELEASE</security.version>
+        <swagger2.version>2.4.0</swagger2.version>
+        <slf4j.version>1.5.8</slf4j.version>
+        <log4j.version>1.2.14</log4j.version>
         <dir>..</dir>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.winify.cvsi</groupId>
             <artifactId>cvsi-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -36,7 +36,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${springframework.version}</version>
-
             <!--23.06.2016 Vovc Artiom Changed: added exclusions for logging-->
             <exclusions>
 
@@ -46,27 +45,26 @@
             </exclusion>
         </exclusions>
         </dependency>
-
         <!--23.06.2016 Vovc Artiom Changed: added logging-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.5.8</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.8</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.8</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
+            <version>${log4j.version}</version>
         </dependency>
 
         <dependency>
@@ -94,41 +92,41 @@
             <!--<artifactId>jackson-dataformat-xml</artifactId>-->
             <!--<version>${jackson.library}</version>-->
         <!--</dependency>-->
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
-
         <!--Swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.4.0</version>
+            <version>${swagger2.version}</version>
         </dependency>
         <!--Swagger UI-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.4.0</version>
+            <version>${swagger2.version}</version>
         </dependency>
-
         <!--23.06.2016 Vovc Artiom Changed: added security-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>4.1.0.RELEASE</version>
+            <version>${security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>4.1.0.RELEASE</version>
+            <version>${security.version}</version>
         </dependency>
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -137,21 +135,15 @@
         </plugins>
         <finalName>cvsi-server</finalName>
     </build>
-
-
-
     <profiles>
-
         <profile>
             <id>local</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-
         <profile>
             <id>dev</id>
-
             <properties>
                 <environment>dev</environment>
             </properties>

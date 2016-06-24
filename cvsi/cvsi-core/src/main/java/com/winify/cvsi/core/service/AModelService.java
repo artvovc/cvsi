@@ -14,6 +14,7 @@ public class AModelService {
     @Autowired
     private AModelDao aModelDao;
 
+    @Transactional
     public AModel getAModel(Long id){
         return aModelDao.findById(id);
     }
