@@ -1,4 +1,6 @@
 *.iml
 out/*
 .idea/*
-**/target
+/cvsi-server/target/
+/cvsi-db/target/
+/cvsi-core/target/

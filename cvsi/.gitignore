@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+/cvsi-server/target/
+/cvsi-db/target/
+/cvsi-core/target/
+/.idea/
