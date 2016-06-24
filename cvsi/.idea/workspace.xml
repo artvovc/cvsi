@@ -1,48 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a26a303a-b063-42b9-8310-23e46223d5da" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../%HOMEDRIVE%%HOMEPATH%/.gitconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-core/target/cvsi-server.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-core/target/maven-status/maven-compiler-plugin/compile/default/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-core/target/maven-status/maven-compiler-plugin/compile/default/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-db/target/cvsi-server.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-db/target/maven-status/maven-compiler-plugin/compile/default/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-db/target/maven-status/maven-compiler-plugin/compile/default/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-server/target/maven-status/maven-compiler-plugin/compile/default/createdFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-server/target/maven-status/maven-compiler-plugin/compile/default/inputFiles.lst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default/inputFiles.lst" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/dto/ASimpleDto.class" afterPath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/dto/ASimpleDto.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/dto/CvsiResponse.class" afterPath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/dto/CvsiResponse.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/enums/ErrorEnum.class" afterPath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/enums/ErrorEnum.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/service/AModelService.class" afterPath="$PROJECT_DIR$/cvsi-core/target/classes/com/winify/cvsi/core/service/AModelService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/AModelDao.class" afterPath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/AModelDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/CrudOperations.class" afterPath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/CrudOperations.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/impl/AModelDaoImpl.class" afterPath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/impl/AModelDaoImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/impl/AbstractDao.class" afterPath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/dao/impl/AbstractDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/model/AModel.class" afterPath="$PROJECT_DIR$/cvsi-db/target/classes/com/winify/cvsi/db/model/AModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/classes/com/winify/cvsi/server/controller/AController.class" afterPath="$PROJECT_DIR$/cvsi-server/target/classes/com/winify/cvsi/server/controller/AController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/classes/com/winify/cvsi/server/facade/AFacade.class" afterPath="$PROJECT_DIR$/cvsi-server/target/classes/com/winify/cvsi/server/facade/AFacade.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server.war" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/classes/com/winify/cvsi/server/controller/AController.class" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/classes/com/winify/cvsi/server/controller/AController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/classes/com/winify/cvsi/server/facade/AFacade.class" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/classes/com/winify/cvsi/server/facade/AFacade.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-core-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-core-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-db-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-db-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/cvsi-core/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/cvsi-core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/cvsi-core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/classes/liquibase.properties" afterPath="$PROJECT_DIR$/cvsi-db/target/classes/liquibase.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/cvsi-db/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/cvsi-db/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/cvsi-db/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/pom.xml" afterPath="$PROJECT_DIR$/cvsi-server/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/cvsi-server/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/cvsi-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/cvsi-server/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-    </list>
+    <list default="true" id="a26a303a-b063-42b9-8310-23e46223d5da" name="Default" comment="" />
     <ignored path="cvsi.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -129,8 +88,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+            <state relative-caret-position="170">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -209,8 +168,8 @@
         <option value="$PROJECT_DIR$/cvsi-core/pom.xml" />
         <option value="$PROJECT_DIR$/cvsi-db/pom.xml" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/resources/liquibase.properties" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/cvsi-server/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -1028,12 +987,12 @@
       <workItem from="1466677739924" duration="12243000" />
       <workItem from="1466695006767" duration="563000" />
       <workItem from="1466747860173" duration="7809000" />
-      <workItem from="1466761526666" duration="620000" />
+      <workItem from="1466761526666" duration="867000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75563000" />
+    <option name="totallyTimeSpent" value="75810000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1456" height="916" extended-state="6" />
@@ -1474,8 +1433,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        <state relative-caret-position="170">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding />
         </state>
       </provider>
