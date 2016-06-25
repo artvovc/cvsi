@@ -1,6 +1,5 @@
 package com.winify.cvsi.server.controller;
 
-import com.sun.deploy.net.HttpResponse;
 import com.winify.cvsi.core.dto.CvsiResponse;
 import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.enums.ErrorEnum;
@@ -13,14 +12,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sun.security.provider.certpath.OCSPResponse;
 
 /**
  * Created by Artemie on 25.06.2016.
  */
-@RestController
-@Api
+@Controller
+@Api(description = "User controller with not all services, have just two services: saveUser(name,surname) and findById(id). You cant introduce user phone,email,password and another date. NOT DONE !!!")
 @RequestMapping(name = "user controller",path = "/user",produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
     @Autowired

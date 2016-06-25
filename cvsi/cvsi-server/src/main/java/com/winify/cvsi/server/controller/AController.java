@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 //@Controller
 @RestController
-@Api
+@Api(description = "Do not use this controller, because his destination is only for study how it works")
 @RequestMapping(path = "/rest", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AController {
     @Autowired

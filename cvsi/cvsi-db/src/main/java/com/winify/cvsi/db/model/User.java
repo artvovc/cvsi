@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by Artemie on 24.06.2016.
  */
 @Entity
-@Table(name = "userinfo")
+@Table(name = "user_information")
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class User implements Serializable{
     private String email;
     @Column(name = "credential", nullable = false)
     private String password;
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phone;
     @Column
     private String name;
