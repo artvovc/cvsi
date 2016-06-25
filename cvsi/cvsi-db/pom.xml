@@ -86,14 +86,14 @@
                         <propertyFileWillOverride>true</propertyFileWillOverride>
                         <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>update</goal>
-                            </goals>
-                        </execution>
-                    </executions>
+                    <!--<executions>-->
+                        <!--<execution>-->
+                            <!--<phase>process-resources</phase>-->
+                            <!--<goals>-->
+                                <!--<goal>update</goal>-->
+                            <!--</goals>-->
+                        <!--</execution>-->
+                    <!--</executions>-->
                 </plugin>
             </plugins>
         <finalName>cvsi-db</finalName>

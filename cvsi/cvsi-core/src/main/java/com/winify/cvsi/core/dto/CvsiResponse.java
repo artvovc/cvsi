@@ -18,6 +18,11 @@ public class CvsiResponse {
         this.status = status;
     }
 
+    public CvsiResponse(CvsiResponse cvsiResponse){
+        this.error = cvsiResponse.getError();
+        this.status = cvsiResponse.getStatus();
+    }
+
     public ErrorEnum getError() {
         return error;
     }
