@@ -4,3 +4,4 @@ out/*
 /cvsi-server/target/
 /cvsi-db/target/
 /cvsi-core/target/
+/.idea/workspace.xml

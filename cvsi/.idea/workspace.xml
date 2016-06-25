@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a26a303a-b063-42b9-8310-23e46223d5da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/ProductAdditionsBorrow.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/ProductAdditionsChange.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/classes/com/winify/cvsi/server/controller/AController.class" afterPath="$PROJECT_DIR$/cvsi-server/target/classes/com/winify/cvsi/server/controller/AController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/classes/com/winify/cvsi/server/controller/AController.class" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/classes/com/winify/cvsi/server/controller/AController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-core-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-core-1.0-SNAPSHOT.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-db-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-db-1.0-SNAPSHOT.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/AController.java" afterPath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/AController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java" afterPath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java" />
     </list>
     <ignored path="cvsi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,7 +73,6 @@
         <option value="$PROJECT_DIR$/cvsi-db/src/main/resources/ChangeLog.xml" />
         <option value="$PROJECT_DIR$/cvsi-server/src/main/resources/sqlscript/test.sql" />
         <option value="$PROJECT_DIR$/src/main/fiters/app-local.properties" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/cvsi-server/target/classes/database.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/develop-filter.properties" />
         <option value="$PROJECT_DIR$/src/test/filters/test-ittest.properties" />
@@ -124,6 +110,7 @@
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/ProductAdditionsBorrow.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -162,10 +149,10 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="170" />
-    <option name="y" value="50" />
-    <option name="width" value="1026" />
-    <option name="height" value="576" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -791,6 +778,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dto" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cvsi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cvsi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1424,12 +1425,12 @@
       <workItem from="1466761526666" duration="1597000" />
       <workItem from="1466763223562" duration="2996000" />
       <workItem from="1466767198503" duration="6822000" />
-      <workItem from="1466789254753" duration="28968000" />
+      <workItem from="1466789254753" duration="29272000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115326000" />
+    <option name="totallyTimeSpent" value="115630000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1441,7 +1442,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="170" y="50" width="1026" height="576" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1462,10 +1463,10 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3376" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4916067" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3344" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2256" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24120083" sideWeight="0.49358973" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1762481" sideWeight="0.49358973" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295129" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17335883" sideWeight="0.50641024" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1500,14 +1501,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/develop-filter.properties" />
     <entry file="file://$PROJECT_DIR$/cvsi-server/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1939,6 +1932,14 @@
             <element signature="e#464#465#0" expanded="true" />
             <element signature="e#489#490#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
