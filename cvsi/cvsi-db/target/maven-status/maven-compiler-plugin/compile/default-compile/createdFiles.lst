@@ -2,7 +2,14 @@ com\winify\cvsi\db\dao\UserDao.class
 com\winify\cvsi\db\dao\impl\UserDaoImpl.class
 com\winify\cvsi\db\dao\impl\AModelDaoImpl.class
 com\winify\cvsi\db\model\AModel.class
+com\winify\cvsi\db\model\Image.class
+com\winify\cvsi\db\model\ProductAdditionsBorrow.class
+com\winify\cvsi\db\model\Registration.class
 com\winify\cvsi\db\model\User.class
+com\winify\cvsi\db\model\ProductAdditionsChange.class
+com\winify\cvsi\db\model\Message.class
+com\winify\cvsi\db\model\Product.class
 com\winify\cvsi\db\dao\impl\AbstractDao.class
 com\winify\cvsi\db\dao\AModelDao.class
 com\winify\cvsi\db\dao\CrudOperations.class
+com\winify\cvsi\db\model\Conversation.class

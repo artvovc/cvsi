@@ -1,0 +1,4 @@
+com\winify\cvsi\server\controller\AController.class
+com\winify\cvsi\server\controller\UserController.class
+com\winify\cvsi\server\facade\AFacade.class
+com\winify\cvsi\server\facade\UserFacade.class
