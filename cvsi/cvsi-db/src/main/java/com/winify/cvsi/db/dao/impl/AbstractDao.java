@@ -20,7 +20,6 @@ public abstract class AbstractDao<T, I> implements CrudOperations<T, I>{
 
     public void save(T entity){
         getCurrentSession().save(entity);
-
     }
 
     public T findById(I identifier){
