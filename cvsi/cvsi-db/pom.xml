@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cvsi-db</artifactId>
     <properties>
-        <liquibase-maven-plugin.version>3.0.5</liquibase-maven-plugin.version>
+        <liquibase-maven-plugin.version>3.5.0</liquibase-maven-plugin.version>
         <liquibase-core.version>3.5.0</liquibase-core.version>
         <spring-tx.version>4.3.0.RELEASE</spring-tx.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
@@ -20,6 +20,7 @@
         <spring-context.version>4.3.0.RELEASE</spring-context.version>
         <spring-orm.version>4.3.0.RELEASE</spring-orm.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
+        <ojdbc14.version>10.2.0.4.0</ojdbc14.version>
         <dir>..</dir>
     </properties>
     <dependencies>
@@ -51,6 +52,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.oracle</groupId>-->
+            <!--<artifactId>ojdbc14</artifactId>-->
+            <!--<version>${ojdbc14.version}</version>-->
+        <!--</dependency>-->
         <!-- jsr303 validation -->
         <dependency>
             <groupId>javax.validation</groupId>
@@ -77,6 +83,12 @@
     </dependencies>
     <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
             <plugins>
                 <plugin>
                     <groupId>org.liquibase</groupId>
@@ -84,16 +96,22 @@
                     <version>${liquibase-maven-plugin.version}</version>
                     <configuration>
                         <propertyFileWillOverride>true</propertyFileWillOverride>
-                        <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+                        <!--<changeLogFile>${dir}/scr/resources/ChangeLog.xml/</changeLogFile>-->
+                        <!--<driver>jdbc:mysql://127.0.0.1:3306/cvsidb</driver>-->
+                        <!--<url>com.mysql.jdbc.Driver</url>-->
+                        <!--<username>root</username>-->
+                        <!--<password>12345</password>-->
+                        <!--<propertyFile>src/main/resources/liquibase.properties</propertyFile>-->
+                        <propertyFile>target/classes/liquibase.properties</propertyFile>
                     </configuration>
-                    <!--<executions>-->
-                        <!--<execution>-->
-                            <!--<phase>process-resources</phase>-->
-                            <!--<goals>-->
-                                <!--<goal>update</goal>-->
-                            <!--</goals>-->
-                        <!--</execution>-->
-                    <!--</executions>-->
+                    <executions>
+                        <execution>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>update</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         <finalName>cvsi-db</finalName>

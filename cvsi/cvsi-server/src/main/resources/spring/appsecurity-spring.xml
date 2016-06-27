@@ -8,17 +8,16 @@
                     http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/secure/**" access="ROLE_USER" />
+        <intercept-url pattern="/user/**" access="ROLE_USER" />
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
         <http-basic />
     </http>
 
+    <beans:bean id="cvsiUserDetailsService" class="com.winify.cvsi.server.security.CvsiUserDetailsService" />
+    <beans:bean class="org.springframework.security.authentication.AuthenticationProvider" abstract="true"/>
+
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="admin" password="adminpassword" authorities="ROLE_USER, ROLE_ADMIN" />
-                <user name="user" password="userpassword" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="cvsiUserDetailsService"/>
+
     </authentication-manager>
 </beans:beans>

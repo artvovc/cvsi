@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "product_additions_borrow")
-public class ProductAdditionsBorrow {
+public class ProductAdditionsBorrow extends Product{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

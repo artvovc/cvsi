@@ -12,4 +12,8 @@ public class UserDaoImpl extends AbstractDao<User, Long> implements UserDao {
     public UserDaoImpl() {
         super(User.class);
     }
+
+    public User findByUsername(String uname) {
+        return null;
+    }
 }
