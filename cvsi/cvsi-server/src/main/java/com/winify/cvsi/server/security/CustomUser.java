@@ -17,7 +17,7 @@ public class CustomUser implements UserDetails {
     private String firstName;
     private String lastName;
 
-    private List<Role> authorities;
+    private List<RoleGrantedAuthority> authorities;
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
@@ -75,7 +75,7 @@ public class CustomUser implements UserDetails {
         this.lastName = lastName;
     }
 
-    public void setAuthorities(List<Role> authorities) {
+    public void setAuthorities(List<RoleGrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 }

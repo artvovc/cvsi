@@ -1,7 +1,5 @@
 package com.winify.cvsi.server.security;
 
-import com.sun.istack.internal.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,19 +16,12 @@ import java.util.Collection;
 //@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    private Logger log = Logger.getLogger(CustomAuthenticationProvider.class);
-
-//    @Autowired
-//    private CustomUserDetailsService userService;
     private UserDetailsService userService;
 
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = String.valueOf(authentication.getName());
         String pass = String.valueOf(authentication.getCredentials());
         CustomUser user = (CustomUser) userService.loadUserByUsername(email);
-
-        log.info("email: "+email+" password"+pass);
-        log.info("email: "+user.getUsername()+" password"+user.getPassword());
 
         if (user == null || !user.getUsername().equalsIgnoreCase(email)) {
             throw new BadCredentialsException("Username not found.");

@@ -1,5 +1,6 @@
 package com.winify.cvsi.core.dto;
 
+import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 
@@ -7,6 +8,8 @@ import com.winify.cvsi.db.model.User;
  * Created by Artemie on 25.06.2016.
  */
 public class UserDto extends CvsiResponse{
+
+    private String userName;
     private String name;
     private String surname;
     private String phone;
@@ -16,16 +19,26 @@ public class UserDto extends CvsiResponse{
     public UserDto() {
     }
 
-    public UserDto(ErrorEnum error, String status, String name, String surname, String phone, String email, String password) {
+    public UserDto(UserBuilder userBuilder){
+        this.userName = userBuilder.getUserName();
+        this.name = userBuilder.getName();
+        this.surname = userBuilder.getSurname();
+        this.phone = userBuilder.getPhone();
+        this.email = userBuilder.getEmail();
+        this.password = userBuilder.getPassword();
+    }
+    public UserDto(ErrorEnum error, String status, String userName, String name, String surname, String phone, String email, String password) {
         super(error, status);
+        this.userName = userName;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.email = email;
         this.password = password;
     }
-    public UserDto(CvsiResponse cvsiResponse, String name, String surname, String phone, String email, String password) {
+    public UserDto(CvsiResponse cvsiResponse, String userName, String name, String surname, String phone, String email, String password) {
         super(cvsiResponse);
+        this.userName = userName;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -34,6 +47,7 @@ public class UserDto extends CvsiResponse{
     }
     public UserDto(CvsiResponse cvsiResponse, User user) {
         super(cvsiResponse);
+        this.userName = user.getUserName();
         this.name = user.getName();
         this.surname = user.getSurname();
         this.phone = user.getPhone();
@@ -79,5 +93,13 @@ public class UserDto extends CvsiResponse{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

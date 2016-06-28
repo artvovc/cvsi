@@ -1,6 +1,7 @@
 package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Artemie on 25.06.2016.
@@ -10,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "image")
-public class Image {
+public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

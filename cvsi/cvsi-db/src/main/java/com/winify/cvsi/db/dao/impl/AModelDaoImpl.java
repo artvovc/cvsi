@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public class AModelDaoImpl extends AbstractDao<AModel, Long> implements AModelDao {
-
     public AModelDaoImpl() {
         super(AModel.class);
     }

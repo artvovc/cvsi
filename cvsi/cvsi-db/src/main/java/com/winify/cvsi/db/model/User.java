@@ -12,6 +12,8 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "user_name", unique = true, nullable = false)
+    private String userName;
     @Column(name = "email", unique = true, nullable = false)
     private String email;
     @Column(name = "credential", nullable = false)
@@ -70,4 +72,13 @@ public class User implements Serializable{
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }

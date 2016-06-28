@@ -1,13 +1,14 @@
 package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Artemie on 25.06.2016.
  */
 @Entity
 @Table(name = "conversation")
-public class Conversation {
+public class Conversation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

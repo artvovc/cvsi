@@ -19,6 +19,7 @@ public class UserFacade {
     public UserDto getUser(Long id){
         User user = userService.getUser(id);
         return new UserDto(new CvsiResponse(ErrorEnum.UNKNOWN_ERROR,"OK"),
+                user.getUserName(),
                 user.getName(),
                 user.getSurname(),
                 user.getPhone(),

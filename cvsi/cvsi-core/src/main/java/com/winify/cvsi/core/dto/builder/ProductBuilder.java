@@ -1,64 +1,25 @@
-package com.winify.cvsi.db.model;
+package com.winify.cvsi.core.dto.builder;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.winify.cvsi.core.dto.ProductDto;
+import com.winify.cvsi.db.model.Product;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by Artemie on 25.06.2016.
+ * Created by Artemie on 28.06.2016.
  */
-@Entity
-@Table(name = "product")
-public class Product implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductBuilder {
+
     private Long id;
-    @Column(nullable = false)
     private String title;
-    @Column
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
     private Date postedDate;
-    @Column(nullable = false)
     private String category;
-    @Column
-    // MAYBE NEED CHANGE DATATYPE FOR PRICE
     private BigDecimal price;
-    @Column
     private String itemForChange;
-    @Column
     private String itemNeeded;
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
     private Date limitDate;
-
-    public String getItemForChange() {
-        return itemForChange;
-    }
-
-    public void setItemForChange(String itemForChange) {
-        this.itemForChange = itemForChange;
-    }
-
-    public String getItemNeeded() {
-        return itemNeeded;
-    }
-
-    public void setItemNeeded(String itemNeeded) {
-        this.itemNeeded = itemNeeded;
-    }
-
-    public Date getLimitDate() {
-        return limitDate;
-    }
-
-    public void setLimitDate(Date limitDate) {
-        this.limitDate = limitDate;
-    }
 
     public Long getId() {
         return id;
@@ -107,4 +68,41 @@ public class Product implements Serializable {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public String getItemForChange() {
+        return itemForChange;
+    }
+
+    public void setItemForChange(String itemForChange) {
+        this.itemForChange = itemForChange;
+    }
+
+    public String getItemNeeded() {
+        return itemNeeded;
+    }
+
+    public void setItemNeeded(String itemNeeded) {
+        this.itemNeeded = itemNeeded;
+    }
+
+    public Date getLimitDate() {
+        return limitDate;
+    }
+
+    public void setLimitDate(Date limitDate) {
+        this.limitDate = limitDate;
+    }
+
+    public ProductBuilder(Product product) {
+        this.id = product.getId();
+        this.title= product.getTitle();
+        this.description= product.getDescription();
+        this.postedDate= product.getPostedDate();
+        this.category= product.getCategory();
+        this.price= product.getPrice();
+        this.itemForChange= product.getItemForChange();
+        this.itemNeeded= product.getItemNeeded();
+        this.limitDate= product.getLimitDate();
+    }
+
 }

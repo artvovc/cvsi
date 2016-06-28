@@ -11,6 +11,7 @@
         <intercept-url pattern="/user/**" access="ROLE_USER" />
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
         <http-basic  />
+        <csrf disabled="true"/>
     </http>
 
     <beans:bean id="customUserDetailsService" class="com.winify.cvsi.server.security.CustomUserDetailsService" />

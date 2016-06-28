@@ -2,6 +2,7 @@ package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.CvsiResponse;
 import com.winify.cvsi.core.dto.UserDto;
+import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.UserFacade;
@@ -32,26 +33,46 @@ public class UserController {
     private UserFacade userFasade;
     final static Logger log = Logger.getLogger(UserController.class);
 
-    @PostMapping(path = "/set/{name}/{surname}")
-    public HttpEntity<UserDto> saveNewUser(@PathVariable String name, @PathVariable String surname){
+    @PostMapping(path = "/registration")
+    public HttpEntity<CvsiResponse> saveNewUser(@ModelAttribute("registrationValue") UserBuilder userBuilder){
         User user = new User();
-        user.setName(name);
-        user.setSurname(surname);
-        user.setPhone("000000000000");
-        user.setEmail("vovc@gmail.com");
-        user.setPassword("TREBUIE md5");
-        userFasade.saveUser(user);
-        return new ResponseEntity<UserDto>(new UserDto(new CvsiResponse(ErrorEnum.UNKNOWN_ERROR,"OK"),user),
-                HttpStatus.OK);
+        user.setUserName(userBuilder.getUserName());
+        user.setName(userBuilder.getName());
+        user.setSurname(userBuilder.getSurname());
+        user.setPhone(userBuilder.getPhone());
+        user.setEmail(userBuilder.getEmail());
+        user.setPassword(userBuilder.getPassword());
+
+        log.info(user.getEmail());
+
+//        userFasade.saveUser(user);
+        return new ResponseEntity(new CvsiResponse(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/me/{id}")
-    public HttpEntity<UserDto> getUserInfo(@PathVariable Long id){
-        return new ResponseEntity<UserDto>(userFasade.getUser(id),HttpStatus.OK);
+    @GetMapping(path = "/me")
+    public HttpEntity<UserDto> getUserInfo(@RequestParam(value = "userId",required = false) Integer userId,
+                                           @RequestParam(value = "userName",required = false, defaultValue="null") String userName,
+                                           @RequestParam(value = "userEmail",required = false, defaultValue="null") String userEmail
+                                           ){
+
+        //userFasade.getUser(userId)......
+
+        UserDto userDto = new UserDto();
+        userDto.setError(ErrorEnum.UNKNOWN_ERROR);
+        userDto.setStatus("OK");
+        userDto.setUserName("username");
+        userDto.setPassword("1240001230012040120401204");
+        userDto.setPhone("000000000");
+        userDto.setEmail("joraStyle@gmail.com");
+        userDto.setName("jora");
+        userDto.setSurname("crit");
+        return new ResponseEntity<UserDto>(userDto,HttpStatus.OK);
     }
+
+
 
     @RequestMapping(
-            //value="/secured/home",
+            value="/secured/home",
             method = RequestMethod.GET)
 
     public String securedHome(ModelMap model) {

@@ -37,7 +37,6 @@ public class AController {
     public HttpEntity<CvsiResponse> saveAModel(@ModelAttribute("testvalue") User userdto ){
         //aFacade.saveAModel();
 
-
         log.info(userdto.getEmail());
 
         return new ResponseEntity(new CvsiResponse(), HttpStatus.OK);

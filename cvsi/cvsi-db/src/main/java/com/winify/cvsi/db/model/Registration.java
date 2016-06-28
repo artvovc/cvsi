@@ -4,6 +4,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,12 +12,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "registration")
-public class Registration {
+public class Registration implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true,nullable = false)
-    private String email;
+    private String userName;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
@@ -37,11 +38,11 @@ public class Registration {
     }
 
     public String getEmail() {
-        return email;
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

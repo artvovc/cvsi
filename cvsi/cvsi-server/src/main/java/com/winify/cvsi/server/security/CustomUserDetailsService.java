@@ -3,7 +3,6 @@ package com.winify.cvsi.server.security;
 import com.winify.cvsi.core.service.UserService;
 import com.winify.cvsi.db.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,11 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userservice.getUserByMail(username);
         CustomUser customUser = new CustomUser(user);
-        Role role = new Role();
-        role.setName("ROLE_USER");
-        List<Role> roleList = new ArrayList<Role>();
-        roleList.add(role);
-        customUser.setAuthorities(roleList);
+        RoleGrantedAuthority roleGrantedAuthority = new RoleGrantedAuthority();
+        roleGrantedAuthority.setName("ROLE_USER");
+        List<RoleGrantedAuthority> roleGrantedAuthorityList = new ArrayList<RoleGrantedAuthority>();
+        roleGrantedAuthorityList.add(roleGrantedAuthority);
+        customUser.setAuthorities(roleGrantedAuthorityList);
         return customUser;
     }
 }
