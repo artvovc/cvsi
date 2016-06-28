@@ -1,7 +1,6 @@
 package com.winify.cvsi.core.dto;
 
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
-import com.winify.cvsi.db.model.Product;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,9 +16,8 @@ public class ProductDto extends CvsiResponse {
     private Date postedDate;
     private String category;
     private BigDecimal price;
-    private String itemForChange;
-    private String itemNeeded;
     private Date limitDate;
+    private Date updateDate;
 
     public Long getId() {
         return id;
@@ -69,28 +67,20 @@ public class ProductDto extends CvsiResponse {
         this.price = price;
     }
 
-    public String getItemForChange() {
-        return itemForChange;
-    }
-
-    public void setItemForChange(String itemForChange) {
-        this.itemForChange = itemForChange;
-    }
-
-    public String getItemNeeded() {
-        return itemNeeded;
-    }
-
-    public void setItemNeeded(String itemNeeded) {
-        this.itemNeeded = itemNeeded;
-    }
-
     public Date getLimitDate() {
         return limitDate;
     }
 
     public void setLimitDate(Date limitDate) {
         this.limitDate = limitDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public ProductDto(){
@@ -104,9 +94,8 @@ public class ProductDto extends CvsiResponse {
         this.postedDate= productBuilder.getPostedDate();
         this.category= productBuilder.getCategory();
         this.price= productBuilder.getPrice();
-        this.itemForChange= productBuilder.getItemForChange();
-        this.itemNeeded= productBuilder.getItemNeeded();
         this.limitDate= productBuilder.getLimitDate();
+        this.updateDate= productBuilder.getUpdateDate();
     }
     public ProductDto(ProductBuilder productBuilder){
         this.id = productBuilder.getId();
@@ -115,9 +104,8 @@ public class ProductDto extends CvsiResponse {
         this.postedDate= productBuilder.getPostedDate();
         this.category= productBuilder.getCategory();
         this.price= productBuilder.getPrice();
-        this.itemForChange= productBuilder.getItemForChange();
-        this.itemNeeded= productBuilder.getItemNeeded();
         this.limitDate= productBuilder.getLimitDate();
+        this.updateDate= productBuilder.getUpdateDate();
     }
 
 }

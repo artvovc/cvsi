@@ -1,6 +1,6 @@
-
--- test
-
-create table test(
-testID int
-);
+--
+-- -- test
+--
+-- create table test(
+-- testID int
+-- );

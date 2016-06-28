@@ -29,28 +29,11 @@ public class Product implements Serializable {
     // MAYBE NEED CHANGE DATATYPE FOR PRICE
     private BigDecimal price;
     @Column
-    private String itemForChange;
-    @Column
-    private String itemNeeded;
-    @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date limitDate;
-
-    public String getItemForChange() {
-        return itemForChange;
-    }
-
-    public void setItemForChange(String itemForChange) {
-        this.itemForChange = itemForChange;
-    }
-
-    public String getItemNeeded() {
-        return itemNeeded;
-    }
-
-    public void setItemNeeded(String itemNeeded) {
-        this.itemNeeded = itemNeeded;
-    }
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateDate;
 
     public Date getLimitDate() {
         return limitDate;
@@ -106,5 +89,13 @@ public class Product implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

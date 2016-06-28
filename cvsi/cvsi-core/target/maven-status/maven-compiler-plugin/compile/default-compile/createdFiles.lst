@@ -4,6 +4,7 @@ com\winify\cvsi\core\dto\builder\UserBuilder.class
 com\winify\cvsi\core\service\UserService.class
 com\winify\cvsi\core\dto\ProductDto.class
 com\winify\cvsi\core\dto\UserDto.class
+com\winify\cvsi\core\dto\ProductListDto.class
 com\winify\cvsi\core\dto\ASimpleDto.class
 com\winify\cvsi\core\dto\ImageDto.class
 com\winify\cvsi\core\dto\CvsiResponse.class

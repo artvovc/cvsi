@@ -4,11 +4,13 @@ import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.db.model.Product;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
  * Created by Artemie on 28.06.2016.
  */
+// DE SCHIMBAT, NU-I CORECT
 public class ProductBuilder {
 
     private Long id;
@@ -17,9 +19,18 @@ public class ProductBuilder {
     private Date postedDate;
     private String category;
     private BigDecimal price;
-    private String itemForChange;
-    private String itemNeeded;
     private Date limitDate;
+    private Date updateDate;
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public ProductBuilder(){}
 
     public Long getId() {
         return id;
@@ -69,22 +80,6 @@ public class ProductBuilder {
         this.price = price;
     }
 
-    public String getItemForChange() {
-        return itemForChange;
-    }
-
-    public void setItemForChange(String itemForChange) {
-        this.itemForChange = itemForChange;
-    }
-
-    public String getItemNeeded() {
-        return itemNeeded;
-    }
-
-    public void setItemNeeded(String itemNeeded) {
-        this.itemNeeded = itemNeeded;
-    }
-
     public Date getLimitDate() {
         return limitDate;
     }
@@ -100,9 +95,8 @@ public class ProductBuilder {
         this.postedDate= product.getPostedDate();
         this.category= product.getCategory();
         this.price= product.getPrice();
-        this.itemForChange= product.getItemForChange();
-        this.itemNeeded= product.getItemNeeded();
         this.limitDate= product.getLimitDate();
+        this.updateDate= product.getUpdateDate();
     }
 
 }
