@@ -2,7 +2,9 @@ package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ASimpleDto;
 import com.winify.cvsi.core.dto.CvsiResponse;
+import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.enums.ErrorEnum;
+import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.AFacade;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
@@ -32,9 +34,11 @@ public class AController {
     }
 
     @PostMapping (path = "/me")
-    public HttpEntity<CvsiResponse> saveAModel(){
-        aFacade.saveAModel();
-        log.info("post me not work :D");
+    public HttpEntity<CvsiResponse> saveAModel(@ModelAttribute("testvalue") User userdto ){
+        //aFacade.saveAModel();
+
+
+        log.info(userdto.getEmail());
 
         return new ResponseEntity(new CvsiResponse(), HttpStatus.OK);
     }

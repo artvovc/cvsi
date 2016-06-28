@@ -5,6 +5,7 @@ import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.UserFacade;
+import com.winify.cvsi.server.security.CustomUser;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import sun.security.provider.certpath.OCSPResponse;
 
@@ -21,7 +24,9 @@ import sun.security.provider.certpath.OCSPResponse;
  */
 @Controller
 @Api(description = "User controller with not all services, have just two services: saveUser(name,surname) and findById(id). You cant introduce user phone,email,password and another date. NOT DONE !!!")
-@RequestMapping(name = "user controller",path = "/user",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(name = "user controller",
+        //path = "/user",
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
     @Autowired
     private UserFacade userFasade;
@@ -43,6 +48,23 @@ public class UserController {
     @GetMapping(path = "/me/{id}")
     public HttpEntity<UserDto> getUserInfo(@PathVariable Long id){
         return new ResponseEntity<UserDto>(userFasade.getUser(id),HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            //value="/secured/home",
+            method = RequestMethod.GET)
+
+    public String securedHome(ModelMap model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUser user=null;
+        if (principal instanceof CustomUser) {
+            user = ((CustomUser)principal);
+        }
+
+        String name = user.getUsername();
+        model.addAttribute("username", name);
+        model.addAttribute("message", "Welcome to the secured page");
+        return "home";
     }
 }
 

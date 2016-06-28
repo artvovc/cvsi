@@ -21,4 +21,6 @@ public class UserService {
     }
     @Transactional
     public void saveUser (User user){ userDao.save(user);}
+    @Transactional
+    public User getUserByMail(String uName) {return userDao.findByUserName(uName);}
 }
