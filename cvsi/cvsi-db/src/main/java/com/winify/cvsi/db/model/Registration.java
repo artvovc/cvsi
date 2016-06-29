@@ -1,8 +1,5 @@
 package com.winify.cvsi.db.model;
 
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,23 +8,66 @@ import java.util.Date;
  * Created by Artemie on 25.06.2016.
  */
 @Entity
-@Table(name = "registration")
+@Table(
+        name = "registration",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "email",name = "UK_email_registration"),
+                @UniqueConstraint(columnNames = "username",name = "UK_username_registration")
+        }
+)
 public class Registration implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false)
     private String userName;
     @Column(nullable = false)
+    private String email;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String phone;
+    @Column
+    private String name;
+    @Column
+    private String surname;
     @Column(nullable = false)
     private String hash;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date requeestCreatedDate;
-    @Column(nullable = false)
-    //DEFAULT VALUE MAST BE FALSE
-    private Boolean isConfirmed;
+    private Date requestCreatedDate;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
     public Long getId() {
         return id;
@@ -38,11 +78,11 @@ public class Registration implements Serializable {
     }
 
     public String getEmail() {
-        return userName;
+        return email;
     }
 
-    public void setEmail(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -61,19 +101,12 @@ public class Registration implements Serializable {
         this.hash = hash;
     }
 
-    public Date getRequeestCreatedDate() {
-        return requeestCreatedDate;
+    public Date getRequestCreatedDate() {
+        return requestCreatedDate;
     }
 
-    public void setRequeestCreatedDate(Date requeestCreatedDate) {
-        this.requeestCreatedDate = requeestCreatedDate;
+    public void setRequestCreatedDate(Date requestCreatedDate) {
+        this.requestCreatedDate = requestCreatedDate;
     }
 
-    public Boolean getConfirmed() {
-        return isConfirmed;
-    }
-
-    public void setConfirmed(Boolean confirmed) {
-        isConfirmed = confirmed;
-    }
 }

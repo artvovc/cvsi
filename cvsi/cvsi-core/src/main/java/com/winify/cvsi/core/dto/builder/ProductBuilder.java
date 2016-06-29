@@ -19,14 +19,14 @@ public class ProductBuilder {
     private Date postedDate;
     private BigDecimal price;
     private Date limitDate;
-    private Date updateDate;
+    private Date updatedDate;
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdatedDate(Date updateDate) {
+        this.updatedDate = updateDate;
     }
 
     public ProductBuilder(){}
@@ -86,7 +86,7 @@ public class ProductBuilder {
         this.postedDate= product.getPostedDate();
         this.price= product.getPrice();
         this.limitDate= product.getLimitDate();
-        this.updateDate= product.getUpdateDate();
+        this.updatedDate= product.getUpdatedDate();
     }
 
 }

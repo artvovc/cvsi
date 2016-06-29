@@ -29,15 +29,26 @@ public class Product implements Serializable {
     private Date limitDate;
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updateDate;
+    private Date updatedDate;
 
-    @OneToMany(mappedBy ="product", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy ="product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private List<ProductCategory> productCategoryList = new ArrayList<ProductCategory>();
+
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true)
+    private List<Image> imageList = new ArrayList<Image>();
 
     @ManyToOne
     @JoinColumn(
-            name = "user_id",
-            foreignKey = @ForeignKey(name = "FK_user_id")
+            name = "user_id_product",
+            foreignKey = @ForeignKey(name = "FK_user_id_product")
     )
     private User user;
 
@@ -89,12 +100,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
     public List<ProductCategory> getProductCategoryList() {
@@ -111,5 +122,13 @@ public class Product implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Image> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
     }
 }

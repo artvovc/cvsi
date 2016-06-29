@@ -6,21 +6,21 @@ import java.io.Serializable;
 /**
  * Created by Artemie on 29.06.2016.
  */
-@Entity(name = "ProductCategory")
+@Entity(name = "Product_Category")
 public class ProductCategory implements Serializable{
     @Id
     @ManyToOne
     @JoinColumn(
-            name = "product_id",
-            foreignKey = @ForeignKey(name = "FK_product_id")
+            name = "product_id_product_category",
+            foreignKey = @ForeignKey(name = "FK_product_id_product_category")
     )
     private Product product;
 
     @Id
     @ManyToOne
     @JoinColumn(
-            name = "category_id",
-            foreignKey = @ForeignKey(name = "FK_category_id")
+            name = "category_id_product_category",
+            foreignKey = @ForeignKey(name = "FK_category_id_product_category")
     )
     private Category category;
 

@@ -23,7 +23,11 @@ public class Category implements Serializable{
     @NaturalId
     private String category;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "category",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private List<ProductCategory> productCategoryList = new ArrayList<ProductCategory>();
 
     public List<ProductCategory> getProductCategoryList() {

@@ -16,7 +16,7 @@ public class ProductDto extends CvsiResponse {
     private Date postedDate;
     private BigDecimal price;
     private Date limitDate;
-    private Date updateDate;
+    private Date updatedDate;
 
     public Long getId() {
         return id;
@@ -66,12 +66,12 @@ public class ProductDto extends CvsiResponse {
         this.limitDate = limitDate;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 
     public ProductDto(){
@@ -85,7 +85,7 @@ public class ProductDto extends CvsiResponse {
         this.postedDate= productBuilder.getPostedDate();
         this.price= productBuilder.getPrice();
         this.limitDate= productBuilder.getLimitDate();
-        this.updateDate= productBuilder.getUpdateDate();
+        this.updatedDate= productBuilder.getUpdatedDate();
     }
     public ProductDto(ProductBuilder productBuilder){
         this.id = productBuilder.getId();
@@ -94,7 +94,7 @@ public class ProductDto extends CvsiResponse {
         this.postedDate= productBuilder.getPostedDate();
         this.price= productBuilder.getPrice();
         this.limitDate= productBuilder.getLimitDate();
-        this.updateDate= productBuilder.getUpdateDate();
+        this.updatedDate= productBuilder.getUpdatedDate();
     }
 
 }

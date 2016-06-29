@@ -2,13 +2,11 @@ package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Blob;
 
 /**
  * Created by Artemie on 25.06.2016.
  */
-
-// WILL BE LOCAL STORAGE
-
 @Entity
 public class Image implements Serializable {
     @Id
@@ -16,8 +14,16 @@ public class Image implements Serializable {
     private Long id;
     @Column(nullable = false)
     private String imgType;
-    //@Column(nullable = false)
-    //private Image img;
+    //http://www.codejava.net/frameworks/hibernate/hibernate-binary-data-and-blob-mapping-example
+    @Column
+    private Blob img;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "product_id_image",
+            foreignKey = @ForeignKey(name = "FK_product_id_image")
+    )
+    private Product product;
 
     public Long getId() {
         return id;
@@ -33,5 +39,13 @@ public class Image implements Serializable {
 
     public void setImgType(String imgType) {
         this.imgType = imgType;
+    }
+
+    public Blob getImg() {
+        return img;
+    }
+
+    public void setImg(Blob img) {
+        this.img = img;
     }
 }

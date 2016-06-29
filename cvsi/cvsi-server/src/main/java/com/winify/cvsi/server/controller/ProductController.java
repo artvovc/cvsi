@@ -295,7 +295,7 @@ public class ProductController {
             product.setPostedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             product.setLimitDate(new Date());
-            //product.setUpdateDate(new Date());
+            //product.setUpdatedDate(new Date());
 
             productDtoList.add(new ProductBuilder(product));
         }
@@ -325,7 +325,7 @@ public class ProductController {
             product.setPostedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             product.setLimitDate(new Date());
-            //product.setUpdateDate(new Date());
+            //product.setUpdatedDate(new Date());
 
             productDtoList.add(new ProductBuilder(product));
         }
@@ -370,7 +370,7 @@ public class ProductController {
         prod.setPrice(price);
         prod.setPostedDate(new Date());
         prod.setLimitDate(new Date());
-        prod.setUpdateDate(new Date());
+        prod.setUpdatedDate(new Date());
 
         productFacade.saveProduct(prod);
         return new ResponseEntity(new CvsiResponse(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);

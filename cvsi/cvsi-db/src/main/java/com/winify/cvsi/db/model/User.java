@@ -23,9 +23,9 @@ public class User implements Serializable{
     private String userName;
     @Column(nullable = false)
     private String email;
-    @Column(name = "credential", nullable = false)
+    @Column(nullable = false)
     private String password;
-    @Column(name = "phone", nullable = false)
+    @Column(nullable = false)
     private String phone;
     @Column
     private String name;
@@ -43,7 +43,12 @@ public class User implements Serializable{
             fetch = FetchType.LAZY,
             orphanRemoval = true)
     private List<Product>  productList = new ArrayList<Product>();
-
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
+    private List<UserRole> userRoleList = new ArrayList<UserRole>();
 
     public Long getId() {
         return id;
@@ -115,5 +120,13 @@ public class User implements Serializable{
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public List<UserRole> getUserRoleList() {
+        return userRoleList;
+    }
+
+    public void setUserRoleList(List<UserRole> userRoleList) {
+        this.userRoleList = userRoleList;
     }
 }

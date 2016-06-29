@@ -13,13 +13,12 @@ public class Conversation{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
-    private Long firstUserId;
-    @Column(nullable = false)
-    private Long secondUserId;
+    private String userName;
+
     @Column(nullable = false)
     private Long productId;
-
     @OneToMany(
             mappedBy = "conversation",
             cascade = CascadeType.ALL,
@@ -29,11 +28,18 @@ public class Conversation{
 
     @ManyToOne
     @JoinColumn(
-            name = "user_id",
-            foreignKey = @ForeignKey(name = "FK_user_id")
+            name = "user_id_conversation",
+            foreignKey = @ForeignKey(name = "FK_user_id_conversation")
     )
     private User user;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Long getId() {
         return id;
@@ -41,22 +47,6 @@ public class Conversation{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getFirstUserId() {
-        return firstUserId;
-    }
-
-    public void setFirstUserId(Long firstUserId) {
-        this.firstUserId = firstUserId;
-    }
-
-    public Long getSecondUserId() {
-        return secondUserId;
-    }
-
-    public void setSecondUserId(Long secondUserId) {
-        this.secondUserId = secondUserId;
     }
 
     public Long getProductId() {
