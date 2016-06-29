@@ -1,17 +1,16 @@
 package com.winify.cvsi.db.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Artemie on 25.06.2016.
  */
-@Entity
-@Table(name = "product")
+@Entity(name = "Product")
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +22,7 @@ public class Product implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date postedDate;
-    @Column(nullable = false)
-    private String category;
     @Column
-    // MAYBE NEED CHANGE DATATYPE FOR PRICE
     private BigDecimal price;
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,6 +30,16 @@ public class Product implements Serializable {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDate;
+
+    @OneToMany(mappedBy ="product", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ProductCategory> productCategoryList = new ArrayList<ProductCategory>();
+
+    @ManyToOne
+    @JoinColumn(
+            name = "user_id",
+            foreignKey = @ForeignKey(name = "FK_user_id")
+    )
+    private User user;
 
     public Date getLimitDate() {
         return limitDate;
@@ -75,14 +81,6 @@ public class Product implements Serializable {
         this.postedDate = postedDate;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -97,5 +95,21 @@ public class Product implements Serializable {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public List<ProductCategory> getProductCategoryList() {
+        return productCategoryList;
+    }
+
+    public void setProductCategoryList(List<ProductCategory> productCategoryList) {
+        this.productCategoryList = productCategoryList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

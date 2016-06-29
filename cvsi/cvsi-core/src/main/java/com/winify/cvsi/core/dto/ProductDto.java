@@ -14,7 +14,6 @@ public class ProductDto extends CvsiResponse {
     private String title;
     private String description;
     private Date postedDate;
-    private String category;
     private BigDecimal price;
     private Date limitDate;
     private Date updateDate;
@@ -51,14 +50,6 @@ public class ProductDto extends CvsiResponse {
         this.postedDate = postedDate;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -92,7 +83,6 @@ public class ProductDto extends CvsiResponse {
         this.title= productBuilder.getTitle();
         this.description= productBuilder.getDescription();
         this.postedDate= productBuilder.getPostedDate();
-        this.category= productBuilder.getCategory();
         this.price= productBuilder.getPrice();
         this.limitDate= productBuilder.getLimitDate();
         this.updateDate= productBuilder.getUpdateDate();
@@ -102,7 +92,6 @@ public class ProductDto extends CvsiResponse {
         this.title= productBuilder.getTitle();
         this.description= productBuilder.getDescription();
         this.postedDate= productBuilder.getPostedDate();
-        this.category= productBuilder.getCategory();
         this.price= productBuilder.getPrice();
         this.limitDate= productBuilder.getLimitDate();
         this.updateDate= productBuilder.getUpdateDate();

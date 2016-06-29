@@ -17,7 +17,6 @@ public class ProductBuilder {
     private String title;
     private String description;
     private Date postedDate;
-    private String category;
     private BigDecimal price;
     private Date limitDate;
     private Date updateDate;
@@ -64,14 +63,6 @@ public class ProductBuilder {
         this.postedDate = postedDate;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -93,7 +84,6 @@ public class ProductBuilder {
         this.title= product.getTitle();
         this.description= product.getDescription();
         this.postedDate= product.getPostedDate();
-        this.category= product.getCategory();
         this.price= product.getPrice();
         this.limitDate= product.getLimitDate();
         this.updateDate= product.getUpdateDate();

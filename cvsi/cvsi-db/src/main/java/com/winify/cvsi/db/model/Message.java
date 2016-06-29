@@ -15,6 +15,13 @@ public class Message implements Serializable {
     @Column
     private String message;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "conversation_id",
+            foreignKey = @ForeignKey(name = "FK_conversation_id")
+    )
+    private Conversation conversation;
+
     public Long getId() {
         return id;
     }
@@ -29,5 +36,13 @@ public class Message implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Conversation getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(Conversation conversation) {
+        this.conversation = conversation;
     }
 }

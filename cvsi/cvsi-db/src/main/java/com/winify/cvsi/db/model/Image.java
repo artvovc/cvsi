@@ -10,7 +10,6 @@ import java.io.Serializable;
 // WILL BE LOCAL STORAGE
 
 @Entity
-@Table(name = "image")
 public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

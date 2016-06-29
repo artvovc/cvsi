@@ -24,7 +24,7 @@ import sun.security.provider.certpath.OCSPResponse;
  * Created by Artemie on 25.06.2016.
  */
 @Controller
-@Api(description = "User controller with not all services, have just two services: saveUser(name,surname) and findById(id). You cant introduce user phone,email,password and another date. NOT DONE !!!")
+@Api
 @RequestMapping(name = "user controller",
         //path = "/user",
         produces = MediaType.APPLICATION_JSON_VALUE)
