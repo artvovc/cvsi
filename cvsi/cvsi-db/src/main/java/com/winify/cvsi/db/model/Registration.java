@@ -3,7 +3,6 @@ package com.winify.cvsi.db.model;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -14,7 +13,6 @@ import java.util.Date;
  */
 @Entity
 @Table(
-        name = "registration",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "email",name = "UK_email_registration"),
                 @UniqueConstraint(columnNames = "username",name = "UK_username_registration")
@@ -23,14 +21,13 @@ import java.util.Date;
 public class Registration implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Min(value = 1)
     private Long id;
     @Column(nullable = false)
     @Size(min=1,max=30, message = "username.Length between 1-30")
     private String username;
     @Column(nullable = false)
     @Size(min=1, message = "email.Length min=1")
-    @Email(message = "Bad email address")
+    @Email(message = "bad email address")
     private String email;
     @Column(nullable = false)
     @Size(min=9, max=20, message = "password.Length between 9-20")
@@ -47,7 +44,7 @@ public class Registration implements Serializable {
     @Column(nullable = false)
     @Size(min=10, message = "hash.Length min=10")
     private String hash;
-    @Column(nullable = false)
+    @Column(name="request_created_date",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date requestCreatedDate;

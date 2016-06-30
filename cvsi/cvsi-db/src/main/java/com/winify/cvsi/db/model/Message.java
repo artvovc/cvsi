@@ -1,10 +1,10 @@
 package com.winify.cvsi.db.model;
 
-import org.hibernate.annotations.Type;
+
+import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -14,11 +14,9 @@ import java.util.Date;
  * Created by Artemie on 25.06.2016.
  */
 @Entity
-@Table(name = "message")
 public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Min(value = 1)
     private Long id;
     @Column(nullable = false)
     @Size(min=1, message = "message.Length min=1")
@@ -31,10 +29,8 @@ public class Message implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date updatedDate;
-    @Column(name = "is_read",nullable = false,columnDefinition = "bit default 0")
-    @AssertFalse(message = "message must be not read")
-//    @Type(type= "org.hibernate.type.NumericBooleanType")   nu vra padla
-    private boolean isRead;
+    @Column(name = "is_Read")
+    private Boolean isRead;
     @ManyToOne
     @JoinColumn(
             name = "conversation_id",
@@ -82,11 +78,11 @@ public class Message implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    public boolean isRead() {
+    public Boolean getRead() {
         return isRead;
     }
 
-    public void setRead(boolean read) {
+    public void setRead(Boolean read) {
         isRead = read;
     }
 }

@@ -1,10 +1,11 @@
 package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.Date;
 
 /**
  * Created by Artemie on 25.06.2016.
@@ -13,14 +14,17 @@ import java.sql.Blob;
 public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Min(value = 1)
     private Long id;
-    @Column(nullable = false)
+    @Column(name="image_type",nullable = false)
     @Size(min = 1, max = 20, message = "imgtype.Length between 1-20")
     private String imgType;
     //http://www.codejava.net/frameworks/hibernate/hibernate-binary-data-and-blob-mapping-example
-    @Column
+    @Column(name = "image")
     private Blob img;
+    @Column(name = "created_date",nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Past(message = "incorrect date")
+    private Date createdDate;
 
     @ManyToOne
     @JoinColumn(
@@ -59,5 +63,13 @@ public class Image implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

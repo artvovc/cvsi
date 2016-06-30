@@ -10,11 +10,10 @@ import java.util.List;
 /**
  * Created by Artemie on 25.06.2016.
  */
-@Entity(name = "product")
+@Entity
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Min(value = 1)
     private Long id;
     @Column(nullable = false)
     @Size(min=1,max=100, message = "title.Length between 1-100")
@@ -25,8 +24,7 @@ public class Product implements Serializable {
     @Digits(integer = 13,fraction = 2)
     private Long price;
     @Column
-    @Size(min=3,max=3,message = "currency.Length min=max=3")
-    private String currency;
+    private CurrencyEnum currency;
     @Column(name = "borrow_or_lend")
     private Boolean isBorrow;
     @Column(name="created_date",nullable = false)
@@ -50,7 +48,7 @@ public class Product implements Serializable {
                     name = "product_id",
                     foreignKey = @ForeignKey(
                             name = "FK_product_id_category")))
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Size(min=1, message = "Set category for product")
     private List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
 
@@ -148,11 +146,11 @@ public class Product implements Serializable {
         this.categoryEnumList = categoryEnumList;
     }
 
-    public String getCurrency() {
+    public CurrencyEnum getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(CurrencyEnum currency) {
         this.currency = currency;
     }
 

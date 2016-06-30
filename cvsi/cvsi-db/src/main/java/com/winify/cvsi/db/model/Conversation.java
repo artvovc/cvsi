@@ -1,7 +1,6 @@
 package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,14 +11,12 @@ import java.util.List;
  * Created by Artemie on 25.06.2016.
  */
 @Entity
-public class Conversation{
+public class Conversation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Min(value = 1)
     private Long id;
-    @Column(nullable = false)
-    @Min(value = 1)
-    private Long productId;
+    @Column(name="product_id",nullable = false)
+    private Product product;
     @Column(name="created_date",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
@@ -45,12 +42,12 @@ public class Conversation{
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public List<Message> getMessageList() {
