@@ -15,8 +15,6 @@ public class Conversation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="product_id",nullable = false)
-    private Product product;
     @Column(name="created_date",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
@@ -33,6 +31,12 @@ public class Conversation implements Serializable{
             foreignKey = @ForeignKey(name = "FK_user_id_conversation")
     )
     private User user;
+    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "product_id",
+            foreignKey = @ForeignKey(name = "FK_product_id_conversation")
+    )
+    private Product product;
 
     public Long getId() {
         return id;
