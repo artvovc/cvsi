@@ -1,6 +1,8 @@
 package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Blob;
 
@@ -11,8 +13,10 @@ import java.sql.Blob;
 public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Min(value = 1)
     private Long id;
     @Column(nullable = false)
+    @Size(min = 1, max = 20, message = "imgtype.Length between 1-20")
     private String imgType;
     //http://www.codejava.net/frameworks/hibernate/hibernate-binary-data-and-blob-mapping-example
     @Column

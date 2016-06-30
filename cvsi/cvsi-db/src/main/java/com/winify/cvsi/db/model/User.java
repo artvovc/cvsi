@@ -1,9 +1,15 @@
 package com.winify.cvsi.db.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -20,24 +26,34 @@ import java.util.List;
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Min(value = 1)
     private Long id;
     @Column(nullable = false)
+    @Size(min=1,max=30, message = "username.Length between 1-30")
     private String username;
     @Column(nullable = false)
+    @Size(min=1, message = "email.Length min=1")
+    @Email(message = "Bad email address")
     private String email;
     @Column(nullable = false)
+    @Size(min=9, max=20, message = "password.Length between 9-20")
     private String password;
     @Column(nullable = false)
+    @Size(min=9, max=25, message = "phone.Length between 9-25")
     private String phone;
     @Column
+    @Size(min=1, max=30, message = "name.Length between 1-30")
     private String name;
     @Column
+    @Size(min=1, max=30, message = "surname.Length between 1-30")
     private String surname;
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @Past(message = "incorrect date")
     private Date createdDate;
     @Column
     @Temporal(TemporalType.TIMESTAMP)
+    @Past(message = "incorrect date")
     private Date updatedDate;
     @OneToMany(
             mappedBy = "user",
@@ -55,6 +71,7 @@ public class User implements Serializable{
     @ElementCollection(targetClass = RoleEnum.class)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "FK_user_id_role")))
     @Enumerated(EnumType.ORDINAL)
+    @Size(min=1, message = "Set role for user")
     private List<RoleEnum> roleEnumList = new ArrayList<RoleEnum>();
 
     public Long getId() {

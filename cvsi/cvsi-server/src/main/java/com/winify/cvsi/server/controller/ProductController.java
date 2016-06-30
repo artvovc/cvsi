@@ -6,6 +6,7 @@ import com.winify.cvsi.core.dto.ProductListDto;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Product;
+import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.ProductFacade;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
@@ -40,6 +41,9 @@ public class ProductController {
     @CrossOrigin(origins = "*")
     @GetMapping(path = "/all")
     private HttpEntity<ProductListDto> getAllProduct() {
+
+        User user1 = new User();
+        user1.setUsername("a");
 
         int n = 5;
 

@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a26a303a-b063-42b9-8310-23e46223d5da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/CategoryEnum.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/RoleEnum.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Category.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/ProductCategory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Role.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/UserRole.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-core-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-core-1.0-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-db-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/cvsi-server/target/cvsi-server/WEB-INF/lib/cvsi-db-1.0-SNAPSHOT.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/ProductDto.java" afterPath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/ProductDto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/UserDto.java" afterPath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/UserDto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/builder/ProductBuilder.java" afterPath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/builder/ProductBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/builder/UserBuilder.java" afterPath="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/builder/UserBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/pom.xml" afterPath="$PROJECT_DIR$/cvsi-db/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java" />
@@ -23,8 +12,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java" afterPath="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/ProductController.java" afterPath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/ProductController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java" afterPath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/facade/UserFacade.java" afterPath="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/facade/UserFacade.java" />
     </list>
     <ignored path="cvsi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,24 +46,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Conversation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java">
+      <file leaf-file-name="Image.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-              <folding>
-                <element signature="e#727#736#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="34">
+              <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Image.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java">
+      <file leaf-file-name="Conversation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="153">
+              <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="19" />
+              <folding>
+                <element signature="e#886#895#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,8 +71,88 @@
       <file leaf-file-name="Registration.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/ProductController.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+              <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51">
+              <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2077#2091#0" expanded="true" />
+                <element signature="e#2305#2314#0" expanded="true" />
+                <element signature="e#2676#2686#0" expanded="true" />
+                <element signature="e#4455#4456#0" expanded="true" />
+                <element signature="e#4490#4491#0" expanded="true" />
+                <element signature="e#4554#4555#0" expanded="true" />
+                <element signature="e#4602#4603#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Product.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1765#1779#0" expanded="true" />
+                <element signature="e#1992#1999#0" expanded="true" />
+                <element signature="e#3564#3565#0" expanded="true" />
+                <element signature="e#3603#3604#0" expanded="true" />
+                <element signature="e#3679#3680#0" expanded="true" />
+                <element signature="e#3735#3736#0" expanded="true" />
+                <element signature="e#3770#3771#0" expanded="true" />
+                <element signature="e#3801#3802#0" expanded="true" />
+                <element signature="e#3849#3850#0" expanded="true" />
+                <element signature="e#3889#3890#0" expanded="true" />
+                <element signature="e#3925#3926#0" expanded="true" />
+                <element signature="e#3956#3957#0" expanded="true" />
+                <element signature="e#4005#4006#0" expanded="true" />
+                <element signature="e#4045#4046#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Message.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+              <folding>
+                <element signature="e#2201#2202#0" expanded="true" />
+                <element signature="e#2230#2231#0" expanded="true" />
+                <element signature="e#2271#2272#0" expanded="true" />
+                <element signature="e#2300#2301#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/AModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-76">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -96,72 +163,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/ProductController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/webapp/WEB-INF/web.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-              <folding>
-                <element signature="e#1322#1336#0" expanded="true" />
-                <element signature="e#1550#1559#0" expanded="true" />
-                <element signature="e#1873#1883#0" expanded="true" />
-                <element signature="e#3652#3653#0" expanded="true" />
-                <element signature="e#3687#3688#0" expanded="true" />
-                <element signature="e#3751#3752#0" expanded="true" />
-                <element signature="e#3799#3800#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Product.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1291#1305#0" expanded="true" />
-                <element signature="e#1518#1525#0" expanded="true" />
-                <element signature="e#3090#3091#0" expanded="true" />
-                <element signature="e#3129#3130#0" expanded="true" />
-                <element signature="e#3205#3206#0" expanded="true" />
-                <element signature="e#3261#3262#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -229,16 +230,11 @@
         <option value="$PROJECT_DIR$/cvsi-db/src/main/resources/sqlscript/test.sql" />
         <option value="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/facade/ProductFacade.java" />
         <option value="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/service/ProductService.java" />
-        <option value="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/AbstractModel.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Prduct_ProductCategory.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product_ProductCategory.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/roductCategory.java" />
-        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/EnumCategories.java" />
-        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java" />
-        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java" />
-        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java" />
         <option value="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/builder/ProductBuilder.java" />
         <option value="$PROJECT_DIR$/cvsi-core/src/main/java/com/winify/cvsi/core/dto/ProductDto.java" />
         <option value="$PROJECT_DIR$/cvsi-db/pom.xml" />
@@ -248,9 +244,14 @@
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/RoleEnum.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Role.java" />
         <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/UserRole.java" />
-        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java" />
-        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java" />
+        <option value="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java" />
         <option value="$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/ProductController.java" />
+        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java" />
+        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java" />
+        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java" />
+        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java" />
+        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java" />
+        <option value="$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java" />
       </list>
     </option>
   </component>
@@ -1555,12 +1556,12 @@
       <workItem from="1467131370103" duration="122000" />
       <workItem from="1467143712400" duration="589000" />
       <workItem from="1467177645221" duration="24681000" />
-      <workItem from="1467210068246" duration="22872000" />
+      <workItem from="1467210068246" duration="35305000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247705000" />
+    <option name="totallyTimeSpent" value="260138000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1593,7 +1594,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3376" sideWeight="0.49546143" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34478202" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4729194" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4029062" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49358973" order="0" side_tool="false" content_ui="combo" />
@@ -1728,14 +1729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/facade/ConversationFacade.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1815,13 +1808,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/AbstractModel.java" />
-    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/AModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-381">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/facade/ProductFacade.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1889,14 +1875,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-db/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="100" column="36" selection-start-line="100" selection-start-column="36" selection-end-line="100" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1937,28 +1915,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java">
+    <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-          <folding>
-            <element signature="e#727#736#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        <state relative-caret-position="258">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java">
+    <entry file="file://$PROJECT_DIR$/cvsi-db/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="19" column="70" selection-start-line="19" selection-start-column="70" selection-end-line="19" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/ProductController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
           <folding />
         </state>
       </provider>
@@ -1971,6 +1947,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/AModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/CategoryEnum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1979,51 +1963,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java">
+    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Conversation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+        <state relative-caret-position="153">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="19" />
+          <folding>
+            <element signature="e#886#895#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Image.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1765#1779#0" expanded="true" />
+            <element signature="e#1992#1999#0" expanded="true" />
+            <element signature="e#3564#3565#0" expanded="true" />
+            <element signature="e#3603#3604#0" expanded="true" />
+            <element signature="e#3679#3680#0" expanded="true" />
+            <element signature="e#3735#3736#0" expanded="true" />
+            <element signature="e#3770#3771#0" expanded="true" />
+            <element signature="e#3801#3802#0" expanded="true" />
+            <element signature="e#3849#3850#0" expanded="true" />
+            <element signature="e#3889#3890#0" expanded="true" />
+            <element signature="e#3925#3926#0" expanded="true" />
+            <element signature="e#3956#3957#0" expanded="true" />
+            <element signature="e#4005#4006#0" expanded="true" />
+            <element signature="e#4045#4046#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Registration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding>
-            <element signature="e#1322#1336#0" expanded="true" />
-            <element signature="e#1550#1559#0" expanded="true" />
-            <element signature="e#1873#1883#0" expanded="true" />
-            <element signature="e#3652#3653#0" expanded="true" />
-            <element signature="e#3687#3688#0" expanded="true" />
-            <element signature="e#3751#3752#0" expanded="true" />
-            <element signature="e#3799#3800#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="-51">
+          <caret line="49" column="29" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1291#1305#0" expanded="true" />
-            <element signature="e#1518#1525#0" expanded="true" />
-            <element signature="e#3090#3091#0" expanded="true" />
-            <element signature="e#3129#3130#0" expanded="true" />
-            <element signature="e#3205#3206#0" expanded="true" />
-            <element signature="e#3261#3262#0" expanded="true" />
+            <element signature="e#2077#2091#0" expanded="true" />
+            <element signature="e#2305#2314#0" expanded="true" />
+            <element signature="e#2676#2686#0" expanded="true" />
+            <element signature="e#4455#4456#0" expanded="true" />
+            <element signature="e#4490#4491#0" expanded="true" />
+            <element signature="e#4554#4555#0" expanded="true" />
+            <element signature="e#4602#4603#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cvsi-server/src/main/java/com/winify/cvsi/server/controller/ProductController.java">
+    <entry file="file://$PROJECT_DIR$/cvsi-db/src/main/java/com/winify/cvsi/db/model/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
-          <folding />
+        <state relative-caret-position="255">
+          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+          <folding>
+            <element signature="e#2201#2202#0" expanded="true" />
+            <element signature="e#2230#2231#0" expanded="true" />
+            <element signature="e#2271#2272#0" expanded="true" />
+            <element signature="e#2300#2301#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

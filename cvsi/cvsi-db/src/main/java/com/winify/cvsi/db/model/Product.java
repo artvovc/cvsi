@@ -1,9 +1,9 @@
 package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -14,21 +14,32 @@ import java.util.List;
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Min(value = 1)
     private Long id;
     @Column(nullable = false)
+    @Size(min=1,max=100, message = "title.Length between 1-100")
     private String title;
     @Column
     private String description;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created_date",nullable = false)
-    private Date createdDate;
     @Column
+    @Digits(integer = 13,fraction = 2)
     private Long price;
+    @Column
+    @Size(min=3,max=3,message = "currency.Length min=max=3")
+    private String currency;
+    @Column(name = "borrow_or_lend")
+    private Boolean isBorrow;
+    @Column(name="created_date",nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Past(message = "incorrect date")
+    private Date createdDate;
     @Column(name="limit_date")
     @Temporal(TemporalType.TIMESTAMP)
+    @Future(message = "incorrect date")
     private Date limitDate;
     @Column(name="updated_date")
     @Temporal(TemporalType.TIMESTAMP)
+    @Past(message = "incorrect date")
     private Date updatedDate;
 
     @Column(name = "category_enum_list")
@@ -40,6 +51,7 @@ public class Product implements Serializable {
                     foreignKey = @ForeignKey(
                             name = "FK_product_id_category")))
     @Enumerated(EnumType.ORDINAL)
+    @Size(min=1, message = "Set category for product")
     private List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
 
     @OneToMany(
@@ -134,5 +146,21 @@ public class Product implements Serializable {
 
     public void setCategoryEnumList(List<CategoryEnum> categoryEnumList) {
         this.categoryEnumList = categoryEnumList;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public Boolean getIsBorrow() {
+        return isBorrow;
+    }
+
+    public void setIsBorrow(Boolean isBorrow) {
+        this.isBorrow = isBorrow;
     }
 }
