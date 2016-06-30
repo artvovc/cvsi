@@ -48,4 +48,12 @@ public class Image implements Serializable {
     public void setImg(Blob img) {
         this.img = img;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }

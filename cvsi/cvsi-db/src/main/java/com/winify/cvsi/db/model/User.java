@@ -3,6 +3,8 @@ package com.winify.cvsi.db.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ public class User implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String userName;
+    private String username;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
@@ -31,6 +33,12 @@ public class User implements Serializable{
     private String name;
     @Column
     private String surname;
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedDate;
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -43,12 +51,11 @@ public class User implements Serializable{
             fetch = FetchType.LAZY,
             orphanRemoval = true)
     private List<Product>  productList = new ArrayList<Product>();
-    @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY)
-    private List<UserRole> userRoleList = new ArrayList<UserRole>();
+    @Column(name = "role_enum_list")
+    @ElementCollection(targetClass = RoleEnum.class)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "FK_user_id_role")))
+    @Enumerated(EnumType.ORDINAL)
+    private List<RoleEnum> roleEnumList = new ArrayList<RoleEnum>();
 
     public Long getId() {
         return id;
@@ -98,12 +105,12 @@ public class User implements Serializable{
         this.surname = surname;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public List<Conversation> getConversationList() {
@@ -122,11 +129,28 @@ public class User implements Serializable{
         this.productList = productList;
     }
 
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public List<RoleEnum> getRoleEnumList() {
+        return roleEnumList;
+    }
+
+    public void setRoleEnumList(List<RoleEnum> roleEnumList) {
+        this.roleEnumList = roleEnumList;
+    }
+
 }

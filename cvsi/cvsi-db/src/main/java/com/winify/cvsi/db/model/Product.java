@@ -2,15 +2,15 @@ package com.winify.cvsi.db.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Artemie on 25.06.2016.
  */
-@Entity(name = "Product")
+@Entity(name = "product")
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,23 +20,27 @@ public class Product implements Serializable {
     @Column
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date postedDate;
+    @Column(name="created_date",nullable = false)
+    private Date createdDate;
     @Column
-    private BigDecimal price;
-    @Column
+    private Long price;
+    @Column(name="limit_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date limitDate;
-    @Column
+    @Column(name="updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
 
-    @OneToMany(
-            mappedBy ="product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY)
-    private List<ProductCategory> productCategoryList = new ArrayList<ProductCategory>();
+    @Column(name = "category_enum_list")
+    @ElementCollection(targetClass = CategoryEnum.class)
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(
+                    name = "product_id",
+                    foreignKey = @ForeignKey(
+                            name = "FK_product_id_category")))
+    @Enumerated(EnumType.ORDINAL)
+    private List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
 
     @OneToMany(
             mappedBy = "product",
@@ -84,20 +88,12 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public Date getPostedDate() {
-        return postedDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setPostedDate(Date postedDate) {
-        this.postedDate = postedDate;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Date getUpdatedDate() {
@@ -106,14 +102,6 @@ public class Product implements Serializable {
 
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
-    }
-
-    public List<ProductCategory> getProductCategoryList() {
-        return productCategoryList;
-    }
-
-    public void setProductCategoryList(List<ProductCategory> productCategoryList) {
-        this.productCategoryList = productCategoryList;
     }
 
     public User getUser() {
@@ -130,5 +118,21 @@ public class Product implements Serializable {
 
     public void setImageList(List<Image> imageList) {
         this.imageList = imageList;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
+    public List<CategoryEnum> getCategoryEnumList() {
+        return categoryEnumList;
+    }
+
+    public void setCategoryEnumList(List<CategoryEnum> categoryEnumList) {
+        this.categoryEnumList = categoryEnumList;
     }
 }

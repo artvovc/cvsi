@@ -66,7 +66,7 @@ public class UserBuilder {
 
     }
     public UserBuilder(User user){
-        this.userName = user.getUserName();
+        this.userName = user.getUsername();
         this.name = user.getName();
         this.surname = user.getSurname();
         this.phone = user.getPhone();

@@ -18,7 +18,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import sun.security.provider.certpath.OCSPResponse;
 
 /**
  * Created by Artemie on 25.06.2016.
@@ -36,7 +35,7 @@ public class UserController {
     @PostMapping(path = "/registration")
     public HttpEntity<CvsiResponse> saveNewUser(@ModelAttribute("registrationValue") UserBuilder userBuilder){
         User user = new User();
-        user.setUserName(userBuilder.getUserName());
+        user.setUsername(userBuilder.getUserName());
         user.setName(userBuilder.getName());
         user.setSurname(userBuilder.getSurname());
         user.setPhone(userBuilder.getPhone());

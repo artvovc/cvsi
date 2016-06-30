@@ -20,7 +20,7 @@ public class Registration implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String userName;
+    private String username;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
@@ -37,12 +37,12 @@ public class Registration implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestCreatedDate;
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPhone() {

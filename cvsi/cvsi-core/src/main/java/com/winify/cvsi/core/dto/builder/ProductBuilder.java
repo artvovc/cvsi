@@ -1,10 +1,8 @@
 package com.winify.cvsi.core.dto.builder;
 
-import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.db.model.Product;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -17,7 +15,7 @@ public class ProductBuilder {
     private String title;
     private String description;
     private Date postedDate;
-    private BigDecimal price;
+    private Long price;
     private Date limitDate;
     private Date updatedDate;
 
@@ -63,11 +61,11 @@ public class ProductBuilder {
         this.postedDate = postedDate;
     }
 
-    public BigDecimal getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -83,7 +81,7 @@ public class ProductBuilder {
         this.id = product.getId();
         this.title= product.getTitle();
         this.description= product.getDescription();
-        this.postedDate= product.getPostedDate();
+        this.postedDate= product.getCreatedDate();
         this.price= product.getPrice();
         this.limitDate= product.getLimitDate();
         this.updatedDate= product.getUpdatedDate();

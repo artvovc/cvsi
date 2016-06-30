@@ -47,7 +47,7 @@ public class UserDto extends CvsiResponse{
     }
     public UserDto(CvsiResponse cvsiResponse, User user) {
         super(cvsiResponse);
-        this.userName = user.getUserName();
+        this.userName = user.getUsername();
         this.name = user.getName();
         this.surname = user.getSurname();
         this.phone = user.getPhone();

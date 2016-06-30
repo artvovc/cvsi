@@ -37,6 +37,7 @@ public class ProductController {
 
     final static Logger log = Logger.getLogger(ProductController.class);
 
+    @CrossOrigin(origins = "*")
     @GetMapping(path = "/all")
     private HttpEntity<ProductListDto> getAllProduct() {
 
@@ -56,7 +57,7 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
+            product.setCreatedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             //product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
@@ -76,8 +77,8 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
-            product.setPrice(new BigDecimal(2123124.3341));
+            product.setCreatedDate(new Date());
+            product.setPrice(new Long(123));
             //product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
 
@@ -96,7 +97,7 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
+            product.setCreatedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
@@ -129,7 +130,7 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
+            product.setCreatedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             //product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
@@ -159,7 +160,7 @@ public class ProductController {
                     "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
+            product.setCreatedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             //product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
@@ -185,7 +186,7 @@ public class ProductController {
                     "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
+            product.setCreatedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             //product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
@@ -210,8 +211,8 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
-            product.setPrice(new BigDecimal(2123124.3341));
+            product.setCreatedDate(new Date());
+            product.setPrice(new Long(123));
             //product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
 
@@ -241,8 +242,8 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
-            product.setPrice(new BigDecimal(2123124.3341));
+            product.setCreatedDate(new Date());
+            product.setPrice(new Long(123));
             //product.setLimitDate(new Date());
             //product.setUpdateDate(new Date());
 
@@ -267,12 +268,14 @@ public class ProductController {
                 "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                 "\n" +
                 "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-        product.setPostedDate(new Date());
-        product.setPrice(new BigDecimal(2123124.3341));
+        product.setCreatedDate(new Date());
+        product.setPrice(new Long(123));
         //product.setLimitDate(new Date());
         //product.setUpdateDate(new Date());
         return new ResponseEntity(new ProductDto(new CvsiResponse(ErrorEnum.UNKNOWN_ERROR,"OK"),new ProductBuilder(product)), HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
     @GetMapping(path = "/borrow")
     private HttpEntity<ProductListDto> getAllBorrowProduct() {
 
@@ -292,7 +295,7 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
+            product.setCreatedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             product.setLimitDate(new Date());
             //product.setUpdatedDate(new Date());
@@ -322,7 +325,7 @@ public class ProductController {
                     "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                     "\n" +
                     "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-            product.setPostedDate(new Date());
+            product.setCreatedDate(new Date());
             //product.setPrice(new BigDecimal(2123124.3341));
             product.setLimitDate(new Date());
             //product.setUpdatedDate(new Date());
@@ -348,7 +351,7 @@ public class ProductController {
                 "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
                 "\n" +
                 "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-        product.setPostedDate(new Date());
+        product.setCreatedDate(new Date());
         //product.setPrice(new BigDecimal(2123124.3341));
         product.setLimitDate(new Date());
         //product.setUpdateDate(new Date());
@@ -359,7 +362,7 @@ public class ProductController {
     private HttpEntity<CvsiResponse> setBorrowProduct(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "price") BigDecimal price,
+            @RequestParam(value = "price") Long price,
             @RequestParam(value = "limitdate") String limitDate
         ) {
 
@@ -368,7 +371,7 @@ public class ProductController {
         prod.setTitle(title);
         prod.setDescription(description);
         prod.setPrice(price);
-        prod.setPostedDate(new Date());
+        prod.setCreatedDate(new Date());
         prod.setLimitDate(new Date());
         prod.setUpdatedDate(new Date());
 

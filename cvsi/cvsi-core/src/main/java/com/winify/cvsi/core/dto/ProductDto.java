@@ -14,7 +14,7 @@ public class ProductDto extends CvsiResponse {
     private String title;
     private String description;
     private Date postedDate;
-    private BigDecimal price;
+    private Long price;
     private Date limitDate;
     private Date updatedDate;
 
@@ -50,11 +50,11 @@ public class ProductDto extends CvsiResponse {
         this.postedDate = postedDate;
     }
 
-    public BigDecimal getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 

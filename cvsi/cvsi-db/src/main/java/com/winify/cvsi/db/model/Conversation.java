@@ -3,6 +3,7 @@ package com.winify.cvsi.db.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,10 +16,11 @@ public class Conversation{
     private Long id;
 
     @Column(nullable = false)
-    private String userName;
-
-    @Column(nullable = false)
     private Long productId;
+    @Column(name="created_date",nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
     @OneToMany(
             mappedBy = "conversation",
             cascade = CascadeType.ALL,
@@ -32,14 +34,6 @@ public class Conversation{
             foreignKey = @ForeignKey(name = "FK_user_id_conversation")
     )
     private User user;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public Long getId() {
         return id;
@@ -71,5 +65,13 @@ public class Conversation{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

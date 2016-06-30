@@ -52,11 +52,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.oracle</groupId>-->
-            <!--<artifactId>ojdbc14</artifactId>-->
-            <!--<version>${ojdbc14.version}</version>-->
-        <!--</dependency>-->
         <!-- jsr303 validation -->
         <dependency>
             <groupId>javax.validation</groupId>
@@ -96,12 +91,6 @@
                     <version>${liquibase-maven-plugin.version}</version>
                     <configuration>
                         <propertyFileWillOverride>true</propertyFileWillOverride>
-                        <!--<changeLogFile>${dir}/scr/resources/ChangeLog.xml/</changeLogFile>-->
-                        <!--<driver>jdbc:mysql://127.0.0.1:3306/cvsidb</driver>-->
-                        <!--<url>com.mysql.jdbc.Driver</url>-->
-                        <!--<username>root</username>-->
-                        <!--<password>12345</password>-->
-                        <!--<propertyFile>src/main/resources/liquibase.properties</propertyFile>-->
                         <propertyFile>target/classes/liquibase.properties</propertyFile>
                     </configuration>
                     <executions>
