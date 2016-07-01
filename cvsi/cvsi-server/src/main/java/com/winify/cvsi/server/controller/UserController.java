@@ -1,6 +1,6 @@
 package com.winify.cvsi.server.controller;
 
-import com.winify.cvsi.core.dto.CvsiResponse;
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.enums.ErrorEnum;
@@ -33,7 +33,7 @@ public class UserController {
     final static Logger log = Logger.getLogger(UserController.class);
 
     @PostMapping(path = "/registration")
-    public HttpEntity<CvsiResponse> saveNewUser(@ModelAttribute("registrationValue") UserBuilder userBuilder){
+    public HttpEntity<ServerResponseStatus> saveNewUser(@ModelAttribute("registrationValue") UserBuilder userBuilder){
         User user = new User();
         user.setUsername(userBuilder.getUserName());
         user.setName(userBuilder.getName());
@@ -45,7 +45,7 @@ public class UserController {
         log.info(user.getEmail());
 
 //        userFasade.saveUser(user);
-        return new ResponseEntity(new CvsiResponse(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
+        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
     }
 
     @GetMapping(path = "/me")

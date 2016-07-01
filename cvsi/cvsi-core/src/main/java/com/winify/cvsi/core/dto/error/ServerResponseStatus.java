@@ -1,26 +1,26 @@
-package com.winify.cvsi.core.dto;
+package com.winify.cvsi.core.dto.error;
 
 import com.winify.cvsi.core.enums.ErrorEnum;
 
 /**
  * Created by Artemie on 22.06.2016.
  */
-public class CvsiResponse {
+public class ServerResponseStatus {
     private ErrorEnum error;
     private String status;
 
-    public CvsiResponse() {
+    public ServerResponseStatus() {
         status = "OK";
     }
 
-    public CvsiResponse(ErrorEnum error, String status) {
+    public ServerResponseStatus(ErrorEnum error, String status) {
         this.error = error;
         this.status = status;
     }
 
-    public CvsiResponse(CvsiResponse cvsiResponse){
-        this.error = cvsiResponse.getError();
-        this.status = cvsiResponse.getStatus();
+    public ServerResponseStatus(ServerResponseStatus serverResponseStatus){
+        this.error = serverResponseStatus.getError();
+        this.status = serverResponseStatus.getStatus();
     }
 
     public ErrorEnum getError() {

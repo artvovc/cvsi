@@ -1,4 +1,4 @@
-package com.winify.cvsi.db.model;
+package com.winify.cvsi.db.model.enums;
 
 /**
  * Created by Artemie on 30.06.2016.

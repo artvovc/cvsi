@@ -31,9 +31,8 @@ public class Conversation implements Serializable{
             foreignKey = @ForeignKey(name = "FK_user_id_conversation")
     )
     private User user;
-    @Column(nullable = false)
     @ManyToOne
-    @JoinColumn(name = "product_id",
+    @JoinColumn(name = "product_id_conversation",
             foreignKey = @ForeignKey(name = "FK_product_id_conversation")
     )
     private Product product;

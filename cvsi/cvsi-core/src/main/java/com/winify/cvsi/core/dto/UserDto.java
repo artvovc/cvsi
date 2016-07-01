@@ -1,13 +1,14 @@
 package com.winify.cvsi.core.dto;
 
 import com.winify.cvsi.core.dto.builder.UserBuilder;
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 
 /**
  * Created by Artemie on 25.06.2016.
  */
-public class UserDto extends CvsiResponse{
+public class UserDto extends ServerResponseStatus {
 
     private String userName;
     private String name;
@@ -36,8 +37,8 @@ public class UserDto extends CvsiResponse{
         this.email = email;
         this.password = password;
     }
-    public UserDto(CvsiResponse cvsiResponse, String userName, String name, String surname, String phone, String email, String password) {
-        super(cvsiResponse);
+    public UserDto(ServerResponseStatus serverResponseStatus, String userName, String name, String surname, String phone, String email, String password) {
+        super(serverResponseStatus);
         this.userName = userName;
         this.name = name;
         this.surname = surname;
@@ -45,8 +46,8 @@ public class UserDto extends CvsiResponse{
         this.email = email;
         this.password = password;
     }
-    public UserDto(CvsiResponse cvsiResponse, User user) {
-        super(cvsiResponse);
+    public UserDto(ServerResponseStatus serverResponseStatus, User user) {
+        super(serverResponseStatus);
         this.userName = user.getUsername();
         this.name = user.getName();
         this.surname = user.getSurname();

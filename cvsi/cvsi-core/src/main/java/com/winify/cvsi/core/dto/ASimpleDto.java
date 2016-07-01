@@ -1,9 +1,11 @@
 package com.winify.cvsi.core.dto;
 
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
+
 /**
  * Created by Artemie on 22.06.2016.
  */
-public class ASimpleDto extends CvsiResponse {
+public class ASimpleDto extends ServerResponseStatus {
     private String firstName;
     private String lastName;
     private int age;

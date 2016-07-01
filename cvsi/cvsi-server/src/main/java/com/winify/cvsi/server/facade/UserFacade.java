@@ -1,6 +1,6 @@
 package com.winify.cvsi.server.facade;
 
-import com.winify.cvsi.core.dto.CvsiResponse;
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.core.service.UserService;
@@ -18,7 +18,7 @@ public class UserFacade {
     private UserService userService;
     public UserDto getUser(Long id){
         User user = userService.getUser(id);
-        return new UserDto(new CvsiResponse(ErrorEnum.UNKNOWN_ERROR,"OK"),
+        return new UserDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),
                 user.getUsername(),
                 user.getName(),
                 user.getSurname(),

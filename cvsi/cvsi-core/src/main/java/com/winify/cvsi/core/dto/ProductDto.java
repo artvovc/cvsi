@@ -1,100 +1,34 @@
 package com.winify.cvsi.core.dto;
 
-import com.winify.cvsi.core.dto.builder.ProductBuilder;
-
-import java.math.BigDecimal;
-import java.util.Date;
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
+import com.winify.cvsi.core.dto.templates.ProductTemplate;
+import com.winify.cvsi.core.enums.ErrorEnum;
 
 /**
  * Created by Artemie on 28.06.2016.
  */
-public class ProductDto extends CvsiResponse {
+public class ProductDto extends ServerResponseStatus {
 
-    private Long id;
-    private String title;
-    private String description;
-    private Date postedDate;
-    private Long price;
-    private Date limitDate;
-    private Date updatedDate;
+    private ProductTemplate productTemplate;
+    private String token;
 
-    public Long getId() {
-        return id;
+    public ProductDto(){}
+
+    public ProductDto(ErrorEnum error, String status, ProductTemplate productTemplate){
+        super(error,status);
+        this.productTemplate = productTemplate;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public ProductDto(ServerResponseStatus serverResponseStatus,ProductTemplate productTemplate){
+        super(serverResponseStatus);
+        this.productTemplate = productTemplate;
     }
 
-    public String getTitle() {
-        return title;
+    public ProductTemplate getProductTemplate() {
+        return productTemplate;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setProductTemplate(ProductTemplate productTemplate) {
+        this.productTemplate = productTemplate;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getPostedDate() {
-        return postedDate;
-    }
-
-    public void setPostedDate(Date postedDate) {
-        this.postedDate = postedDate;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
-
-    public Date getLimitDate() {
-        return limitDate;
-    }
-
-    public void setLimitDate(Date limitDate) {
-        this.limitDate = limitDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public ProductDto(){
-
-    }
-    public ProductDto(CvsiResponse cvsiResponse, ProductBuilder productBuilder){
-        super(cvsiResponse);
-        this.id = productBuilder.getId();
-        this.title= productBuilder.getTitle();
-        this.description= productBuilder.getDescription();
-        this.postedDate= productBuilder.getPostedDate();
-        this.price= productBuilder.getPrice();
-        this.limitDate= productBuilder.getLimitDate();
-        this.updatedDate= productBuilder.getUpdatedDate();
-    }
-    public ProductDto(ProductBuilder productBuilder){
-        this.id = productBuilder.getId();
-        this.title= productBuilder.getTitle();
-        this.description= productBuilder.getDescription();
-        this.postedDate= productBuilder.getPostedDate();
-        this.price= productBuilder.getPrice();
-        this.limitDate= productBuilder.getLimitDate();
-        this.updatedDate= productBuilder.getUpdatedDate();
-    }
-
 }

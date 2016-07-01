@@ -1,5 +1,8 @@
 package com.winify.cvsi.db.model;
 
+import com.winify.cvsi.db.model.enums.CategoryEnum;
+import com.winify.cvsi.db.model.enums.CurrencyEnum;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -10,6 +13,7 @@ import java.util.List;
 /**
  * Created by Artemie on 25.06.2016.
  */
+//@Embeddable
 @Entity
 public class Product implements Serializable {
     @Id
