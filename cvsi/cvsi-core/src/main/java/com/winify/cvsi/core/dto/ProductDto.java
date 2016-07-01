@@ -10,7 +10,6 @@ import com.winify.cvsi.core.enums.ErrorEnum;
 public class ProductDto extends ServerResponseStatus {
 
     private ProductTemplate productTemplate;
-    private String token;
 
     public ProductDto(){}
 

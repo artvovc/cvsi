@@ -1,14 +1,11 @@
 package com.winify.cvsi.server.controller;
 
-import com.winify.cvsi.core.dto.error.ServerResponseStatus;
-import com.winify.cvsi.core.dto.ProductDto;
-import com.winify.cvsi.core.dto.ProductListDto;
+import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
+import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
-import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
-import com.winify.cvsi.db.model.Product;
-import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
 import com.winify.cvsi.server.facade.ProductFacade;
@@ -22,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,10 +38,59 @@ public class ProductController {
 
     final static Logger log = Logger.getLogger(ProductController.class);
 
-    @PostMapping(path = "/all")
-    private HttpEntity<ProductListDto> getAllProduct(
-            @ModelAttribute("ProductSearchClientRequest")ProductSearchClientRequest productSearchClientRequest
+    @PostMapping(path = "/search")
+    private HttpEntity<ListDto<ProductTemplate>> getSearchProduct(
+            @ModelAttribute("ProductSearchClientRequest")ProductSearchTemplate productSearchTemplate
     ) {
+
+        Integer in = productSearchTemplate.getCount();
+
+        int n = 20;
+        if(in!=null)
+        n = in;
+
+
+        List<ProductTemplate> productTemplateList = new ArrayList<ProductTemplate>();
+        for(int i=0;i<n;++i){
+            ProductTemplate productTemplate = new ProductTemplate();
+            productTemplate.setId(new Long(i));
+            productTemplate.setTitle("title_"+i);
+            productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
+            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setPrice(new Long(i*100));
+            productTemplate.setBorrow(new Boolean(true));
+            productTemplate.setLimitDate(new Date());
+
+            List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+            categoryEnumList.add(CategoryEnum.BORROW);
+            categoryEnumList.add(CategoryEnum.SELL);
+            categoryEnumList.add(CategoryEnum.BUY);
+
+            productTemplate.setCategoryEnumList(categoryEnumList);
+            productTemplate.setCreatedDate(new Date());
+            productTemplate.setUpdatedDate(new Date());
+            productTemplateList.add(productTemplate);}
+
+
+        ListDto<ProductTemplate> productListDto = new ListDto<ProductTemplate>(
+                new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),
+                productTemplateList);
+
+
+        return new ResponseEntity(productListDto, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/all")
+    private HttpEntity<ListDto<ProductTemplate>> getAllProduct() {
+
+        //query la bd prin product facade
+
+        //primesc modele
+
+//        ProductBuilder productBuilder = new ProductBuilder();
+//        productBuilder.getProductTemplateList(
+//                querry.List();
+//        )
 
         List<ProductTemplate> productTemplateList = new ArrayList<ProductTemplate>();
         for(int i=0;i<20;++i){
@@ -69,7 +114,7 @@ public class ProductController {
             productTemplateList.add(productTemplate);}
 
 
-        ProductListDto productListDto = new ProductListDto(
+        ListDto<ProductTemplate> productListDto = new ListDto<ProductTemplate>(
                 new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),
                 productTemplateList);
 

@@ -18,9 +18,7 @@ public class ProductTemplate {
     private Long price;
     private Boolean isBorrow;
     private Date limitDate;
-
     private List<CategoryEnum> categoryEnumList;
-
     private Date createdDate;
     private Date updatedDate;
 

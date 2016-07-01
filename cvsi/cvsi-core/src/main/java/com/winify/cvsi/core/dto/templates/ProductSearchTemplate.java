@@ -11,7 +11,6 @@ import java.util.List;
  */
 //Clasa template pentru formarea requestului de la un client
 public class ProductSearchTemplate {
-    private Long id;
     private String title;
     private CurrencyEnum currency;
     private Long minPrice;
@@ -19,14 +18,7 @@ public class ProductSearchTemplate {
     private List<CategoryEnum> categoryEnumList;
     private Date minCreatedDate;
     private Date maxCreatedDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Integer count;
 
     public String getTitle() {
         return title;
@@ -82,5 +74,13 @@ public class ProductSearchTemplate {
 
     public void setMaxCreatedDate(Date maxCreatedDate) {
         this.maxCreatedDate = maxCreatedDate;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }
