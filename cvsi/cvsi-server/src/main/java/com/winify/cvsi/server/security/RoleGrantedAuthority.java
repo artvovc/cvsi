@@ -8,16 +8,16 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class RoleGrantedAuthority implements GrantedAuthority {
 
-    private RoleEnum name;
+    private String name;
 
-    public RoleEnum getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(RoleEnum name) {
+    public void setName(String name) {
         this.name = name;
     }
     public String getAuthority() {
-        return name.toString();
+        return name;
     }
 }

@@ -2,6 +2,7 @@ package com.winify.cvsi.server.security;
 
 import com.winify.cvsi.db.model.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -14,10 +15,8 @@ public class CustomUser implements UserDetails {
 
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
 
-    private List<RoleGrantedAuthority> authorities;
+    private List<SimpleGrantedAuthority> authorities;
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
@@ -27,8 +26,6 @@ public class CustomUser implements UserDetails {
     public CustomUser(User user){
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.firstName = user.getName();
-        this.lastName = user.getSurname();
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,23 +56,7 @@ public class CustomUser implements UserDetails {
         return enabled;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setAuthorities(List<RoleGrantedAuthority> authorities) {
+    public void setAuthorities(List<SimpleGrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 }

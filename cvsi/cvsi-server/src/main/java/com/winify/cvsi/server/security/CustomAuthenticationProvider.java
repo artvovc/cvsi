@@ -17,7 +17,7 @@ import java.util.Collection;
 //@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    private UserDetailsService userService;
+    private CustomUserDetailsService userService;
 
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = String.valueOf(authentication.getName());
@@ -44,11 +44,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return true;
     }
 
-    public UserDetailsService getUserService() {
+    public CustomUserDetailsService getUserService() {
         return userService;
     }
 
-    public void setUserService(UserDetailsService userService) {
+    public void setUserService(CustomUserDetailsService userService) {
         this.userService = userService;
     }
 }

@@ -76,11 +76,6 @@
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase-core.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-annotations}</version>
-        </dependency>
     </dependencies>
     <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
     <build>

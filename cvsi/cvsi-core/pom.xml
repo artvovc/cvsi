@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cvsi-core</artifactId>
     <properties>
+        <jackson-annotations>2.7.3</jackson-annotations>
         <dir>..</dir>
     </properties>
     <dependencies>
@@ -18,5 +19,11 @@
             <artifactId>cvsi-db</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-annotations}</version>
+        </dependency>
     </dependencies>
+
 </project>
