@@ -10,6 +10,7 @@ import java.util.List;
  * Created by Artemie on 02.07.2016.
  */
 public class ConversationDto extends ServerResponseStatus{
+    private Long id;
     private String receptorSurname;
     private String title;
     private List<Message> messageList = new ArrayList<Message>();
@@ -36,5 +37,13 @@ public class ConversationDto extends ServerResponseStatus{
 
     public void setMessageList(List<Message> messageList) {
         this.messageList = messageList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

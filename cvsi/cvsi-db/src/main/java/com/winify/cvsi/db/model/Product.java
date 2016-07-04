@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Created by Artemie on 25.06.2016.
  */
-//@Embeddable
 @Entity
 public class Product implements Serializable {
     @Id
@@ -31,6 +30,8 @@ public class Product implements Serializable {
     private CurrencyEnum currency;
     @Column(name = "borrow_or_lend")
     private Boolean isBorrow;
+    @Column(name = "is_archived")
+    private Boolean isArchived;
     @Column(name="created_date",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
@@ -69,6 +70,9 @@ public class Product implements Serializable {
             foreignKey = @ForeignKey(name = "FK_user_id_product")
     )
     private User user;
+
+    public Product() {
+    }
 
     public Date getLimitDate() {
         return limitDate;
@@ -164,5 +168,13 @@ public class Product implements Serializable {
 
     public void setIsBorrow(Boolean isBorrow) {
         this.isBorrow = isBorrow;
+    }
+
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
     }
 }

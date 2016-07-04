@@ -34,7 +34,9 @@ public class UserController {
     final static Logger log = Logger.getLogger(UserController.class);
 
     @PostMapping(path = "/registration")
-    public HttpEntity<ServerResponseStatus> saveNewUser(@ModelAttribute("registrationValue") AutorizationClientRequest autorizationClientRequest){
+    public HttpEntity<ServerResponseStatus> saveNewUser(
+            @ModelAttribute("registrationValue") AutorizationClientRequest autorizationClientRequest
+    ){
         User user = new User();
         user.setUsername(autorizationClientRequest.getUserName());
         user.setName(autorizationClientRequest.getName());
@@ -67,25 +69,6 @@ public class UserController {
 
 
         return new ResponseEntity<UserDto>(userDto,HttpStatus.OK);
-    }
-
-
-
-    @RequestMapping(
-            value="/secured/home",
-            method = RequestMethod.GET)
-
-    public String securedHome(ModelMap model) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        CustomUser user=null;
-        if (principal instanceof CustomUser) {
-            user = ((CustomUser)principal);
-        }
-
-        String name = user.getUsername();
-        model.addAttribute("username", name);
-        model.addAttribute("message", "Welcome to the secured page");
-        return "home";
     }
 }
 

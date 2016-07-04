@@ -33,7 +33,7 @@ public class User implements Serializable{
     @Email(message = "Bad email address")
     private String email;
     @Column(nullable = false)
-    @Size(min=9, max=20, message = "password.Length between 9-20")
+    @Size(min=9, message = "password.Length min = 9")
     private String password;
     @Column(nullable = false)
     @Size(min=9, max=25, message = "phone.Length between 9-25")

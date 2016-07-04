@@ -12,6 +12,7 @@ import com.winify.cvsi.server.facade.ProductFacade;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,7 +39,7 @@ public class ProductController {
 
     final static Logger log = Logger.getLogger(ProductController.class);
 
-    @PostMapping(path = "/search")
+    @GetMapping(path = "/search")
     private HttpEntity<ListDto<ProductTemplate>> getSearchProduct(
             @ModelAttribute("ProductSearchClientRequest")ProductSearchTemplate productSearchTemplate
     ) {
@@ -82,7 +83,7 @@ public class ProductController {
 
     @GetMapping(path = "/all")
     private HttpEntity<ListDto<ProductTemplate>> getAllProduct() {
-
+        log.info(new Date().getTimezoneOffset());
         //query la bd prin product facade
 
         //primesc modele
@@ -103,6 +104,8 @@ public class ProductController {
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date());
 
+            log.info(productTemplate.getLimitDate());
+
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
             categoryEnumList.add(CategoryEnum.SELL);
@@ -121,293 +124,19 @@ public class ProductController {
 
         return new ResponseEntity(productListDto, HttpStatus.OK);
     }
+    @PostMapping(path = "/create")
+    public HttpEntity<ServerResponseStatus> saveNewProduct(
+            @RequestParam String title,
+            @RequestParam String description,
+            @RequestParam CurrencyEnum currency,
+            @RequestParam(required = false, defaultValue = "0") Long price,
+            @RequestParam(required = false) Boolean isBorrow,
+            @RequestParam(required = false) List<CategoryEnum> categoryEnumList,
+            @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss") Date limitDate,
+            @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss")  Date createdDate,
+            @RequestParam Long userId
+    ){
 
-//
-//
-//    @GetMapping(path = "/buy")
-//    private HttpEntity<ProductListDto> getAllBuyProduct() {
-//
-//        int n = 20;
-//
-//        List<ProductBuilder> productDtoList = new ArrayList<ProductBuilder>();
-//        for (int i = 0; i < n; ++i) {
-//            Product product = new Product();
-//            product.setId(new Long(i));
-//            product.setTitle("title_" + i);
-//            product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                    "\n" +
-//                    "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                    "\n" +
-//                    "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                    "\n" +
-//                    "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                    "\n" +
-//                    "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//            product.setCreatedDate(new Date());
-//            //product.setPrice(new BigDecimal(2123124.3341));
-//            //product.setLimitDate(new Date());
-//            //product.setUpdateDate(new Date());
-//
-//            productDtoList.add(new ProductBuilder(product));
-//        }
-//
-//        ProductListDto productListDto = new ProductListDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), productDtoList);
-//        return new ResponseEntity(productListDto, HttpStatus.OK);
-//    }
-//    @GetMapping(path = "/buy/count")
-//    private HttpEntity<ProductListDto> getCountBuyProduct(@RequestParam(value = "count", required = false, defaultValue = "1") Integer count) {
-//
-//        int n = count;
-//
-//        List<ProductBuilder> productDtoList = new ArrayList<ProductBuilder>();
-//        for (int i = count; i < n; ++i) {
-//            Product product = new Product();
-//            product.setId(new Long(i));
-//            product.setTitle("title_" + i);
-//            product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                    "\n" +
-//                    "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                    "\n" +
-//                    "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                    "\n" +
-//                    "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                    "\n" +
-//                    "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//            product.setCreatedDate(new Date());
-//            //product.setPrice(new BigDecimal(2123124.3341));
-//            //product.setLimitDate(new Date());
-//            //product.setUpdateDate(new Date());
-//
-//            productDtoList.add(new ProductBuilder(product));
-//        }
-//
-//        ProductListDto productListDto = new ProductListDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), productDtoList);
-//        return new ResponseEntity(productListDto, HttpStatus.OK);
-//    }
-//    @GetMapping(path = "/buy/{prodId}")
-//    private HttpEntity<ProductDto> getBuyProductById(@PathVariable Integer count) {
-//
-//            Product product = new Product();
-//            product.setId(new Long(count));
-//            product.setTitle("title_" + count);
-//            product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                    "\n" +
-//                    "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                    "\n" +
-//                    "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                    "\n" +
-//                    "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                    "\n" +
-//                    "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//            product.setCreatedDate(new Date());
-//            //product.setPrice(new BigDecimal(2123124.3341));
-//            //product.setLimitDate(new Date());
-//            //product.setUpdateDate(new Date());
-//        return new ResponseEntity(new ProductDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),new ProductBuilder(product)), HttpStatus.OK);
-//    }
-//    @GetMapping(path = "/sell")
-//    private HttpEntity<ProductListDto> getSellProduct() {
-//
-//        int n = 20;
-//
-//        List<ProductBuilder> productDtoList = new ArrayList<ProductBuilder>();
-//        for (int i = 0; i < n; ++i) {
-//            Product product = new Product();
-//            product.setId(new Long(i));
-//            product.setTitle("title_" + i);
-//            product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                    "\n" +
-//                    "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                    "\n" +
-//                    "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                    "\n" +
-//                    "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                    "\n" +
-//                    "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//            product.setCreatedDate(new Date());
-//            product.setPrice(new Long(123));
-//            //product.setLimitDate(new Date());
-//            //product.setUpdateDate(new Date());
-//
-//            productDtoList.add(new ProductBuilder(product));
-//        }
-//
-//        ProductListDto productListDto = new ProductListDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), productDtoList);
-//        return new ResponseEntity(productListDto, HttpStatus.OK);
-//    }
-//
-//    @GetMapping(path = "/sell/count")
-//    private HttpEntity<ProductListDto> getCountSellProduct(@RequestParam(value = "count", required = false, defaultValue = "1") Integer count) {
-//
-//        int n = count;
-//
-//        List<ProductBuilder> productDtoList = new ArrayList<ProductBuilder>();
-//        for (int i = 0; i < n; ++i) {
-//            Product product = new Product();
-//            product.setId(new Long(i));
-//            product.setTitle("title_" + i);
-//            product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                    "\n" +
-//                    "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                    "\n" +
-//                    "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                    "\n" +
-//                    "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                    "\n" +
-//                    "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//            product.setCreatedDate(new Date());
-//            product.setPrice(new Long(123));
-//            //product.setLimitDate(new Date());
-//            //product.setUpdateDate(new Date());
-//
-//            productDtoList.add(new ProductBuilder(product));
-//        }
-//
-//        ProductListDto productListDto = new ProductListDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), productDtoList);
-//        return new ResponseEntity(productListDto, HttpStatus.OK);
-//    }
-//    @GetMapping(path = "/sell/{prodId}")
-//    private HttpEntity<ProductDto> getSellProductById(@PathVariable Integer count) {
-//
-//        Product product = new Product();
-//        product.setId(new Long(count));
-//        product.setTitle("title_" + count);
-//        product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                "\n" +
-//                "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                "\n" +
-//                "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                "\n" +
-//                "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                "\n" +
-//                "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//        product.setCreatedDate(new Date());
-//        product.setPrice(new Long(123));
-//        //product.setLimitDate(new Date());
-//        //product.setUpdateDate(new Date());
-//        return new ResponseEntity(new ProductDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),new ProductBuilder(product)), HttpStatus.OK);
-//    }
-//
-//    @CrossOrigin(origins = "*")
-//    @GetMapping(path = "/borrow")
-//    private HttpEntity<ProductListDto> getAllBorrowProduct() {
-//
-//        int n = 20;
-//
-//        List<ProductBuilder> productDtoList = new ArrayList<ProductBuilder>();
-//        for (int i = 0; i < n; ++i) {
-//            Product product = new Product();
-//            product.setId(new Long(i));
-//            product.setTitle("title_" + i);
-//            product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                    "\n" +
-//                    "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                    "\n" +
-//                    "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                    "\n" +
-//                    "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                    "\n" +
-//                    "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//            product.setCreatedDate(new Date());
-//            //product.setPrice(new BigDecimal(2123124.3341));
-//            product.setLimitDate(new Date());
-//            //product.setUpdatedDate(new Date());
-//
-//            productDtoList.add(new ProductBuilder(product));
-//        }
-//
-//        ProductListDto productListDto = new ProductListDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), productDtoList);
-//        return new ResponseEntity(productListDto, HttpStatus.OK);
-//    }
-//    @GetMapping(path = "/borrow/count")
-//    private HttpEntity<ProductListDto> getCountBorrowProduct(@RequestParam(value = "count", required = false, defaultValue = "1") Integer count) {
-//
-//        int n = count;
-//
-//        List<ProductBuilder> productDtoList = new ArrayList<ProductBuilder>();
-//        for (int i = 0; i < n; ++i) {
-//            Product product = new Product();
-//            product.setId(new Long(i));
-//            product.setTitle("title_" + i);
-//            product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                    "\n" +
-//                    "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                    "\n" +
-//                    "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                    "\n" +
-//                    "No ius epicuri commune urbanitas, vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                    "\n" +
-//                    "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//            product.setCreatedDate(new Date());
-//            //product.setPrice(new BigDecimal(2123124.3341));
-//            product.setLimitDate(new Date());
-//            //product.setUpdatedDate(new Date());
-//
-//            productDtoList.add(new ProductBuilder(product));
-//        }
-//
-//        ProductListDto productListDto = new ProductListDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), productDtoList);
-//        return new ResponseEntity(productListDto, HttpStatus.OK);
-//    }
-//    @GetMapping(path = "/borrow/{prodId}")
-//    private HttpEntity<ProductDto> getBorrowProductById(@PathVariable Integer count) {
-//
-//        Product product = new Product();
-//        product.setId(new Long(count));
-//        product.setTitle("title_" + count);
-//        product.setDescription("Lorem ipsum dolor sit amet, at sit dictas apeirian theophrastus, ut mea atomorum honestatis dissentiunt, sit ea ullum bonorum ullamcorper. At nam nisl rebum necessitatibus, ex nibh oportere mei. Vim cu error legere atomorum. Pri persecuti intellegat te.\n" +
-//                "\n" +
-//                "Eam esse sale forensibus eu, cum choro consetetur in. Et saepe eripuit iudicabit est. Vidisse feugait posidonium cu qui. Sed utamur accusamus ne, ea sit soluta impetus offendit.\n" +
-//                "\n" +
-//                "Et natum inani mea. Vix option vulputate ea, eum in esse voluptua placerat. Posse lobortis an mei. Quodsi mandamus assentior te cum, ei tritani saperet vix. Eros tota delenit qui an. Et cum eros affert homero.\n" +
-//                "\n" +
-//                "No ius epicuri commune , vide veritus tincidunt ad his. Iudico libris patrioque cum ea. Eu sapientem explicari disputationi mel. Utinam latine ei mel, cu graeco iriure scripserit pri. Novum zril tation ius ut, vel natum quodsi denique cu.\n" +
-//                "\n" +
-//                "In eligendi comprehensam eum, at ius agam vitae. Nam et quas habemus dissentias. In feugait pertinacia mea, an periculis dissentias eam, legimus civibus sit ei. Ei quem idque facer eos, odio affert periculis an mei, vivendum consulatu vulputate est in.");
-//        product.setCreatedDate(new Date());
-//        //product.setPrice(new BigDecimal(2123124.3341));
-//        product.setLimitDate(new Date());
-//        //product.setUpdateDate(new Date());
-//        return new ResponseEntity(new ProductDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),new ProductBuilder(product)), HttpStatus.OK);
-//    }
-//    //    @PostMapping(path = "/")
-//    @PostMapping(path = "/borrow/add")
-//    private HttpEntity<ServerResponseStatus> setBorrowProduct(
-//            @RequestParam(value = "title") String title,
-//            @RequestParam(value = "description") String description,
-//            @RequestParam(value = "price") Long price,
-//            @RequestParam(value = "limitdate") String limitDate
-//        ) {
-//
-//
-//        Product prod = new Product();
-//        prod.setTitle(title);
-//        prod.setDescription(description);
-//        prod.setPrice(price);
-//        prod.setCreatedDate(new Date());
-//        prod.setLimitDate(new Date());
-//        prod.setUpdatedDate(new Date());
-//
-//        productFacade.saveProduct(prod);
-//        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
-//    }
-//    @PostMapping(path = "/buy/add")
-//    private HttpEntity<ServerResponseStatus> setBuyProduct(
-//            @RequestParam(value = "title") String title,
-//            @RequestParam(value = "description") String description,
-//            @RequestParam(value = "price") BigDecimal price,
-//            @RequestParam(value = "limitdate") String limitDate) {
-//
-//        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
-//    }
-//    @PostMapping(path = "/sell/add")
-//    private HttpEntity<ServerResponseStatus> setSellProduct(
-//            @RequestParam(value = "title") String title,
-//            @RequestParam(value = "description") String description,
-//            @RequestParam(value = "price") BigDecimal price,
-//            @RequestParam(value = "limitdate") String limitDate) {
-//
-//        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
-//    }
-
+        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),HttpStatus.OK);
+    }
 }

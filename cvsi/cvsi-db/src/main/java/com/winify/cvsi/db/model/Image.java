@@ -1,5 +1,7 @@
 package com.winify.cvsi.db.model;
 
+
+
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;

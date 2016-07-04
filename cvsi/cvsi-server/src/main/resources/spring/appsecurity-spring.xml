@@ -8,21 +8,14 @@
                     http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 
     <http auto-config="true" >
-        <intercept-url pattern="/user/**" access="ROLE_USER" />
-        <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+        <!--<intercept-url pattern="/**" access="isAnonymous" />-->
+        <!--<intercept-url pattern="/product/all" access="ADMIN"></intercept-url>-->
         <http-basic  />
         <csrf disabled="true"/>
+
     </http>
 
     <beans:bean id="customUserDetailsService" class="com.winify.cvsi.server.security.CustomUserDetailsService" />
-    <!--<beans:bean class="org.springframework.security.authentication.AuthenticationProvider" abstract="true"/>-->
-
-    <!--<authentication-manager>-->
-    <!--<authentication-provider user-service-ref="cvsiUserDetailsService"/>-->
-
-    <!--</authentication-manager>-->
-
-    <!--<beans:bean class="com.winify.cvsi.core.service.UserService"/>-->
 
 
 

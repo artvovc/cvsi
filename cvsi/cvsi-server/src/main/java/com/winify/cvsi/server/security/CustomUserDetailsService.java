@@ -2,6 +2,7 @@ package com.winify.cvsi.server.security;
 
 import com.winify.cvsi.core.service.UserService;
 import com.winify.cvsi.db.model.User;
+import com.winify.cvsi.db.model.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService{
         User user = userservice.getUserByMail(username);
         CustomUser customUser = new CustomUser(user);
         RoleGrantedAuthority roleGrantedAuthority = new RoleGrantedAuthority();
-        roleGrantedAuthority.setName("ROLE_USER");
+        roleGrantedAuthority.setName(RoleEnum.ADMIN);
         List<RoleGrantedAuthority> roleGrantedAuthorityList = new ArrayList<RoleGrantedAuthority>();
         roleGrantedAuthorityList.add(roleGrantedAuthority);
         customUser.setAuthorities(roleGrantedAuthorityList);

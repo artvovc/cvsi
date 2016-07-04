@@ -1,3 +1,4 @@
+com\winify\cvsi\server\controller\ConversationController.class
 com\winify\cvsi\server\controller\MessageController.class
 com\winify\cvsi\server\controller\UserController.class
 com\winify\cvsi\server\security\CustomAuthenticationProvider.class

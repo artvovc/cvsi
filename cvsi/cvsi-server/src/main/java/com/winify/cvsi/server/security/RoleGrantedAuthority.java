@@ -1,5 +1,6 @@
 package com.winify.cvsi.server.security;
 
+import com.winify.cvsi.db.model.enums.RoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
@@ -7,16 +8,16 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public class RoleGrantedAuthority implements GrantedAuthority {
 
-    private String name;
+    private RoleEnum name;
 
-    public String getName() {
+    public RoleEnum getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleEnum name) {
         this.name = name;
     }
     public String getAuthority() {
-        return name;
+        return name.toString();
     }
 }

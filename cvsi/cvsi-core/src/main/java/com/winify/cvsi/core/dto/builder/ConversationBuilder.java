@@ -10,6 +10,7 @@ public class ConversationBuilder {
     public ConversationDto getConversationDto(Conversation conversation)
     {
         ConversationDto conversationDto = new ConversationDto();
+        conversationDto.setId(conversation.getId());
         conversationDto.setMessageList(conversation.getMessageList());
         conversationDto.setTitle(conversation.getProduct().getTitle());
         conversationDto.setReceptorSurname(conversation.getProduct().getUser().getSurname());

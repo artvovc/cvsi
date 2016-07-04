@@ -3,6 +3,7 @@ package com.winify.cvsi.server.controller;
 import com.winify.cvsi.core.dto.ConversationDto;
 import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.builder.ConversationBuilder;
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Conversation;
 import com.winify.cvsi.db.model.Message;
@@ -20,7 +21,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,7 +43,7 @@ public class ConversationController {
     final static Logger log = Logger.getLogger(ConversationController.class);
 
     @GetMapping(path = "/all")
-    public HttpEntity<List<ConversationDto>> getConversation(
+    public HttpEntity<ListDto<ConversationDto>> getConversation(
     ){
 
         User user = new User();
@@ -105,6 +108,13 @@ public class ConversationController {
         conversationDtos.setStatus("OK");
 
 
-        return new ResponseEntity(conversationDtoList, HttpStatus.OK);
+        return new ResponseEntity(conversationDtos, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/create")
+    public HttpEntity<ServerResponseStatus> setConversation(
+            @RequestParam Long productId
+    ){
+        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),HttpStatus.OK);
     }
 }

@@ -3,6 +3,7 @@ package com.winify.cvsi.server.security;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +33,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+
 
         return new UsernamePasswordAuthenticationToken(user, pass, authorities);
     }
