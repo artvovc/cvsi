@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class ProductBuilder {
 
-    public ProductTemplate getProductTemplate(Product product)
-    {
+    public ProductTemplate getProductTemplate(Product product) {
         ProductTemplate productTemplate = new ProductTemplate();
         productTemplate.setId(product.getId());
         productTemplate.setTitle(product.getTitle());
@@ -28,11 +27,11 @@ public class ProductBuilder {
         productTemplate.setUpdatedDate(product.getUpdatedDate());
         return productTemplate;
     }
-    public List<ProductTemplate> getProductTemplateList(List<Product> productList)
-    {
+
+    public List<ProductTemplate> getProductTemplateList(List<Product> productList) {
         List<ProductTemplate> productTemplateList = new ArrayList<ProductTemplate>();
 
-        for (Product product:productList) {
+        for (Product product : productList) {
             ProductTemplate productTemplate = new ProductTemplate();
             productTemplate.setId(product.getId());
             productTemplate.setTitle(product.getTitle());

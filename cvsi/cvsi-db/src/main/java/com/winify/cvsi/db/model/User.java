@@ -20,7 +20,6 @@ import java.util.List;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "email",name = "UK_email"),
                 @UniqueConstraint(columnNames = "username",name = "UK_username"),
-                @UniqueConstraint(columnNames = "token",name = "UK_token")
         })
 public class User implements Serializable{
     @Id
@@ -44,9 +43,6 @@ public class User implements Serializable{
     private String name;
     @Column(name = "is_online")
     private Boolean isOnline;
-    @Column
-    @Size(min=1, message = "token.Length min=1")
-    private String token;
     @Column
     @Size(min=1, max=30, message = "surname.Length between 1-30")
     private String surname;
@@ -179,13 +175,5 @@ public class User implements Serializable{
 
     public void setOnline(Boolean online) {
         isOnline = online;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

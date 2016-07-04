@@ -19,15 +19,6 @@ public class UserDto extends ServerResponseStatus {
 
     public UserDto() {
     }
-
-    public UserDto(UserBuilder userBuilder){
-        this.userName = userBuilder.getUserName();
-        this.name = userBuilder.getName();
-        this.surname = userBuilder.getSurname();
-        this.phone = userBuilder.getPhone();
-        this.email = userBuilder.getEmail();
-        this.password = userBuilder.getPassword();
-    }
     public UserDto(ErrorEnum error, String status, String userName, String name, String surname, String phone, String email, String password) {
         super(error, status);
         this.userName = userName;
