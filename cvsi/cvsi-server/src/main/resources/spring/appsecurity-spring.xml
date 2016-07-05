@@ -6,29 +6,15 @@
                     http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
                     http://www.springframework.org/schema/security
                     http://www.springframework.org/schema/security/spring-security-4.1.xsd">
-
     <http auto-config="true" >
-        <intercept-url pattern="/product" access="ROLE_ADMIN"/>
-        <intercept-url pattern="/product/all" access="ROLE_USER"/>
-        <http-basic  />
-        <csrf disabled="true"/>
+        <intercept-url pattern="/product/all" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+        <intercept-url pattern="/swagger-ui.html" access="hasRole('ROLE_DEV')"/>
 
     </http>
-
-    <!--<authentication-manager >-->
-        <!--<authentication-provider ref="customAuthenticationProvider"/>-->
-    <!--</authentication-manager>-->
-    <beans:bean id="customUserDetailsService" class="com.winify.cvsi.server.security.CustomUserDetailsService" />
-    <beans:bean id="customAuthenticationProvider" class="com.winify.cvsi.server.security.CustomAuthenticationProvider">
-        <beans:property name="userService" ref="customUserDetailsService" />
-    </beans:bean>
-
+    <beans:bean id="userDetailsService" class="com.winify.cvsi.server.security.UserDetailsServiceImpl" ></beans:bean>
     <authentication-manager>
-        <authentication-provider user-service-ref="customUserDetailsService">
-
+        <authentication-provider user-service-ref="userDetailsService">
         </authentication-provider>
     </authentication-manager>
-
-
 
 </beans:beans>
