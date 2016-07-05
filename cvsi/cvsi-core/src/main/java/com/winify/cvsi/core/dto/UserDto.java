@@ -1,6 +1,5 @@
 package com.winify.cvsi.core.dto;
 
-import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;

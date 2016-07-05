@@ -1,12 +1,42 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE web-app PUBLIC-->
+<!--"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"-->
+<!--"http://java.sun.com/dtd/web-app_2_3.dtd" >-->
+<!--<web-app>-->
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
+  <display-name>Archetype Created Web Application</display-name>
 
-<web-app>
-<!--<web-app xmlns="http://java.sun.com/xml/ns/j2ee"-->
-         <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-         <!--xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">-->
-  <!--<display-name>Archetype Created Web Application</display-name>-->
+    <context-param>
+        <param-name>liquibase.changelog</param-name>
+        <param-value>com/example/db.changelog.xml</param-value>
+    </context-param>
+
+
+    <context-param>
+        <param-name>liquibase.datasource</param-name>
+        <param-value>java:comp/env/jdbc/default</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>liquibase.host.includes</param-name>
+        <param-value>production1.example.com, production2.example.com</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>liquibase.onerror.fail</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>liquibase.contexts</param-name>
+        <param-value>production</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>liquibase.integration.servlet.LiquibaseServletListener</listener-class>
+    </listener>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>

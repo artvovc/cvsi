@@ -10,6 +10,7 @@ A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\service\ImageService.j
 A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\dto\templates\request\AuthentificationClientRequest.java
 A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\dto\templates\request\AutorizationClientRequest.java
 A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\dto\builder\ProductBuilder.java
+A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\dto\builder\ImageBuilder.java
 A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\dto\builder\MessageBuilder.java
 A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\dto\templates\ProductSearchTemplate.java
 A:\cvsi\cvsi\cvsi-core\src\main\java\com\winify\cvsi\core\service\ConversationService.java

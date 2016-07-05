@@ -1,7 +1,6 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ListDto;
-import com.winify.cvsi.core.dto.builder.ProductBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;

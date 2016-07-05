@@ -1,16 +1,13 @@
+A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\security\UserDetailsServiceImpl.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\facade\MessageFacade.java
-A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\security\CustomUser.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\facade\ConversationFacade.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\controller\ImageController.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\controller\UserController.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\facade\AFacade.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\facade\ProductFacade.java
-A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\security\CustomUserDetailsService.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\controller\MessageController.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\controller\AController.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\controller\ConversationController.java
-A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\security\RoleGrantedAuthority.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\facade\UserFacade.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\facade\ImageFacade.java
 A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\controller\ProductController.java
-A:\cvsi\cvsi\cvsi-server\src\main\java\com\winify\cvsi\server\security\CustomAuthenticationProvider.java
