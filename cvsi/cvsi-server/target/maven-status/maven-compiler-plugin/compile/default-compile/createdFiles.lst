@@ -1,0 +1,13 @@
+com\winify\cvsi\server\controller\ConversationController.class
+com\winify\cvsi\server\controller\MessageController.class
+com\winify\cvsi\server\controller\UserController.class
+com\winify\cvsi\server\facade\ImageFacade.class
+com\winify\cvsi\server\controller\ProductController.class
+com\winify\cvsi\server\facade\ConversationFacade.class
+com\winify\cvsi\server\facade\AFacade.class
+com\winify\cvsi\server\facade\MessageFacade.class
+com\winify\cvsi\server\facade\UserFacade.class
+com\winify\cvsi\server\controller\ImageController.class
+com\winify\cvsi\server\controller\AController.class
+com\winify\cvsi\server\facade\ProductFacade.class
+com\winify\cvsi\server\security\UserDetailsServiceImpl.class

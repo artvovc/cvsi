@@ -29,6 +29,7 @@
             <artifactId>cvsi-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -149,6 +150,15 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
+        <!--<profile>-->
+            <!--<id>liquibase</id>-->
+            <!--&lt;!&ndash;mleati cum de pus dependenta de alt&ndash;&gt;-->
+            <!--<activation>-->
+                <!--<file>-->
+                    <!--<exists>target/classes/application.properties</exists>-->
+                <!--</file>-->
+            <!--</activation>-->
+        <!--</profile>-->
         <profile>
             <id>dev</id>
             <properties>

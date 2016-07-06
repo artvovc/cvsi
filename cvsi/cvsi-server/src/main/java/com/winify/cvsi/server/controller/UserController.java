@@ -7,6 +7,7 @@ import com.winify.cvsi.core.dto.templates.request.AutorizationClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.UserFacade;
+import com.winify.cvsi.server.security.UserDetailsServiceImpl;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -67,5 +73,15 @@ public class UserController {
 
         return new ResponseEntity<UserDto>(userDto,HttpStatus.OK);
     }
+
+//    public static void reauthenticate(final String username, final String password) {
+//        UserDetailsService userDetailsService = getBean("userDetailsService");
+//        UserCache userCache = getBean("userCache");
+//
+//        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+//        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+//                userDetails, password == null ? userDetails.getPassword() : password, userDetails.getAuthorities()));
+//        userCache.removeUserFromCache(username);
+//    }
 }
 
