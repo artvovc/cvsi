@@ -1,12 +1,12 @@
 package com.winify.cvsi.core.dto.templates.request;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Artemie on 01.07.2016.
  */
-//raspuns de la server va veni curat ServerResponseStatus
-public class AutorizationClientRequest {
+public class AutorizationClientRequest implements Serializable{
 
     private String email;
     private String password;

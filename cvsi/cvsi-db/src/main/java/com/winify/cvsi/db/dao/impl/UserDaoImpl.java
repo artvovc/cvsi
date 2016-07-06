@@ -15,7 +15,7 @@ public class UserDaoImpl extends AbstractDao<User, Long> implements UserDao {
         super(User.class);
     }
 
-    public User findByUserName(String uName) {
+    public User findByUserMail(String uName) {
         Criteria criteria = getCurrentSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("email",uName));
         User user = (User)criteria.uniqueResult();

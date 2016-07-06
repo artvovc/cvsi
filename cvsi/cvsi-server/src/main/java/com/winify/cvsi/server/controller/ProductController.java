@@ -93,7 +93,70 @@ public class ProductController {
 //        )
 
         List<ProductTemplate> productTemplateList = new ArrayList<ProductTemplate>();
-        for(int i=0;i<20;++i){
+        for(int i=0;i<5;++i){
+            ProductTemplate productTemplate = new ProductTemplate();
+            productTemplate.setId(new Long(i));
+            productTemplate.setTitle("title_"+i);
+            productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
+            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setPrice(new Long(i*100));
+            productTemplate.setBorrow(new Boolean(true));
+            productTemplate.setLimitDate(new Date());
+
+            log.info(productTemplate.getLimitDate());
+
+            List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+            categoryEnumList.add(CategoryEnum.BORROW);
+//            categoryEnumList.add(CategoryEnum.SELL);
+//            categoryEnumList.add(CategoryEnum.BUY);
+
+            productTemplate.setCategoryEnumList(categoryEnumList);
+            productTemplate.setCreatedDate(new Date());
+            productTemplate.setUpdatedDate(new Date());
+            productTemplateList.add(productTemplate);}
+        for(int i=5;i<10;++i){
+            ProductTemplate productTemplate = new ProductTemplate();
+            productTemplate.setId(new Long(i));
+            productTemplate.setTitle("title_"+i);
+            productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
+            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setPrice(new Long(i*100));
+            productTemplate.setBorrow(new Boolean(true));
+            productTemplate.setLimitDate(new Date());
+
+            log.info(productTemplate.getLimitDate());
+
+            List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+//            categoryEnumList.add(CategoryEnum.BORROW);
+            categoryEnumList.add(CategoryEnum.SELL);
+//            categoryEnumList.add(CategoryEnum.BUY);
+
+            productTemplate.setCategoryEnumList(categoryEnumList);
+            productTemplate.setCreatedDate(new Date());
+            productTemplate.setUpdatedDate(new Date());
+            productTemplateList.add(productTemplate);}
+        for(int i=10;i<15;++i){
+            ProductTemplate productTemplate = new ProductTemplate();
+            productTemplate.setId(new Long(i));
+            productTemplate.setTitle("title_"+i);
+            productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
+            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setPrice(new Long(i*100));
+            productTemplate.setBorrow(new Boolean(true));
+            productTemplate.setLimitDate(new Date());
+
+            log.info(productTemplate.getLimitDate());
+
+            List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+//            categoryEnumList.add(CategoryEnum.BORROW);
+//            categoryEnumList.add(CategoryEnum.SELL);
+            categoryEnumList.add(CategoryEnum.BUY);
+
+            productTemplate.setCategoryEnumList(categoryEnumList);
+            productTemplate.setCreatedDate(new Date());
+            productTemplate.setUpdatedDate(new Date());
+            productTemplateList.add(productTemplate);}
+        for(int i=15;i<20;++i){
             ProductTemplate productTemplate = new ProductTemplate();
             productTemplate.setId(new Long(i));
             productTemplate.setTitle("title_"+i);
@@ -108,7 +171,7 @@ public class ProductController {
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
             categoryEnumList.add(CategoryEnum.SELL);
-            categoryEnumList.add(CategoryEnum.BUY);
+//            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
             productTemplate.setCreatedDate(new Date());

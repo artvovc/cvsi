@@ -20,6 +20,7 @@ public class UserBuilder {
     }
     public UserDto getUser(User user){
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
         userDto.setUserName(user.getUsername());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());

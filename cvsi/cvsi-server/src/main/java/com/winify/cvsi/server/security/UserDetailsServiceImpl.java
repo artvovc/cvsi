@@ -24,8 +24,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserDao userDao;
 
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findByUserName(username);
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        User user = userDao.findByUserMail(mail);
         List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
         for (RoleEnum roleEnum : user.getRoleEnumList()) {
             simpleGrantedAuthorities.add(new SimpleGrantedAuthority(roleEnum.toString()));
