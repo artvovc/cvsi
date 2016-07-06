@@ -29,11 +29,11 @@ public class ListDto<T> extends ServerResponseStatus{
         this.genericList = genericList;
     }
 
-    public List<T> getProductList() {
+    public List<T> getList() {
         return genericList;
     }
 
-    public void setProductList(List<T> productList) {
+    public void setList(List<T> genericList) {
         this.genericList = genericList;
     }
 }

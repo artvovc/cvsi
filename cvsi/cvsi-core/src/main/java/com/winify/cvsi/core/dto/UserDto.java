@@ -1,6 +1,5 @@
 package com.winify.cvsi.core.dto;
 
-import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
@@ -18,15 +17,6 @@ public class UserDto extends ServerResponseStatus {
     private String password;
 
     public UserDto() {
-    }
-
-    public UserDto(UserBuilder userBuilder){
-        this.userName = userBuilder.getUserName();
-        this.name = userBuilder.getName();
-        this.surname = userBuilder.getSurname();
-        this.phone = userBuilder.getPhone();
-        this.email = userBuilder.getEmail();
-        this.password = userBuilder.getPassword();
     }
     public UserDto(ErrorEnum error, String status, String userName, String name, String surname, String phone, String email, String password) {
         super(error, status);

@@ -1,5 +1,6 @@
 package com.winify.cvsi.core.dto.templates;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
 
@@ -17,9 +18,13 @@ public class ProductTemplate {
     private CurrencyEnum currency;
     private Long price;
     private Boolean isBorrow;
+    @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
     private Date limitDate;
     private List<CategoryEnum> categoryEnumList;
+
+    @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
     private Date createdDate;
+    @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
     private Date updatedDate;
 
     public Long getId() {

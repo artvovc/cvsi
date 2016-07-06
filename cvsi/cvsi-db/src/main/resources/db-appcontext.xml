@@ -37,6 +37,9 @@
         <property name="packagesToScan" value="com.winify.cvsi.db.model" />
     </bean>
 
-
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="mDataSource" />
+        <property name="changeLog" value="classpath:./ChangeLog.xml" />
+    </bean>
 
 </beans>

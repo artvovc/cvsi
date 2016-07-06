@@ -20,7 +20,6 @@ import java.util.List;
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "email",name = "UK_email"),
                 @UniqueConstraint(columnNames = "username",name = "UK_username"),
-                @UniqueConstraint(columnNames = "token",name = "UK_token")
         })
 public class User implements Serializable{
     @Id
@@ -34,7 +33,7 @@ public class User implements Serializable{
     @Email(message = "Bad email address")
     private String email;
     @Column(nullable = false)
-    @Size(min=9, max=20, message = "password.Length between 9-20")
+    @Size(min=9, message = "password.Length min = 9")
     private String password;
     @Column(nullable = false)
     @Size(min=9, max=25, message = "phone.Length between 9-25")
@@ -44,9 +43,6 @@ public class User implements Serializable{
     private String name;
     @Column(name = "is_online")
     private Boolean isOnline;
-    @Column
-    @Size(min=1, message = "token.Length min=1")
-    private String token;
     @Column
     @Size(min=1, max=30, message = "surname.Length between 1-30")
     private String surname;
@@ -71,7 +67,7 @@ public class User implements Serializable{
             orphanRemoval = true)
     private List<Product>  productList = new ArrayList<Product>();
     @Column(name = "role_enum_list")
-    @ElementCollection(targetClass = RoleEnum.class)
+    @ElementCollection(targetClass = RoleEnum.class,fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "FK_user_id_role")))
     @Enumerated(EnumType.STRING)
     @Size(min=1, message = "Set role for user")
@@ -179,13 +175,5 @@ public class User implements Serializable{
 
     public void setOnline(Boolean online) {
         isOnline = online;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

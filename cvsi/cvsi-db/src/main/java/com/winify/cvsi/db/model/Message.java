@@ -1,10 +1,7 @@
 package com.winify.cvsi.db.model;
 
 
-import com.sun.istack.internal.Nullable;
-
 import javax.persistence.*;
-import javax.validation.constraints.AssertFalse;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
