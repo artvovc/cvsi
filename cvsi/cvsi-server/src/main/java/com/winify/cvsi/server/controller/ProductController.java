@@ -126,7 +126,7 @@ public class ProductController {
     @PostMapping(path = "/create")
     public HttpEntity<ServerResponseStatus> saveNewProduct(
             @RequestParam String title,
-            @RequestParam String description,
+            @RequestParam(required = false) String description,
             @RequestParam CurrencyEnum currency,
             @RequestParam(required = false, defaultValue = "0") Long price,
             @RequestParam(required = false) Boolean isBorrow,

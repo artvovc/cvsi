@@ -46,7 +46,7 @@ public class Product implements Serializable {
     private Date updatedDate;
 
     @Column(name = "category_enum_list")
-    @ElementCollection(targetClass = CategoryEnum.class)
+    @ElementCollection(targetClass = CategoryEnum.class,fetch = FetchType.LAZY)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(
