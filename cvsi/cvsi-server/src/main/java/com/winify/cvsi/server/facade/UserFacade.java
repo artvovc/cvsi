@@ -16,17 +16,10 @@ import org.springframework.stereotype.Service;
 public class UserFacade {
     @Autowired
     private UserService userService;
-    public UserDto getUser(Long id){
-        User user = userService.getUser(id);
-        return new UserDto(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),
-                user.getUsername(),
-                user.getName(),
-                user.getSurname(),
-                user.getPhone(),
-                user.getEmail(),
-                user.getPassword()
-                );
+    public User getUser(Long id){
+        return userService.getUser(id);
     }
+    public User getUserByMail(String mail){return userService.getUserByMail(mail);}
     public void saveUser(User user){
         userService.saveUser(user);
     }

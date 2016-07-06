@@ -9,6 +9,7 @@ import com.winify.cvsi.db.model.User;
  */
 public class UserDto extends ServerResponseStatus {
 
+    private Long id;
     private String userName;
     private String name;
     private String surname;
@@ -92,5 +93,13 @@ public class UserDto extends ServerResponseStatus {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
