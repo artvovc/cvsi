@@ -1,6 +1,3 @@
-# Created by .ignore support plugin (hsz.mobi)
-/cvsi-server/target/
-/cvsi-db/target/
-/cvsi-core/target/
-/.idea/
-/.idea/workspace.xml
+target
+.idea
+*.iml
