@@ -1,6 +1,5 @@
 package com.winify.cvsi.core.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 
 import java.sql.Blob;
@@ -12,8 +11,7 @@ import java.util.Date;
 public class ImageDto extends ServerResponseStatus {
     private String imgType;
     private Blob img;
-    @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
-    private Date createdDate;
+    private Long createdDate;
 
     public String getImgType() {
         return imgType;
@@ -31,11 +29,11 @@ public class ImageDto extends ServerResponseStatus {
         this.img = img;
     }
 
-    public Date getCreatedDate() {
+    public Long getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
 }

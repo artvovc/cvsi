@@ -11,7 +11,6 @@ import com.winify.cvsi.server.facade.ProductFacade;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +26,7 @@ import java.util.List;
  * Created by Artemie on 28.06.2016.
  */
 @Controller
-@Api(description = "product services ")
+@Api
 @RequestMapping(name = "product controller",
         path = "/product",
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +39,7 @@ public class ProductController {
 
     @GetMapping(path = "/search")
     private HttpEntity<ListDto<ProductTemplate>> getSearchProduct(
-            @ModelAttribute("ProductSearchClientRequest")ProductSearchTemplate productSearchTemplate
+            @RequestBody ProductSearchTemplate productSearchTemplate
     ) {
 
         Integer in = productSearchTemplate.getCount();
@@ -59,7 +58,7 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date());
+            productTemplate.setLimitDate(new Date().getTime());
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
@@ -67,8 +66,8 @@ public class ProductController {
             categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date());
-            productTemplate.setUpdatedDate(new Date());
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
 
 
@@ -101,7 +100,7 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date());
+            productTemplate.setLimitDate(new Date().getTime());
 
             log.info(productTemplate.getLimitDate());
 
@@ -111,8 +110,8 @@ public class ProductController {
 //            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date());
-            productTemplate.setUpdatedDate(new Date());
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
         for(int i=5;i<10;++i){
             ProductTemplate productTemplate = new ProductTemplate();
@@ -122,7 +121,7 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date());
+            productTemplate.setLimitDate(new Date().getTime());
 
             log.info(productTemplate.getLimitDate());
 
@@ -132,8 +131,8 @@ public class ProductController {
 //            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date());
-            productTemplate.setUpdatedDate(new Date());
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
         for(int i=10;i<15;++i){
             ProductTemplate productTemplate = new ProductTemplate();
@@ -143,7 +142,7 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date());
+            productTemplate.setLimitDate(new Date().getTime());
 
             log.info(productTemplate.getLimitDate());
 
@@ -153,8 +152,8 @@ public class ProductController {
             categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date());
-            productTemplate.setUpdatedDate(new Date());
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
         for(int i=15;i<20;++i){
             ProductTemplate productTemplate = new ProductTemplate();
@@ -164,7 +163,7 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date());
+            productTemplate.setLimitDate(new Date().getTime());
 
             log.info(productTemplate.getLimitDate());
 
@@ -174,8 +173,8 @@ public class ProductController {
 //            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date());
-            productTemplate.setUpdatedDate(new Date());
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
 
 
@@ -194,8 +193,8 @@ public class ProductController {
             @RequestParam(required = false, defaultValue = "0") Long price,
             @RequestParam(required = false) Boolean isBorrow,
             @RequestParam(required = false) List<CategoryEnum> categoryEnumList,
-            @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss") Date limitDate,
-            @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss")  Date createdDate,
+            @RequestParam(required = false) Long limitDate,
+            @RequestParam(required = false) Long createdDate,
             @RequestParam Long userId
     ){
 

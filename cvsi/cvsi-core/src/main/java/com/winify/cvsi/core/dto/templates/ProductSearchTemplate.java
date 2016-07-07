@@ -3,6 +3,7 @@ package com.winify.cvsi.core.dto.templates;
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,14 +11,14 @@ import java.util.List;
  * Created by Artemie on 01.07.2016.
  */
 //Clasa template pentru formarea requestului de la un client
-public class ProductSearchTemplate {
+public class ProductSearchTemplate implements Serializable {
     private String title;
     private CurrencyEnum currency;
     private Long minPrice;
     private Long maxPrice;
     private List<CategoryEnum> categoryEnumList;
-    private Date minCreatedDate;
-    private Date maxCreatedDate;
+    private Long minCreatedDate;
+    private Long maxCreatedDate;
     private Integer count;
 
     public String getTitle() {
@@ -60,19 +61,19 @@ public class ProductSearchTemplate {
         this.categoryEnumList = categoryEnumList;
     }
 
-    public Date getMinCreatedDate() {
+    public Long getMinCreatedDate() {
         return minCreatedDate;
     }
 
-    public void setMinCreatedDate(Date minCreatedDate) {
+    public void setMinCreatedDate(Long minCreatedDate) {
         this.minCreatedDate = minCreatedDate;
     }
 
-    public Date getMaxCreatedDate() {
+    public Long getMaxCreatedDate() {
         return maxCreatedDate;
     }
 
-    public void setMaxCreatedDate(Date maxCreatedDate) {
+    public void setMaxCreatedDate(Long maxCreatedDate) {
         this.maxCreatedDate = maxCreatedDate;
     }
 

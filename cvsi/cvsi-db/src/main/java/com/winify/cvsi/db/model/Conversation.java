@@ -11,6 +11,8 @@ import java.util.List;
  * Created by Artemie on 25.06.2016.
  */
 @Entity
+@Table(
+        name = "conversation")
 public class Conversation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -11,7 +11,8 @@ import java.util.Date;
 /**
  * Created by Artemie on 30.06.2016.
  */
-@Entity(name = "forgot_password")
+@Entity
+@Table(name = "forgot_password")
 public class ForgotPassword implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

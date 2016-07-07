@@ -21,10 +21,10 @@ public class ProductBuilder {
         productTemplate.setCurrency(product.getCurrency());
         productTemplate.setPrice(product.getPrice());
         productTemplate.setBorrow(product.getIsBorrow());
-        productTemplate.setLimitDate(product.getLimitDate());
+        productTemplate.setLimitDate(product.getLimitDate().getTime());
         productTemplate.setCategoryEnumList(product.getCategoryEnumList());
-        productTemplate.setCreatedDate(product.getCreatedDate());
-        productTemplate.setUpdatedDate(product.getUpdatedDate());
+        productTemplate.setCreatedDate(product.getCreatedDate().getTime());
+        productTemplate.setUpdatedDate(product.getUpdatedDate().getTime());
         return productTemplate;
     }
 
@@ -39,10 +39,10 @@ public class ProductBuilder {
             productTemplate.setCurrency(product.getCurrency());
             productTemplate.setPrice(product.getPrice());
             productTemplate.setBorrow(product.getIsBorrow());
-            productTemplate.setLimitDate(product.getLimitDate());
+            productTemplate.setLimitDate(product.getLimitDate().getTime());
             productTemplate.setCategoryEnumList(product.getCategoryEnumList());
-            productTemplate.setCreatedDate(product.getCreatedDate());
-            productTemplate.setUpdatedDate(product.getUpdatedDate());
+            productTemplate.setCreatedDate(product.getCreatedDate().getTime());
+            productTemplate.setUpdatedDate(product.getUpdatedDate().getTime());
             productTemplateList.add(productTemplate);
         }
         return productTemplateList;

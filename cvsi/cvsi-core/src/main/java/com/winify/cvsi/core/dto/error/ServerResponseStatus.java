@@ -2,10 +2,12 @@ package com.winify.cvsi.core.dto.error;
 
 import com.winify.cvsi.core.enums.ErrorEnum;
 
+import java.io.Serializable;
+
 /**
  * Created by Artemie on 22.06.2016.
  */
-public class ServerResponseStatus {
+public class ServerResponseStatus implements Serializable{
     private ErrorEnum error;
     private String status;
 

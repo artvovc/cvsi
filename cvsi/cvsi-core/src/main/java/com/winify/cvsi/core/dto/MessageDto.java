@@ -1,6 +1,5 @@
 package com.winify.cvsi.core.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 
 import java.util.Date;
@@ -10,8 +9,7 @@ import java.util.Date;
  */
 public class MessageDto extends ServerResponseStatus {
     private String message;
-    @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
-    private Date createdDate;
+    private Long createdDate;
     private Boolean isRead;
 
     public String getMessage() {
@@ -22,11 +20,11 @@ public class MessageDto extends ServerResponseStatus {
         this.message = message;
     }
 
-    public Date getCreatedDate() {
+    public Long getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
 

@@ -43,7 +43,6 @@ public class MessageController {
             message.setId(new Long(i));
             message.setMessage("Noroc_"+i);
             message.setCreatedDate(new Date());
-            ///message.setConversation(conversation);
             message.setRead(new Boolean(true));
             MessageBuilder messageBuilder = new MessageBuilder();
             messageListDto.getList().add(messageBuilder.getMessageDto(message));

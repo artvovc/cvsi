@@ -50,7 +50,7 @@ public class UserController {
 //            @RequestParam String userName,
 //            @RequestParam String name,
 //            @RequestParam String surname,
-//            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss") Date createdDate
+//            @RequestParam(required = false) Long createdDate
               @RequestBody AutorizationClientRequest a
     ){
         User user = new User();

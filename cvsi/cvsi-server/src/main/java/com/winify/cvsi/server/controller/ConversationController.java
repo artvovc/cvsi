@@ -84,7 +84,6 @@ public class ConversationController {
             message.setId(new Long(i));
             message.setMessage("Noroc_"+i);
             message.setCreatedDate(new Date());
-            ///message.setConversation(conversation);
             message.setRead(new Boolean(true));
             messageList.add(message);
         }

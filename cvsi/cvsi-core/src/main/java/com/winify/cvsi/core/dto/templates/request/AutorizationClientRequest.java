@@ -14,7 +14,7 @@ public class AutorizationClientRequest implements Serializable{
     private String userName;
     private String name;
     private String surname;
-    private Date createdDate;
+    private Long createdDate;
 
     public String getEmail() {
         return email;
@@ -64,11 +64,11 @@ public class AutorizationClientRequest implements Serializable{
         this.surname = surname;
     }
 
-    public Date getCreatedDate() {
+    public Long getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
 }
