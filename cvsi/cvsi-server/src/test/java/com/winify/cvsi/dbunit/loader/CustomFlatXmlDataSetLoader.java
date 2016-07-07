@@ -8,6 +8,7 @@ import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +24,18 @@ public class CustomFlatXmlDataSetLoader extends AbstractDataSetLoader {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
         builder.setColumnSensing(true);
 
-        try (InputStream inputStream = resource.getInputStream()) {
+        try{
+            InputStream inputStream = resource.getInputStream();
             ReplacementDataSet loaded = new ReplacementDataSet(builder.build(inputStream));
             loaded.addReplacementObject("[NULL]", null);
             return loaded;
-        }
+        }catch(IOException exc){exc.printStackTrace();}
+        return null;
     }
 
     @Override
     public IDataSet loadDataSet(Class<?> testClass, String location) throws Exception {
-        final List<IDataSet> iDataSetList = new ArrayList<>();
+        final List<IDataSet> iDataSetList = new ArrayList<IDataSet>();
         ResourceLoader resourceLoader = getResourceLoader(testClass);
         String[] resourceLocations = getResourceLocations(testClass, location);
         for (String resourceLocation : resourceLocations) {
