@@ -21,8 +21,8 @@ public class CustomDbUnitTestExecutionListener extends DbUnitTestExecutionListen
         super.prepareTestInstance(testContext);
 
         Connection con = DataSourceUtils
-                .getConnection((javax.sql.DataSource) testContext.getApplicationContext().getBean("dataSource"));
-        IDatabaseConnection dbConn = new DatabaseConnection(con);
+                .getConnection((javax.sql.DataSource) testContext.getApplicationContext().getBean("mDataSource"));
+        IDatabaseConnection dbConn = new DatabaseConnection(con, "cvsidbtest");
         DatabaseConfig config = dbConn.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
     }
@@ -32,8 +32,8 @@ public class CustomDbUnitTestExecutionListener extends DbUnitTestExecutionListen
         super.beforeTestMethod(testContext);
 
         Connection con = DataSourceUtils
-                .getConnection((javax.sql.DataSource) testContext.getApplicationContext().getBean("dataSource"));
-        IDatabaseConnection dbConn = new DatabaseConnection(con);
+                .getConnection((javax.sql.DataSource) testContext.getApplicationContext().getBean("mDataSource"));
+        IDatabaseConnection dbConn = new DatabaseConnection(con, "cvsidbtest");
         DatabaseConfig config = dbConn.getConfig();
         config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
     }

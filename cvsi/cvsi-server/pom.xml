@@ -12,17 +12,18 @@
     <artifactId>cvsi-server</artifactId>
     <packaging>war</packaging>
     <name>cvsi-server Maven Webapp</name>
+
     <properties>
         <springframework.version>4.3.0.RELEASE</springframework.version>
-        <jackson.library>2.7.5</jackson.library>
         <security.version>4.1.0.RELEASE</security.version>
         <swagger2.version>2.4.0</swagger2.version>
         <slf4j.version>1.5.8</slf4j.version>
         <log4j.version>1.2.14</log4j.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-        <junit.version>3.8.1</junit.version>
+
         <dir>..</dir>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.winify.cvsi</groupId>
@@ -90,22 +91,7 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>1.0.0.Final</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.library}</version>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.dataformat</groupId>-->
-            <!--<artifactId>jackson-dataformat-xml</artifactId>-->
-            <!--<version>${jackson.library}</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
+
         <!--Swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -187,9 +173,6 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-
-
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -197,6 +180,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -206,13 +190,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
         </plugins>
         <finalName>cvsi-server</finalName>
     </build>
+
     <profiles>
         <profile>
             <id>local</id>
@@ -220,17 +201,20 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-        <!--<profile>-->
-            <!--<id>liquibase</id>-->
-            <!--&lt;!&ndash;mleati cum de pus dependenta de alt&ndash;&gt;-->
-            <!--<activation>-->
-                <!--<file>-->
-                    <!--<exists>target/classes/application.properties</exists>-->
-                <!--</file>-->
-            <!--</activation>-->
-        <!--</profile>-->
+
         <profile>
             <id>dev</id>
+
+            <build>
+                <finalName>cvsi-server</finalName>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+
             <properties>
                 <environment>dev</environment>
             </properties>
