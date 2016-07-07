@@ -18,15 +18,18 @@
 
     <!-- dbunit config -->
     <bean id="sqlDataTypeFactory" class ="org.dbunit.ext.mysql.MySqlDataTypeFactory" />
-    <!--<bean id="mySqlMetadataHandler" class="org.dbunit.ext.mysql.MySqlMetadataHandler" />-->
+    <bean id="mySqlMetadataHandler" class="org.dbunit.ext.mysql.MySqlMetadataHandler" />
 
     <bean id="dbUnitDatabaseConfig" class="com.github.springtestdbunit.bean.DatabaseConfigBean">
-        <property name = "datatypeFactory" ref = "sqlDataTypeFactory" />
-        <!--<property name="metadataHandler" ref="mySqlMetadataHandler" />-->
+        <property name="datatypeFactory" ref="sqlDataTypeFactory" />
+        <property name="metadataHandler" ref="mySqlMetadataHandler" />
+        <property name="caseSensitiveTableNames" value="true" />
     </bean>
     <bean id="dbUnitDatabaseConnection" class="com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean">
         <property name="databaseConfig" ref="dbUnitDatabaseConfig"/>
         <property name="dataSource" ref="mDataSource" />
+        <!-- schema must be set explicitly -->
+        <property name="schema" value="${db.schema}"/>
     </bean>
 
     <!-- END dbunit config -->
