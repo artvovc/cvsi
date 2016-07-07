@@ -102,7 +102,7 @@ public class ProductController {
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date().getTime());
 
-            log.info(productTemplate.getLimitDate());
+            log.info(new Date(productTemplate.getLimitDate()*1000));
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
@@ -123,7 +123,7 @@ public class ProductController {
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date().getTime());
 
-            log.info(productTemplate.getLimitDate());
+            log.info(new Date(productTemplate.getLimitDate()*1000));
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
 //            categoryEnumList.add(CategoryEnum.BORROW);
@@ -144,7 +144,7 @@ public class ProductController {
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date().getTime());
 
-            log.info(productTemplate.getLimitDate());
+            log.info(new Date(productTemplate.getLimitDate()*1000));
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
 //            categoryEnumList.add(CategoryEnum.BORROW);
@@ -165,7 +165,7 @@ public class ProductController {
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date().getTime());
 
-            log.info(productTemplate.getLimitDate());
+            log.info(new Date(productTemplate.getLimitDate()*1000));
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);

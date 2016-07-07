@@ -1,9 +1,11 @@
 package com.winify.cvsi.core.dto.templates.request;
 
+import java.io.Serializable;
+
 /**
  * Created by Artemie on 01.07.2016.
  */
-public class AuthentificationClientRequest {
+public class AuthentificationClientRequest implements Serializable {
 
     private String email;
     private String password;

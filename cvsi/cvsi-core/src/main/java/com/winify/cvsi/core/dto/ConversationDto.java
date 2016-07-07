@@ -3,13 +3,14 @@ package com.winify.cvsi.core.dto;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.db.model.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Artemie on 02.07.2016.
  */
-public class ConversationDto extends ServerResponseStatus{
+public class ConversationDto extends ServerResponseStatus implements Serializable {
     private Long id;
     private String receptorSurname;
     private String title;
