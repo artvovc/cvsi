@@ -1,17 +1,16 @@
 package com.winify.cvsi.core.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Artemie on 28.06.2016.
  */
-public class MessageDto extends ServerResponseStatus {
+public class MessageDto extends ServerResponseStatus implements Serializable {
     private String message;
-    @JsonFormat(pattern = "yyyy.MM.dd HH:mm:ss")
-    private Date createdDate;
+    private Long createdDate;
     private Boolean isRead;
 
     public String getMessage() {
@@ -22,11 +21,11 @@ public class MessageDto extends ServerResponseStatus {
         this.message = message;
     }
 
-    public Date getCreatedDate() {
+    public Long getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
 

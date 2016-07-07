@@ -13,6 +13,8 @@ import java.util.Date;
  * Created by Artemie on 25.06.2016.
  */
 @Entity
+@Table(
+        name = "image")
 public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

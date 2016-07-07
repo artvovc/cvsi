@@ -1,9 +1,11 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ListDto;
+import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
+import com.winify.cvsi.core.dto.templates.request.ProductCreateClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
@@ -11,7 +13,6 @@ import com.winify.cvsi.server.facade.ProductFacade;
 import io.swagger.annotations.Api;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +30,7 @@ import java.util.List;
  * Created by Artemie on 28.06.2016.
  */
 @Controller
-@Api(description = "product services ")
+@Api
 @RequestMapping(name = "product controller",
         path = "/product",
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +43,7 @@ public class ProductController {
 
     @GetMapping(path = "/search")
     private HttpEntity<ListDto<ProductTemplate>> getSearchProduct(
-            @ModelAttribute("ProductSearchClientRequest")ProductSearchTemplate productSearchTemplate
+            @RequestBody @Valid ProductSearchTemplate productSearchTemplate
     ) {
 
         Integer in = productSearchTemplate.getCount();
@@ -59,7 +62,7 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date());
+            productTemplate.setLimitDate(new Date().getTime());
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
@@ -67,8 +70,8 @@ public class ProductController {
             categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date());
-            productTemplate.setUpdatedDate(new Date());
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
 
 
@@ -82,7 +85,6 @@ public class ProductController {
 
     @GetMapping(path = "/all")
     private HttpEntity<ListDto<ProductTemplate>> getAllProduct() {
-        log.info(new Date().getTimezoneOffset());
         //query la bd prin product facade
 
         //primesc modele
@@ -93,7 +95,7 @@ public class ProductController {
 //        )
 
         List<ProductTemplate> productTemplateList = new ArrayList<ProductTemplate>();
-        for(int i=0;i<20;++i){
+        for(int i=0;i<5;++i){
             ProductTemplate productTemplate = new ProductTemplate();
             productTemplate.setId(new Long(i));
             productTemplate.setTitle("title_"+i);
@@ -101,18 +103,77 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date());
+            productTemplate.setLimitDate(new Date().getTime());
 
-            log.info(productTemplate.getLimitDate());
+
+            List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+            categoryEnumList.add(CategoryEnum.BORROW);
+//            categoryEnumList.add(CategoryEnum.SELL);
+//            categoryEnumList.add(CategoryEnum.BUY);
+
+            productTemplate.setCategoryEnumList(categoryEnumList);
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
+            productTemplateList.add(productTemplate);}
+        for(int i=5;i<10;++i){
+            ProductTemplate productTemplate = new ProductTemplate();
+            productTemplate.setId(new Long(i));
+            productTemplate.setTitle("title_"+i);
+            productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
+            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setPrice(new Long(i*100));
+            productTemplate.setBorrow(new Boolean(true));
+            productTemplate.setLimitDate(new Date().getTime());
+
+
+            List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+//            categoryEnumList.add(CategoryEnum.BORROW);
+            categoryEnumList.add(CategoryEnum.SELL);
+//            categoryEnumList.add(CategoryEnum.BUY);
+
+            productTemplate.setCategoryEnumList(categoryEnumList);
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
+            productTemplateList.add(productTemplate);}
+        for(int i=10;i<15;++i){
+            ProductTemplate productTemplate = new ProductTemplate();
+            productTemplate.setId(new Long(i));
+            productTemplate.setTitle("title_"+i);
+            productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
+            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setPrice(new Long(i*100));
+            productTemplate.setBorrow(new Boolean(true));
+            productTemplate.setLimitDate(new Date().getTime());
+
+
+            List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+//            categoryEnumList.add(CategoryEnum.BORROW);
+//            categoryEnumList.add(CategoryEnum.SELL);
+            categoryEnumList.add(CategoryEnum.BUY);
+
+            productTemplate.setCategoryEnumList(categoryEnumList);
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
+            productTemplateList.add(productTemplate);}
+        for(int i=15;i<20;++i){
+            ProductTemplate productTemplate = new ProductTemplate();
+            productTemplate.setId(new Long(i));
+            productTemplate.setTitle("title_"+i);
+            productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
+            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setPrice(new Long(i*100));
+            productTemplate.setBorrow(new Boolean(true));
+            productTemplate.setLimitDate(new Date().getTime());
+
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
             categoryEnumList.add(CategoryEnum.SELL);
-            categoryEnumList.add(CategoryEnum.BUY);
+//            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date());
-            productTemplate.setUpdatedDate(new Date());
+            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
 
 
@@ -121,21 +182,21 @@ public class ProductController {
                 productTemplateList);
 
 
-        return new ResponseEntity(productListDto, HttpStatus.OK);
+        return new ResponseEntity<ListDto<ProductTemplate>>(productListDto, HttpStatus.OK);
     }
-    @PostMapping(path = "/create")
-    public HttpEntity<ServerResponseStatus> saveNewProduct(
-            @RequestParam String title,
-            @RequestParam(required = false) String description,
-            @RequestParam CurrencyEnum currency,
-            @RequestParam(required = false, defaultValue = "0") Long price,
-            @RequestParam(required = false) Boolean isBorrow,
-            @RequestParam(required = false) List<CategoryEnum> categoryEnumList,
-            @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss") Date limitDate,
-            @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss")  Date createdDate,
-            @RequestParam Long userId
+
+    @PostMapping(
+            path = "/create",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<ServerResponseStatus> saveNewUser(
+            @RequestBody @Valid ProductCreateClientRequest a, HttpServletRequest request
     ){
 
-        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),HttpStatus.OK);
+        log.info(a.getTitle());
+
+
+
+        return new ResponseEntity<ServerResponseStatus>(new ServerResponseStatus(ErrorEnum.SUCCESS,"OK"), HttpStatus.OK);
     }
 }

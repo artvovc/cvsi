@@ -10,7 +10,7 @@ public class ImageBuilder {
     public ImageDto getImageDto(Image image)
     {
         ImageDto imageDto = new ImageDto();
-        imageDto.setCreatedDate(image.getCreatedDate());
+        imageDto.setCreatedDate(image.getCreatedDate().getTime());
         imageDto.setImg(image.getImg());
         imageDto.setImgType(image.getImgType());
         return imageDto;

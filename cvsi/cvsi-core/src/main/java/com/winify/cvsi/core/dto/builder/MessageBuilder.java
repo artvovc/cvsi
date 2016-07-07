@@ -11,7 +11,7 @@ public class MessageBuilder {
     public MessageDto getMessageDto(Message message)
     {
         MessageDto messageDto = new MessageDto();
-        messageDto.setCreatedDate(message.getCreatedDate());
+        messageDto.setCreatedDate(message.getCreatedDate().getTime());
         messageDto.setMessage(message.getMessage());
         messageDto.setRead(message.getRead());
         return messageDto;

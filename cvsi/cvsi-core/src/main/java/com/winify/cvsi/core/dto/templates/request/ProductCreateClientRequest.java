@@ -1,18 +1,15 @@
-package com.winify.cvsi.core.dto.templates;
+package com.winify.cvsi.core.dto.templates.request;
 
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Artemie on 01.07.2016.
+ * Created by Artemie on 07.07.2016.
  */
-// Clasa template pentru un item din lista de producte
-public class ProductTemplate implements Serializable {
-    private Long id;
+public class ProductCreateClientRequest implements Serializable {
     private String title;
     private String description;
     private CurrencyEnum currency;
@@ -23,14 +20,6 @@ public class ProductTemplate implements Serializable {
 
     private Long createdDate;
     private Long updatedDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

@@ -4,11 +4,14 @@ import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 
+import java.io.Serializable;
+
 /**
  * Created by Artemie on 25.06.2016.
  */
-public class UserDto extends ServerResponseStatus {
+public class UserDto extends ServerResponseStatus implements Serializable {
 
+    private Long id;
     private String userName;
     private String name;
     private String surname;
@@ -92,5 +95,13 @@ public class UserDto extends ServerResponseStatus {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

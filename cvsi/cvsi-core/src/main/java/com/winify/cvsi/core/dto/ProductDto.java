@@ -4,10 +4,12 @@ import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
 import com.winify.cvsi.core.enums.ErrorEnum;
 
+import java.io.Serializable;
+
 /**
  * Created by Artemie on 28.06.2016.
  */
-public class ProductDto extends ServerResponseStatus {
+public class ProductDto extends ServerResponseStatus implements Serializable{
 
     private ProductTemplate productTemplate;
 

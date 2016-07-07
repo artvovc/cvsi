@@ -13,6 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table(
+        name = "registration",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "email",name = "UK_email_registration"),
                 @UniqueConstraint(columnNames = "username",name = "UK_username_registration")

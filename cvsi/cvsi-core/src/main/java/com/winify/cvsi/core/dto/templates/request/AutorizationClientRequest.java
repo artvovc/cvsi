@@ -1,12 +1,12 @@
 package com.winify.cvsi.core.dto.templates.request;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Artemie on 01.07.2016.
  */
-//raspuns de la server va veni curat ServerResponseStatus
-public class AutorizationClientRequest {
+public class AutorizationClientRequest implements Serializable{
 
     private String email;
     private String password;
@@ -14,7 +14,7 @@ public class AutorizationClientRequest {
     private String userName;
     private String name;
     private String surname;
-    private Date createdDate;
+    private Long createdDate;
 
     public String getEmail() {
         return email;
@@ -64,11 +64,11 @@ public class AutorizationClientRequest {
         this.surname = surname;
     }
 
-    public Date getCreatedDate() {
+    public Long getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
 }

@@ -61,7 +61,7 @@ public class ImageController {
     public HttpEntity<ServerResponseStatus> setImage(
             @RequestParam String imgType,
             @RequestParam byte[] image,
-            @RequestParam @DateTimeFormat(pattern = "yyyy.MM.dd HH:mm:ss") Date createdDate,
+            @RequestParam Long createdDate,
             @RequestParam Long productId
     ){
 
