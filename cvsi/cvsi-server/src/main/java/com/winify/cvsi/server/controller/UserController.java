@@ -20,9 +20,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by Artemie on 25.06.2016.
@@ -31,8 +30,9 @@ import java.util.List;
 @Api
 @RequestMapping(name = "user controller",
         //path = "/user",
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        consumes = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE//,
+        //consumes = MediaType.APPLICATION_JSON_VALUE
+)
 public class UserController {
     @Autowired
     private UserFacade userFasade;
@@ -52,7 +52,10 @@ public class UserController {
 //            @RequestParam(required = false) Long createdDate
             @RequestBody @Valid AutorizationClientRequest a, HttpServletRequest request
     ){
-        String str = request.getRequestURI();
+        printRequest(request);
+
+
+
         User user = new User();
         user.setUsername(a.getUserName());
         user.setName(a.getName());
@@ -68,7 +71,6 @@ public class UserController {
         roleEnumList.add(RoleEnum.ROLE_USER);
         user.setRoleEnumList(roleEnumList);
         log.info(user.getEmail());
-        log.info(str);
         userFasade.saveUser(user);
         return new ResponseEntity(new ServerResponseStatus(ErrorEnum.SUCCESS,"OK"), HttpStatus.OK);
     }
@@ -76,17 +78,70 @@ public class UserController {
     @GetMapping(path = "/me")
     public HttpEntity<UserDto> getUserInfo(
             @RequestParam String token
+            //HttpServletRequest request
     ){
+        //printRequest(request);
 
+        log.info("                        " + token);
         User user = userFasade.getUserByMail(token);
+        log.info("                        " + user.getEmail());
+        log.info("                        " + user.getPassword());
+        log.info("                        " + user.getUsername());
+        log.info("                        " + user.getName());
+        log.info("                        " + user.getSurname());
+
+
 
 
         UserBuilder userBuilder = new UserBuilder();
         UserDto userDto = userBuilder.getUser(user);
-        userDto.setStatus("OK your username: "+ userDto.getUserName());
-        userDto.setError(ErrorEnum.UNKNOWN_ERROR);
+        userDto.setStatus("OK");
+        userDto.setError(ErrorEnum.SUCCESS);
 
-        return new ResponseEntity<UserDto>(userDto,HttpStatus.OK);
+        return new ResponseEntity(userDto,HttpStatus.OK);
+    }
+
+    private static void printRequest(HttpServletRequest request) {
+
+        System.out.println("\n\n\tHeaders");
+
+        Enumeration headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = (String) headerNames.nextElement();
+            System.out.println(headerName + " = " + request.getHeader(headerName));
+        }
+
+        System.out.println("\n\n\tParameters");
+
+        Enumeration params = request.getParameterNames();
+        while (params.hasMoreElements()) {
+            String paramName = (String) params.nextElement();
+            System.out.println(paramName + " = " + request.getParameter(paramName));
+        }
+
+        System.out.println("\n\n\tRow data");
+        System.out.println(extractPostRequestBody(request));
+
+        System.out.println("\n\n\t");
+        System.out.println("URI " + request.getRequestURI());
+        System.out.println("Method " + request.getMethod());
+        System.out.println("URL " + request.getRequestURL());
+        System.out.println("ServerName " + request.getServerName());
+        System.out.println("ServerPort " + request.getServerPort());
+
+    }
+
+    private static String extractPostRequestBody(HttpServletRequest request) {
+        if ("POST".equalsIgnoreCase(request.getMethod())) {
+            Scanner s = null;
+            try {
+                s = new Scanner(request.getInputStream(), "UTF-8").useDelimiter("\\A");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return s.hasNext() ? s.next() : "";
+        }
+        return "";
     }
 
 //    public static void reauthenticate(final String username, final String password) {
