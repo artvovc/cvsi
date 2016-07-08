@@ -34,8 +34,8 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
-        WithSecurityContextTestExecutionListener.class,
-        DbUnitTestExecutionListener.class})
+        DbUnitTestExecutionListener.class,
+        WithSecurityContextTestExecutionListener.class})
 @DbUnitConfiguration(dataSetLoader = CustomFlatXmlDataSetLoader.class)
 public class AbstractControllerIntegrationTest {
     @Autowired

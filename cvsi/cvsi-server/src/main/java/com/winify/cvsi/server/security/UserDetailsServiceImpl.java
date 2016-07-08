@@ -23,21 +23,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserDao userDao;
 
-    @Transactional
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-        User user = userDao.findByUserMail(mail);
-        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+        User user = userDao.findByEmail(mail);
+
+        if(user == null){
+            throw new UsernameNotFoundException(mail);
+        }
+
+        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
         for (RoleEnum roleEnum : user.getRoleEnumList()) {
             simpleGrantedAuthorities.add(new SimpleGrantedAuthority(roleEnum.toString()));
         }
-        // DE SCHIMBAT USER.GETONLINE(), adaugind cimpuri de securitate in baza de date... posibil ))
+
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                user.getOnline(),
-                user.getOnline(),
-                user.getOnline(),
-                user.getOnline(),
                 simpleGrantedAuthorities
         );
     }

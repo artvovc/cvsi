@@ -3,6 +3,8 @@ package com.winify.cvsi.server.facade;
 import com.winify.cvsi.core.dto.ASimpleDto;
 import com.winify.cvsi.core.service.AModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,6 +18,9 @@ public class AFacade {
     private AModelService aModelService;
 
     public ASimpleDto getAModel(Long id){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         return convertToDto(aModelService.getAModel(id));
     }
 

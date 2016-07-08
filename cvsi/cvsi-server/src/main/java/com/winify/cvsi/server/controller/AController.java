@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.*;
 @Api(description = "Do not use this controller, because his destination is only for study how it works")
 @RequestMapping(path = "/rest", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AController {
+
     @Autowired
     private AFacade aFacade;
+
     final static Logger log = Logger.getLogger(AController.class);
 
     @GetMapping(path = "/me/{modelId}")
@@ -35,7 +37,7 @@ public class AController {
         return new ResponseEntity(new ServerResponseStatus(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/him")
+    @RequestMapping(method = RequestMethod.GET, path = "/admin")
     public HttpEntity<ServerResponseStatus> getHim(){
         log.info("da ladnoooo");
 

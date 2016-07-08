@@ -2,7 +2,6 @@ package com.winify.cvsi.core.service;
 
 import com.winify.cvsi.db.dao.UserDao;
 import com.winify.cvsi.db.model.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,5 +21,5 @@ public class UserService {
     @Transactional
     public void saveUser (User user){ userDao.save(user);}
     @Transactional
-    public User getUserByMail(String mail) {return userDao.findByUserMail(mail);}
+    public User getUserByMail(String mail) {return userDao.findByEmail(mail);}
 }

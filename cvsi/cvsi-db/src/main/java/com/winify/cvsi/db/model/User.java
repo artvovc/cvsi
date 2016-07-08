@@ -79,7 +79,7 @@ public class User implements Serializable{
     private List<Product>  productList = new ArrayList<Product>();
 
     @Column(name = "role_enum_list")
-    @ElementCollection(targetClass = RoleEnum.class,fetch = FetchType.LAZY)
+    @ElementCollection(targetClass = RoleEnum.class,fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "FK_user_id_role")))
     @Enumerated(EnumType.STRING)
     @Size(min=1, message = "Set role for user")

@@ -7,20 +7,12 @@ import com.winify.cvsi.core.dto.ASimpleDto;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.utils.JsonUtils;
 import com.winify.cvsi.it.server.AbstractControllerIntegrationTest;
-import org.dbunit.dataset.filter.DefaultColumnFilter;
-import org.dbunit.dataset.filter.IColumnFilter;
 import org.junit.Test;
 import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static com.github.springtestdbunit.annotation.DatabaseOperation.TRUNCATE_TABLE;
 import static com.github.springtestdbunit.assertion.DatabaseAssertionMode.NON_STRICT;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.testSecurityContext;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
@@ -28,18 +20,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WithUserDetails("alexei.popa@example.com")
 @DatabaseTearDown("classpath:/testdata/com/winify/cvsi/it/server/tear-down-common.xml")
 public class AControllerIT extends AbstractControllerIntegrationTest {
 
     @Test
-//    @WithUserDetails("alexei.popa@example.com")
     @DatabaseSetup("classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml")
     @ExpectedDatabase(value ="classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml", assertionMode = NON_STRICT)
     public void getAModel() throws Exception {
 
         MvcResult mvcResult = mockMvc.perform(get("/rest/me/2")
                 .contentType(APPLICATION_JSON)
-//                .with(testSecurityContext())
+                .with(testSecurityContext())
         ).andExpect(status().isOk())
                 .andReturn();
 
@@ -67,7 +59,7 @@ public class AControllerIT extends AbstractControllerIntegrationTest {
         MvcResult mvcResult = mockMvc.perform(post("/rest/me/")
                         .contentType(APPLICATION_JSON)
                 .content(JsonUtils.convertObjectToJsonBytes(aSimpleDto))
-//                .with(testSecurityContext())
+                .with(testSecurityContext())
         ).andExpect(status().isOk())
                 .andReturn();
 
@@ -75,6 +67,19 @@ public class AControllerIT extends AbstractControllerIntegrationTest {
         assertThat(responseDto, notNullValue());
         assertThat(responseDto.getStatus(), equalTo("OK"));
         assertThat(responseDto.getError(), nullValue());
+
+    }
+
+    @Test
+    @DatabaseSetup("classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml")
+    @ExpectedDatabase(value ="classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml", assertionMode = NON_STRICT)
+    public void aAdminRequest_forbidden() throws Exception {
+
+        mockMvc.perform(get("/rest/admin/")
+                .contentType(APPLICATION_JSON)
+                .with(testSecurityContext())
+        ).andExpect(status().is(403))
+                .andReturn();
 
     }
 }
