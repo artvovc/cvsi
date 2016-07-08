@@ -63,6 +63,7 @@ public class ProductController {
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date().getTime());
+            productTemplate.setUserName("vasea_"+i);
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
@@ -104,7 +105,7 @@ public class ProductController {
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date().getTime());
-
+            productTemplate.setUserName("vasea_"+i);
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BORROW);
@@ -162,6 +163,7 @@ public class ProductController {
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
             productTemplate.setLimitDate(new Date().getTime());
+            productTemplate.setUserName("vasea_"+i);
 
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();

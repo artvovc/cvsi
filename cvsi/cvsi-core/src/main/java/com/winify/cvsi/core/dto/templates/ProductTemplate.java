@@ -20,6 +20,7 @@ public class ProductTemplate implements Serializable {
     private Boolean isBorrow;
     private Long limitDate;
     private List<CategoryEnum> categoryEnumList;
+    private String userName;
 
     private Long createdDate;
     private Long updatedDate;
@@ -102,5 +103,13 @@ public class ProductTemplate implements Serializable {
 
     public void setUpdatedDate(Long updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
