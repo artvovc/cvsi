@@ -1,0 +1,6 @@
+<dataset>
+    <a_table id="1" first_name="Alexei" last_name="Popa" age="22" />
+    <a_table id="2" first_name="Andrei" last_name="Voinicul"  age="22" />
+    <a_table id="3" first_name="Laur" last_name="Balaur"  age="22" />
+    <a_table id="4" first_name="Luca" last_name="Nebunu"  age="23" />
+</dataset>

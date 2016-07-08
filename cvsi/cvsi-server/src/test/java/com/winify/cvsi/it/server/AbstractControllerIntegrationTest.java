@@ -1,8 +1,8 @@
 package com.winify.cvsi.it.server;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
-import com.winify.cvsi.dbunit.loader.CustomDbUnitTestExecutionListener;
 import com.winify.cvsi.dbunit.loader.CustomFlatXmlDataSetLoader;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -35,7 +35,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         WithSecurityContextTestExecutionListener.class,
-        CustomDbUnitTestExecutionListener.class})
+        DbUnitTestExecutionListener.class})
 @DbUnitConfiguration(dataSetLoader = CustomFlatXmlDataSetLoader.class)
 public class AbstractControllerIntegrationTest {
     @Autowired
@@ -63,5 +63,7 @@ public class AbstractControllerIntegrationTest {
     public <T> T mvcResultToGenericResponse(MvcResult mvcResult, TypeReference<T> ref) throws IOException {
         return convertJsonSourceToGenericObject(mvcResult.getResponse().getContentAsString(), ref);
     }
+
+
 
 }

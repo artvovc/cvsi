@@ -25,47 +25,59 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     @Size(min=1,max=30, message = "username.Length between 1-30")
     private String username;
+
     @Column(nullable = false)
     @Size(min=1, message = "email.Length min=1")
     @Email(message = "Bad email address")
     private String email;
+
     @Column(nullable = false)
     @Size(min=9, message = "password.Length min = 9")
     private String password;
+
     @Column(nullable = false)
     @Size(min=9, max=25, message = "phone.Length between 9-25")
     private String phone;
+
     @Column
     @Size(min=1, max=30, message = "name.Length between 1-30")
     private String name;
+
     @Column(name = "is_online")
     private Boolean isOnline;
+
     @Column
     @Size(min=1, max=30, message = "surname.Length between 1-30")
     private String surname;
+
     @Column(name = "created_date",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date createdDate;
+
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date updatedDate;
+
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
     private List<Conversation> conversationList = new ArrayList<Conversation>();
+
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
     private List<Product>  productList = new ArrayList<Product>();
+
     @Column(name = "role_enum_list")
     @ElementCollection(targetClass = RoleEnum.class,fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "FK_user_id_role")))

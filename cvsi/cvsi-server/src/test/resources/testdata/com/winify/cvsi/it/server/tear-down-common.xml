@@ -1,12 +1,12 @@
 <dataset>
     <a_table />
-    <Conversation />
+    <conversation />
     <forgot_password />
-    <Image />
-    <Message />
-    <Product />
+    <image />
+    <message />
+    <product />
     <product_category />
-    <Registration />
+    <registration />
     <user_information />
     <user_role />
 </dataset>
