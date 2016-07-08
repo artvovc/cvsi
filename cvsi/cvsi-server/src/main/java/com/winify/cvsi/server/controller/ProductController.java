@@ -147,8 +147,6 @@ public class ProductController {
 
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
-//            categoryEnumList.add(CategoryEnum.BORROW);
-//            categoryEnumList.add(CategoryEnum.SELL);
             categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
