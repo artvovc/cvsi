@@ -11,6 +11,8 @@ import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
 import com.winify.cvsi.server.facade.ProductFacade;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -104,7 +106,7 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date().getTime());
+            productTemplate.setLimitDate(new Date().getTime() + i*1000);
             productTemplate.setUserName("vasea_"+i);
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
@@ -113,7 +115,7 @@ public class ProductController {
 //            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setCreatedDate(new Date().getTime() + i*1000);
             productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
         for(int i=5;i<10;++i){
@@ -124,8 +126,8 @@ public class ProductController {
             productTemplate.setCurrency(CurrencyEnum.EUR);
             productTemplate.setPrice(new Long(i*100));
             productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date().getTime());
-
+            productTemplate.setLimitDate(new Date().getTime() + i*1000);
+            productTemplate.setUserName("vasea_"+i);
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
 //            categoryEnumList.add(CategoryEnum.BORROW);
@@ -133,7 +135,7 @@ public class ProductController {
 //            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setCreatedDate(new Date().getTime() + i*1000);
             productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
         for(int i=10;i<15;++i){
@@ -141,17 +143,17 @@ public class ProductController {
             productTemplate.setId(new Long(i));
             productTemplate.setTitle("title_"+i);
             productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
-            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setCurrency(CurrencyEnum.MDL);
             productTemplate.setPrice(new Long(i*100));
-            productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date().getTime());
-
+            productTemplate.setBorrow(new Boolean(false));
+            productTemplate.setLimitDate(new Date().getTime() + i*1000);
+            productTemplate.setUserName("vasea_"+i);
 
             List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
             categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setCreatedDate(new Date().getTime() + i*1000);
             productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
         for(int i=15;i<20;++i){
@@ -159,10 +161,10 @@ public class ProductController {
             productTemplate.setId(new Long(i));
             productTemplate.setTitle("title_"+i);
             productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
-            productTemplate.setCurrency(CurrencyEnum.EUR);
+            productTemplate.setCurrency(CurrencyEnum.USD);
             productTemplate.setPrice(new Long(i*100));
-            productTemplate.setBorrow(new Boolean(true));
-            productTemplate.setLimitDate(new Date().getTime());
+            productTemplate.setBorrow(new Boolean(false));
+            productTemplate.setLimitDate(new Date().getTime() + i*1000);
             productTemplate.setUserName("vasea_"+i);
 
 
@@ -172,7 +174,7 @@ public class ProductController {
 //            categoryEnumList.add(CategoryEnum.BUY);
 
             productTemplate.setCategoryEnumList(categoryEnumList);
-            productTemplate.setCreatedDate(new Date().getTime());
+            productTemplate.setCreatedDate(new Date().getTime() + i*1000);
             productTemplate.setUpdatedDate(new Date().getTime());
             productTemplateList.add(productTemplate);}
 
@@ -190,10 +192,10 @@ public class ProductController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<ServerResponseStatus> saveNewUser(
-            @RequestBody @Valid ProductCreateClientRequest a, HttpServletRequest request
+            @ApiParam(value = "what the fuck??") @RequestBody @Valid ProductCreateClientRequest productCreateClientRequest, HttpServletRequest request
     ){
 
-        log.info(a.getTitle());
+        log.info(productCreateClientRequest.getTitle());
 
 
 
