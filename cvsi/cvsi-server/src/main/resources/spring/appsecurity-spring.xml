@@ -9,8 +9,7 @@
     <http auto-config="true" >
         <!--<intercept-url pattern="/product/all" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>-->
         <!--<intercept-url pattern="/swagger-ui.html" access="hasRole('ROLE_DEV')"/>-->
-        <intercept-url pattern="/rest/me/**" access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/rest/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <form-login default-target-url="/product/all" ></form-login>
         <logout/>
         <csrf disabled="true"/>
     </http>

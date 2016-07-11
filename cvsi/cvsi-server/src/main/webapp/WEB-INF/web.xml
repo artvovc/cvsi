@@ -16,7 +16,6 @@
         </param-value>
     </context-param>
 
-    <!--26.06.2016 Vovc Artiom Added: fileter for spring-security-->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -48,3 +47,5 @@
     </servlet-mapping>
 
 </web-app>
+
+

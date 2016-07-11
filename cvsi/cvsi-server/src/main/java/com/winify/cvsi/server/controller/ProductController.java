@@ -1,7 +1,6 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ListDto;
-import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
@@ -12,7 +11,6 @@ import com.winify.cvsi.db.model.enums.CurrencyEnum;
 import com.winify.cvsi.server.facade.ProductFacade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

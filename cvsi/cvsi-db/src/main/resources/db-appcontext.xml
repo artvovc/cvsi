@@ -10,7 +10,6 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--<context:property-placeholder location="classpath:application.properties"/>-->
     <context:component-scan base-package="com.winify.cvsi.db.dao.impl" />
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

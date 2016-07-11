@@ -25,13 +25,11 @@
         <dir>..</dir>
     </properties>
     <dependencies>
-        <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase-core.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
@@ -47,19 +45,16 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring-orm.version}</version>
         </dependency>
-        <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate-core.version}</version>
         </dependency>
-        <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
         </dependency>
-        <!-- jsr303 validation -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -70,14 +65,12 @@
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
         </dependency>
-        <!--23.06.2016 Vovc Artiom Changed: moved from cvsi-core to cvsi-db-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring-tx.version}</version>
         </dependency>
     </dependencies>
-    <!--23.06.2016 Vovc Artiom Changed: added liquibase-core -->
     <build>
         <resources>
             <resource>
