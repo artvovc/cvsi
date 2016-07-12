@@ -42,7 +42,7 @@ public class ConversationController {
     private ConversationFacade conversationFacade;
     final static Logger log = Logger.getLogger(ConversationController.class);
 
-    @GetMapping(path = "/all")
+    @GetMapping
     public HttpEntity<ListDto<ConversationDto>> getConversation(
     ){
 
@@ -110,7 +110,7 @@ public class ConversationController {
         return new ResponseEntity(conversationDtos, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping
     public HttpEntity<ServerResponseStatus> setConversation(
             @RequestParam Long productId
     ){

@@ -7,8 +7,8 @@ import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Image;
 import com.winify.cvsi.server.facade.ImageFacade;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,8 +34,9 @@ import java.util.List;
 public class ImageController {
     @Autowired
     private ImageFacade imageFacade;
+    private final static Logger log = Logger.getLogger(ImageController.class);
 
-    @GetMapping(path = "/all")
+    @GetMapping
     public HttpEntity<ListDto<ImageDto>> getAllImages(
             @RequestParam Long productId
     ){
@@ -57,7 +58,7 @@ public class ImageController {
 
         return new ResponseEntity(imageDtoListDto, HttpStatus.OK);
     }
-    @PostMapping(path = "/create")
+    @PostMapping
     public HttpEntity<ServerResponseStatus> setImage(
             @RequestParam String imgType,
             @RequestParam byte[] image,

@@ -1,19 +1,34 @@
 package com.winify.cvsi.core.dto.templates.request;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by Artemie on 01.07.2016.
  */
-public class AutorizationClientRequest implements Serializable{
-
+@ApiModel(value = "AuthorizationClientRequest")
+public class AuthorizationClientRequest implements Serializable {
+    @ApiModelProperty(name = "email", required = true, dataType = "String", example = "example@mail.com", value = "email must be valid")
     private String email;
+
+    @ApiModelProperty(name = "password", required = true, dataType = "String", position = 1, example = "qwerty1234", value = "password must be more than seven digits")
     private String password;
+
+    @ApiModelProperty(name = "phone", required = true, dataType = "String", position = 2, example = "069922158", value = "phone number must be more than seven digits and less than twenty five")
     private String phone;
+
+    @ApiModelProperty(name = "userName", required = true, dataType = "String", position = 3, example = "UserName", value = "user name must be unique")
     private String userName;
+
+    @ApiModelProperty(name = "name", dataType = "String", position = 4, example = "Andy")
     private String name;
+
+    @ApiModelProperty(name = "surname", dataType = "String", position = 5, example = "Tratatori")
     private String surname;
+
+    @ApiModelProperty(name = "createdDate", dataType = "Long", position = 6, example = "1468301773839")
     private Long createdDate;
 
     public String getEmail() {

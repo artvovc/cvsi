@@ -29,7 +29,7 @@ import java.util.Date;
 public class MessageController {
     @Autowired
     private ImageFacade imageFacade;
-    final static Logger log = Logger.getLogger(MessageController.class);
+    private final static Logger log = Logger.getLogger(MessageController.class);
 
     @GetMapping
     public HttpEntity<ListDto<MessageDto>> getConversation(

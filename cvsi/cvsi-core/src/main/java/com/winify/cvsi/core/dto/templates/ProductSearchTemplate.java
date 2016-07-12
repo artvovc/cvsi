@@ -2,15 +2,16 @@ package com.winify.cvsi.core.dto.templates;
 
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Artemie on 01.07.2016.
  */
-//Clasa template pentru formarea requestului de la un client
+@ApiModel
 public class ProductSearchTemplate implements Serializable {
     private String title;
     private CurrencyEnum currency;
@@ -19,7 +20,7 @@ public class ProductSearchTemplate implements Serializable {
     private List<CategoryEnum> categoryEnumList;
     private Long minCreatedDate;
     private Long maxCreatedDate;
-    private Integer count;
+    private Long count;
 
     public String getTitle() {
         return title;
@@ -77,11 +78,11 @@ public class ProductSearchTemplate implements Serializable {
         this.maxCreatedDate = maxCreatedDate;
     }
 
-    public Integer getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(Long count) {
         this.count = count;
     }
 }
