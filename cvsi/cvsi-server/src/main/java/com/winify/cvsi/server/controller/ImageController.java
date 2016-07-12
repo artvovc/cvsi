@@ -37,12 +37,12 @@ public class ImageController {
     private final static Logger log = Logger.getLogger(ImageController.class);
 
     @GetMapping
-    public HttpEntity<ListDto<ImageDto>> getAllImages(
+    public HttpEntity<ListDto<ImageDto>> getImage(
             @RequestParam Long productId
     ){
 
-        ListDto<ImageDto> imageDtoListDto = new ListDto<ImageDto>();
-        List<ImageDto> imageDtoList = new ArrayList<ImageDto>();
+        ListDto<ImageDto> imageDtoListDto = new ListDto<>();
+        List<ImageDto> imageDtoList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Image image = new Image();
             image.setImgType("DEFAULT_"+i);
@@ -56,7 +56,7 @@ public class ImageController {
         imageDtoListDto.setError(ErrorEnum.UNKNOWN_ERROR);
         imageDtoListDto.setStatus("OK");
 
-        return new ResponseEntity(imageDtoListDto, HttpStatus.OK);
+        return new ResponseEntity<>(imageDtoListDto, HttpStatus.OK);
     }
     @PostMapping
     public HttpEntity<ServerResponseStatus> setImage(
@@ -66,7 +66,7 @@ public class ImageController {
             @RequestParam Long productId
     ){
 
-        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
     }
 
 }

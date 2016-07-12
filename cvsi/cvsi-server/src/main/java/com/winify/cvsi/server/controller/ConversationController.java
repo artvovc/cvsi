@@ -47,59 +47,59 @@ public class ConversationController {
     ){
 
         User user = new User();
-        user.setId(new Long(1));
+        user.setId(1L);
 
         User second = new User();
-        user.setId(new Long(2));
+        user.setId(2L);
         user.setName("jon");
         user.setSurname("snow");
         user.setPhone("980999909");
         user.setUsername("jonSNOW");
 
         Product product = new Product();
-        product.setId(new Long(1));
+        product.setId(1L);
         product.setCreatedDate(new Date());
         product.setLimitDate(new Date());
         product.setDescription("long long long long long long long long long long long long long long long long long long long long long");
-        List<CategoryEnum> categoryEnumList = new ArrayList<CategoryEnum>();
+        List<CategoryEnum> categoryEnumList = new ArrayList<>();
         categoryEnumList.add(CategoryEnum.BORROW);
         categoryEnumList.add(CategoryEnum.SELL);
         product.setCategoryEnumList(categoryEnumList);
         product.setTitle("title_1");
         product.setCurrency(CurrencyEnum.EUR);
-        product.setIsBorrow(new Boolean(true));
-        product.setPrice(new Long(312));
+        product.setIsBorrow(true);
+        product.setPrice(312L);
         product.setUpdatedDate(new Date());
         product.setUser(user);
 
         Conversation conversation = new Conversation();
-        conversation.setId(new Long(1));
+        conversation.setId(1L);
         conversation.setCreatedDate(new Date());
         conversation.setProduct(product);
         conversation.setUser(second);
 
-        List<Message> messageList = new ArrayList<Message>();
+        List<Message> messageList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Message message = new Message();
-            message.setId(new Long(i));
+            message.setId((long) i);
             message.setMessage("Noroc_"+i);
             message.setCreatedDate(new Date());
-            message.setRead(new Boolean(true));
+            message.setRead(true);
             messageList.add(message);
         }
         conversation.setMessageList(messageList);
 
-        List<Conversation> conversationList = new ArrayList<Conversation>();
+        List<Conversation> conversationList = new ArrayList<>();
         conversationList.add(conversation);
 
-        List<ConversationDto> conversationDtoList = new ArrayList<ConversationDto>();
+        List<ConversationDto> conversationDtoList = new ArrayList<>();
 
         for (Conversation conversation1 : conversationList) {
             ConversationBuilder conversationBuilder = new ConversationBuilder();
             conversationDtoList.add(conversationBuilder.getConversationDto(conversation1));
         }
 
-        ListDto<ConversationDto> conversationDtos = new ListDto<ConversationDto>();
+        ListDto<ConversationDto> conversationDtos = new ListDto<>();
 
         conversationDtos.setList(conversationDtoList);
 
@@ -107,13 +107,13 @@ public class ConversationController {
         conversationDtos.setStatus("OK");
 
 
-        return new ResponseEntity(conversationDtos, HttpStatus.OK);
+        return new ResponseEntity<>(conversationDtos, HttpStatus.OK);
     }
 
     @PostMapping
     public HttpEntity<ServerResponseStatus> setConversation(
             @RequestParam Long productId
     ){
-        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),HttpStatus.OK);
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),HttpStatus.OK);
     }
 }

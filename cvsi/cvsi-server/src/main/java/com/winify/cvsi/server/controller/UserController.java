@@ -49,7 +49,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
-            value = "/user",
+            value = "saveNewUser",
             notes = "save new user into database",
             produces = "application/json",
             consumes = "application/json",
@@ -72,7 +72,7 @@ public class UserController {
     @GetMapping(
     )
     @ApiOperation(
-            value = "/user",
+            value = "getUserInfo",
             notes = "get user info by token",
             produces = "application/json",
             httpMethod = "GET",

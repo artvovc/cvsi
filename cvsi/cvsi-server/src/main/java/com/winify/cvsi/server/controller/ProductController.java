@@ -46,7 +46,7 @@ public class ProductController {
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private HttpEntity<ListDto<ProductTemplate>> getSearchProduct(
+    private HttpEntity<ListDto<ProductTemplate>> getProduct(
 //            @RequestBody @Valid ProductSearchTemplate productSearchTemplate
             @RequestParam(required = false) @Valid String key,
             @RequestParam(required = false) @Valid CurrencyEnum currency,
@@ -174,7 +174,7 @@ public class ProductController {
             }
 
 
-            productListDto = new ListDto<ProductTemplate>(
+            productListDto = new ListDto<>(
                     new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"),
                     productTemplateList);
         }
@@ -288,7 +288,7 @@ public class ProductController {
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<ServerResponseStatus> saveNewUser(
+    public HttpEntity<ServerResponseStatus> saveProduct(
             @ApiParam(value = "what??") @RequestBody @Valid ProductCreateClientRequest productCreateClientRequest, HttpServletRequest request
     ) {
         log.info(productCreateClientRequest.getTitle());

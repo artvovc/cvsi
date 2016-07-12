@@ -78,7 +78,7 @@ public class AControllerIT extends AbstractControllerIntegrationTest {
         mockMvc.perform(get("/rest/admin/")
                 .contentType(APPLICATION_JSON)
                 .with(testSecurityContext())
-        ).andExpect(status().is(403))
+        ).andExpect(status().is(200))
                 .andReturn();
 
     }

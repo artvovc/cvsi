@@ -32,28 +32,27 @@ public class MessageController {
     private final static Logger log = Logger.getLogger(MessageController.class);
 
     @GetMapping
-    public HttpEntity<ListDto<MessageDto>> getConversation(
+    public HttpEntity<ListDto<MessageDto>> getMessage(
             @RequestParam("conversation_id") Long conversation_id
     ){
-        //find all message for current conversation
-        ListDto<MessageDto> messageListDto = new ListDto<MessageDto>();
-        messageListDto.setList(new ArrayList<MessageDto>());
+        ListDto<MessageDto> messageListDto = new ListDto<>();
+        messageListDto.setList(new ArrayList<>());
         for (int i = 0; i < 10; i++) {
             Message message = new Message();
-            message.setId(new Long(i));
+            message.setId((long) i);
             message.setMessage("Noroc_"+i);
             message.setCreatedDate(new Date());
-            message.setRead(new Boolean(true));
+            message.setRead(true);
             MessageBuilder messageBuilder = new MessageBuilder();
             messageListDto.getList().add(messageBuilder.getMessageDto(message));
         }
-        return new ResponseEntity(messageListDto, HttpStatus.OK);
+        return new ResponseEntity<>(messageListDto, HttpStatus.OK);
     }
     @PostMapping
     public HttpEntity<ServerResponseStatus> setMessage(
             @RequestParam Long conversationId
     ){
-        return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"), HttpStatus.OK);
     }
 
 }
