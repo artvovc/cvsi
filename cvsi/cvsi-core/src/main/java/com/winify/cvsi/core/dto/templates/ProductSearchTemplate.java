@@ -3,7 +3,6 @@ package com.winify.cvsi.core.dto.templates;
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +19,7 @@ public class ProductSearchTemplate implements Serializable {
     private List<CategoryEnum> categoryEnumList;
     private Long minCreatedDate;
     private Long maxCreatedDate;
-    private Long count;
+    private Long count = 50L;
 
     public String getTitle() {
         return title;

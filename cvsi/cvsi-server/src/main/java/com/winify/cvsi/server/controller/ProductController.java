@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -43,29 +44,37 @@ public class ProductController {
 
     private final static Logger log = Logger.getLogger(ProductController.class);
 
+
+
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+//    @RequestMapping(method = RequestMethod.GET,consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     private HttpEntity<ListDto<ProductTemplate>> getProduct(
-//            @RequestBody @Valid ProductSearchTemplate productSearchTemplate
-            @RequestParam(required = false) @Valid String key,
-            @RequestParam(required = false) @Valid CurrencyEnum currency,
-            @RequestParam(required = false) @Valid Long minPrice,
-            @RequestParam(required = false) @Valid Long maxPrice,
-            @RequestParam(required = false) @Valid Long minCreatedDate,
-            @RequestParam(required = false) @Valid Long maxCreatedDate,
-            @RequestParam(required = false) @Valid List<CategoryEnum> categories,
-            @RequestParam(required = false) @Valid Long count
+            @ModelAttribute @Valid ProductSearchTemplate productSearchTemplate,
+            HttpServletRequest request
+//            @RequestParam(required = false) @Valid String key,
+//            @RequestParam(required = false) @Valid CurrencyEnum currency,
+//            @RequestParam(required = false) @Valid Long minPrice,
+//            @RequestParam(required = false) @Valid Long maxPrice,
+//            @RequestParam(required = false) @Valid Long minCreatedDate,
+//            @RequestParam(required = false) @Valid Long maxCreatedDate,
+//            @RequestParam(required = false) @Valid List<CategoryEnum> categories,
+//            @RequestParam(required = false) @Valid Long count
     ) {
+
+        log.info(productSearchTemplate.getTitle());
 
         int n = 20;
 
-        if (count.intValue() >= 0)
-            n = count.intValue();
+        if(productSearchTemplate.getCount() != null){
+        if (productSearchTemplate.getCount().intValue() >= 0)
+            n = productSearchTemplate.getCount().intValue();
+        }
 
         ListDto<ProductTemplate> productListDto;
 
-        if(count.intValue()!=0) {
+        if(productSearchTemplate.getCount().intValue()!=0) {
             List<ProductTemplate> productTemplateList = new ArrayList<>();
             for (int i = 0; i < n; ++i) {
                 ProductTemplate productTemplate = new ProductTemplate();
