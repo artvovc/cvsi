@@ -36,11 +36,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         for (RoleEnum roleEnum : user.getRoleEnumList()) {
             simpleGrantedAuthorities.add(new SimpleGrantedAuthority(roleEnum.toString()));
         }
-
-        return new org.springframework.security.core.userdetails.User(
+        return new SpringSecurityUser(
+                user.getId(),
                 user.getEmail(),
                 user.getPassword(),
+                null,
+                null,
                 simpleGrantedAuthorities
         );
+//        return new SpringSecurityUser(
+//                user.getEmail(),
+//                user.getPassword(),
+//                simpleGrantedAuthorities);
+//        return new org.springframework.security.core.userdetails.User(
+//                user.getEmail(),
+//                user.getPassword(),
+//                simpleGrantedAuthorities
+//        );
     }
 }

@@ -65,7 +65,9 @@ public class UserController {
             @RequestBody @Valid AuthorizationClientRequest authorizationClientRequest,
             HttpServletRequest request
     ) {
+        log.info(authorizationClientRequest.getEmail());
         userFacade.saveUser(new UserBuilder().getUser(authorizationClientRequest));
+        log.info("ZAPISALOSI NNA");
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 
