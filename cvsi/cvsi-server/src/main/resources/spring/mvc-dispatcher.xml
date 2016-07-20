@@ -14,14 +14,14 @@
        http://www.springframework.org/schema/aop
 	   http://www.springframework.org/schema/aop/spring-aop.xsd ">
 
-       <context:component-scan base-package="com.winify.cvsi.server.controller"/>
-       <mvc:annotation-driven />
+    <context:component-scan base-package="com.winify.cvsi.server.controller"/>
+    <mvc:annotation-driven/>
 
-       <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration" id="swagger2Config">
-       </bean>
-       
-       <mvc:resources mapping="swagger-ui.html" location="swagger-ui.html" />
-       <mvc:resources mapping="/webjars/springfox-swagger-ui/**" location="/webjars/springfox-swagger-ui/" />
+    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration" id="swagger2Config">
+    </bean>
+
+    <mvc:resources mapping="swagger-ui.html" location="swagger-ui.html"/>
+    <mvc:resources mapping="/webjars/springfox-swagger-ui/**" location="/webjars/springfox-swagger-ui/"/>
 
 
 </beans>

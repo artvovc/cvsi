@@ -5,9 +5,6 @@ import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Artemie on 28.06.2016.
- */
 public class MessageDto extends ServerResponseStatus implements Serializable {
     private String message;
     private Long createdDate;

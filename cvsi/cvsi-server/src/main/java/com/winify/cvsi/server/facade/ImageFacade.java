@@ -4,11 +4,12 @@ import com.winify.cvsi.core.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Artemie on 28.06.2016.
- */
 @Service
 public class ImageFacade {
+    private final ImageService imageService;
+
     @Autowired
-    private ImageService imageService;
+    public ImageFacade(ImageService imageService) {
+        this.imageService = imageService;
+    }
 }

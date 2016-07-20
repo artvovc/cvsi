@@ -4,13 +4,12 @@ import com.winify.cvsi.db.dao.ConversationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Artemie on 28.06.2016.
- */
 @Service
 public class ConversationService {
+    private final ConversationDao conversationDao;
+
     @Autowired
-    private ConversationDao conversationDao;
-
-
+    public ConversationService(ConversationDao conversationDao) {
+        this.conversationDao = conversationDao;
+    }
 }

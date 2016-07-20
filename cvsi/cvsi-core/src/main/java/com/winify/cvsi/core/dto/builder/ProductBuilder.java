@@ -1,17 +1,29 @@
 package com.winify.cvsi.core.dto.builder;
 
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
+import com.winify.cvsi.core.dto.templates.request.CreateProductClientRequest;
 import com.winify.cvsi.db.model.Product;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by Artemie on 28.06.2016.
- */
 public class ProductBuilder {
+
+    public Product getProduct(CreateProductClientRequest createProductClientRequest) {
+        Product product = new Product();
+        product.setTitle(createProductClientRequest.getTitle());
+        product.setDescription(createProductClientRequest.getDescription());
+        product.setPrice(createProductClientRequest.getPrice());
+        product.setCurrency(createProductClientRequest.getCurrency());
+        product.setBorrow(createProductClientRequest.getBorrow());
+        product.setArchived(false);
+        product.setCreatedDate(new Date(createProductClientRequest.getCreatedDate()));
+        product.setLimitDate(createProductClientRequest.getLimitDate()==null?null:new Date(createProductClientRequest.getLimitDate()));
+        product.setUpdatedDate(createProductClientRequest.getUpdatedDate()==null?null:new Date(createProductClientRequest.getUpdatedDate()));
+        product.setCategories(createProductClientRequest.getCategories());
+        return product;
+    }
 
     public ProductTemplate getProductTemplate(Product product) {
         ProductTemplate productTemplate = new ProductTemplate();
@@ -20,31 +32,31 @@ public class ProductBuilder {
         productTemplate.setDescription(product.getDescription());
         productTemplate.setCurrency(product.getCurrency());
         productTemplate.setPrice(product.getPrice());
-        productTemplate.setBorrow(product.getIsBorrow());
+        productTemplate.setBorrow(product.getBorrow());
         productTemplate.setLimitDate(product.getLimitDate().getTime());
-        productTemplate.setCategoryEnumList(product.getCategoryEnumList());
+        productTemplate.setCategories(product.getCategories());
         productTemplate.setCreatedDate(product.getCreatedDate().getTime());
         productTemplate.setUpdatedDate(product.getUpdatedDate().getTime());
         return productTemplate;
     }
 
-    public List<ProductTemplate> getProductTemplateList(List<Product> productList) {
-        List<ProductTemplate> productTemplateList = new ArrayList<ProductTemplate>();
+    public Set<ProductTemplate> getProductTemplates(Set<Product> products) {
+        Set<ProductTemplate> productTemplates = new HashSet<>();
 
-        for (Product product : productList) {
+        for (Product product : products) {
             ProductTemplate productTemplate = new ProductTemplate();
             productTemplate.setId(product.getId());
             productTemplate.setTitle(product.getTitle());
             productTemplate.setDescription(product.getDescription());
             productTemplate.setCurrency(product.getCurrency());
             productTemplate.setPrice(product.getPrice());
-            productTemplate.setBorrow(product.getIsBorrow());
-            productTemplate.setLimitDate(product.getLimitDate().getTime());
-            productTemplate.setCategoryEnumList(product.getCategoryEnumList());
+            productTemplate.setBorrow(product.getBorrow());
+            productTemplate.setLimitDate(product.getLimitDate()==null?null:product.getLimitDate().getTime());
+            productTemplate.setCategories(product.getCategories());
             productTemplate.setCreatedDate(product.getCreatedDate().getTime());
-            productTemplate.setUpdatedDate(product.getUpdatedDate().getTime());
-            productTemplateList.add(productTemplate);
+            productTemplate.setUpdatedDate(product.getUpdatedDate()==null?null:product.getUpdatedDate().getTime());
+            productTemplates.add(productTemplate);
         }
-        return productTemplateList;
+        return productTemplates;
     }
 }

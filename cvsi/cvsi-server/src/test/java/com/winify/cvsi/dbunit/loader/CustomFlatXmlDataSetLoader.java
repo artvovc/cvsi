@@ -13,10 +13,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * CustomFlatXmlDataSetLoader --- utility class, custom data set loader used by DBUnit.
- * 
- */
 public class CustomFlatXmlDataSetLoader extends AbstractDataSetLoader {
 
     @Override
@@ -24,12 +20,14 @@ public class CustomFlatXmlDataSetLoader extends AbstractDataSetLoader {
         FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
         builder.setColumnSensing(true);
 
-        try{
+        try {
             InputStream inputStream = resource.getInputStream();
             ReplacementDataSet loaded = new ReplacementDataSet(builder.build(inputStream));
             loaded.addReplacementObject("[NULL]", null);
             return loaded;
-        }catch(IOException exc){exc.printStackTrace();}
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
         return null;
     }
 

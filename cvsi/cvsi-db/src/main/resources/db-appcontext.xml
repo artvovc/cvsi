@@ -10,13 +10,13 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.winify.cvsi.db.dao.impl" />
+    <context:component-scan base-package="com.winify.cvsi.db.dao.impl"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
-        <property name="dataSource" ref="mDataSource" />
-        <property name="changeLog" value="classpath:./ChangeLog.xml" />
+        <property name="dataSource" ref="mDataSource"/>
+        <property name="changeLog" value="classpath:./ChangeLog.xml"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
@@ -31,17 +31,16 @@
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" depends-on="liquibase">
-        <property name="dataSource" ref="mDataSource" />
-        <property name="hibernateProperties" >
+        <property name="dataSource" ref="mDataSource"/>
+        <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
             </props>
         </property>
-        <property name="packagesToScan" value="com.winify.cvsi.db.model" />
+        <property name="packagesToScan" value="com.winify.cvsi.db.model"/>
     </bean>
-
 
 
 </beans>

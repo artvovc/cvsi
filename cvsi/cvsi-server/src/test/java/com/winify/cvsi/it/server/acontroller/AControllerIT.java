@@ -26,7 +26,7 @@ public class AControllerIT extends AbstractControllerIntegrationTest {
 
     @Test
     @DatabaseSetup("classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml")
-    @ExpectedDatabase(value ="classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml", assertionMode = NON_STRICT)
+    @ExpectedDatabase(value = "classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml", assertionMode = NON_STRICT)
     public void getAModel() throws Exception {
 
         MvcResult mvcResult = mockMvc.perform(get("/rest/me/2")
@@ -48,7 +48,7 @@ public class AControllerIT extends AbstractControllerIntegrationTest {
 
     @Test
     @DatabaseSetup("classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml")
-    @ExpectedDatabase(value ="classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_model_added.xml", assertionMode = NON_STRICT)//, columnFilters = {"create"}
+    @ExpectedDatabase(value = "classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_model_added.xml", assertionMode = NON_STRICT)
     public void saveAModel() throws Exception {
 
         ASimpleDto aSimpleDto = new ASimpleDto();
@@ -57,7 +57,7 @@ public class AControllerIT extends AbstractControllerIntegrationTest {
         aSimpleDto.setFirstName("Luca");
 
         MvcResult mvcResult = mockMvc.perform(post("/rest/me/")
-                        .contentType(APPLICATION_JSON)
+                .contentType(APPLICATION_JSON)
                 .content(JsonUtils.convertObjectToJsonBytes(aSimpleDto))
                 .with(testSecurityContext())
         ).andExpect(status().isOk())
@@ -72,7 +72,7 @@ public class AControllerIT extends AbstractControllerIntegrationTest {
 
     @Test
     @DatabaseSetup("classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml")
-    @ExpectedDatabase(value ="classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml", assertionMode = NON_STRICT)
+    @ExpectedDatabase(value = "classpath:/testdata/com/winify/cvsi/it/server/AControllerIT/a_models.xml", assertionMode = NON_STRICT)
     public void aAdminRequest_forbidden() throws Exception {
 
         mockMvc.perform(get("/rest/admin/")

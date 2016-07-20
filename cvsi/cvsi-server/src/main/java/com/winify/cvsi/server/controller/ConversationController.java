@@ -1,7 +1,7 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ConversationDto;
-import com.winify.cvsi.core.dto.ListDto;
+import com.winify.cvsi.core.dto.SetDto;
 import com.winify.cvsi.core.dto.builder.ConversationBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
@@ -25,26 +25,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-/**
- * Created by Artemie on 29.06.2016.
- */
 @Controller
 @Api
 @RequestMapping(name = "user controller",
         path = "/conversation",
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class ConversationController {
-    @Autowired
-    private ConversationFacade conversationFacade;
+    private final ConversationFacade conversationFacade;
     final static Logger log = Logger.getLogger(ConversationController.class);
 
+    @Autowired
+    public ConversationController(ConversationFacade conversationFacade) {
+        this.conversationFacade = conversationFacade;
+    }
+
     @GetMapping
-    public HttpEntity<ListDto<ConversationDto>> getConversation(
-    ){
+    public HttpEntity<SetDto<ConversationDto>> getConversation(
+    ) {
 
         User user = new User();
         user.setId(1L);
@@ -61,13 +60,13 @@ public class ConversationController {
         product.setCreatedDate(new Date());
         product.setLimitDate(new Date());
         product.setDescription("long long long long long long long long long long long long long long long long long long long long long");
-        List<CategoryEnum> categoryEnumList = new ArrayList<>();
-        categoryEnumList.add(CategoryEnum.BORROW);
-        categoryEnumList.add(CategoryEnum.SELL);
-        product.setCategoryEnumList(categoryEnumList);
+        Set<CategoryEnum> categories = new HashSet<>();
+        categories.add(CategoryEnum.BORROW);
+        categories.add(CategoryEnum.SELL);
+        product.setCategories(categories);
         product.setTitle("title_1");
         product.setCurrency(CurrencyEnum.EUR);
-        product.setIsBorrow(true);
+        product.setBorrow(true);
         product.setPrice(312L);
         product.setUpdatedDate(new Date());
         product.setUser(user);
@@ -78,30 +77,30 @@ public class ConversationController {
         conversation.setProduct(product);
         conversation.setUser(second);
 
-        List<Message> messageList = new ArrayList<>();
+        Set<Message> messages = new HashSet<>();
         for (int i = 0; i < 10; i++) {
             Message message = new Message();
             message.setId((long) i);
-            message.setMessage("Noroc_"+i);
+            message.setMessage("Noroc_" + i);
             message.setCreatedDate(new Date());
             message.setRead(true);
-            messageList.add(message);
+            messages.add(message);
         }
-        conversation.setMessageList(messageList);
+        conversation.setMessages(messages);
 
-        List<Conversation> conversationList = new ArrayList<>();
-        conversationList.add(conversation);
+        Set<Conversation> conversations = new HashSet<>();
+        conversations.add(conversation);
 
-        List<ConversationDto> conversationDtoList = new ArrayList<>();
+        Set<ConversationDto> conversationDtoSet = new HashSet<>();
 
-        for (Conversation conversation1 : conversationList) {
+        for (Conversation conversation1 : conversations) {
             ConversationBuilder conversationBuilder = new ConversationBuilder();
-            conversationDtoList.add(conversationBuilder.getConversationDto(conversation1));
+            conversationDtoSet.add(conversationBuilder.getConversationDto(conversation1));
         }
 
-        ListDto<ConversationDto> conversationDtos = new ListDto<>();
+        SetDto<ConversationDto> conversationDtos = new SetDto<>();
 
-        conversationDtos.setList(conversationDtoList);
+        conversationDtos.setSet(conversationDtoSet);
 
         conversationDtos.setError(ErrorEnum.UNKNOWN_ERROR);
         conversationDtos.setStatus("OK");
@@ -113,7 +112,7 @@ public class ConversationController {
     @PostMapping
     public HttpEntity<ServerResponseStatus> setConversation(
             @RequestParam Long productId
-    ){
-        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR,"OK"),HttpStatus.OK);
+    ) {
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), HttpStatus.OK);
     }
 }

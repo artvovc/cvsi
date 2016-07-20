@@ -6,21 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by Artemie on 22.06.2016.
- */
 @Service
 public class AModelService {
+    private final AModelDao aModelDao;
+
     @Autowired
-    private AModelDao aModelDao;
+    public AModelService(AModelDao aModelDao) {
+        this.aModelDao = aModelDao;
+    }
 
     @Transactional
-    public AModel getAModel(Long id){
+    public AModel getAModel(Long id) {
         return aModelDao.findById(id);
     }
 
     @Transactional
-    public void saveAModel(AModel aModel){
+    public void saveAModel(AModel aModel) {
         aModelDao.save(aModel);
     }
 }

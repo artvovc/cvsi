@@ -7,54 +7,51 @@ import javax.persistence.*;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by Artemie on 24.06.2016.
- */
 @Entity
 @Table(
         name = "user_information",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "email",name = "UK_email"),
-                @UniqueConstraint(columnNames = "username",name = "UK_username"),
+                @UniqueConstraint(columnNames = "email", name = "UK_email"),
+                @UniqueConstraint(columnNames = "username", name = "UK_username"),
         })
-public class User implements Serializable{
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    @Size(min=1,max=30, message = "username.Length between 1-30")
+    @Size(min = 1, max = 30, message = "username.Length between 1-30")
     private String username;
 
     @Column(nullable = false)
-    @Size(min=1, message = "email.Length min=1")
+    @Size(min = 1, message = "email.Length min=1")
     @Email(message = "Bad email address")
     private String email;
 
     @Column(nullable = false)
-    @Size(min=9, message = "password.Length min = 9")
+    @Size(min = 9, message = "password.Length min = 9")
     private String password;
 
     @Column(nullable = false)
-    @Size(min=9, max=25, message = "phone.Length between 9-25")
+    @Size(min = 9, max = 25, message = "phone.Length between 9-25")
     private String phone;
 
     @Column
-    @Size(min=1, max=30, message = "name.Length between 1-30")
+    @Size(min = 1, max = 30, message = "name.Length between 1-30")
     private String name;
 
     @Column(name = "is_online")
     private Boolean isOnline;
 
     @Column
-    @Size(min=1, max=30, message = "surname.Length between 1-30")
+    @Size(min = 1, max = 30, message = "surname.Length between 1-30")
     private String surname;
 
-    @Column(name = "created_date",nullable = false)
+    @Column(name = "created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date createdDate;
@@ -67,23 +64,28 @@ public class User implements Serializable{
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             orphanRemoval = true)
-    private List<Conversation> conversationList = new ArrayList<Conversation>();
+    private Set<Conversation> conversations = new HashSet<>();
 
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             orphanRemoval = true)
-    private List<Product>  productList = new ArrayList<Product>();
+    private Set<Product> products = new HashSet<>();
 
-    @Column(name = "role_enum_list")
-    @ElementCollection(targetClass = RoleEnum.class,fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "FK_user_id_role")))
+    @Column(name = "role_enum_set")
+    @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(
+                    name = "user_id",
+                    foreignKey = @ForeignKey(
+                            name = "FK_user_id_role")))
     @Enumerated(EnumType.STRING)
-    @Size(min=1, message = "Set role for user")
-    private List<RoleEnum> roleEnumList = new ArrayList<RoleEnum>();
+    @Size(min = 1, message = "Set role for user")
+    private Set<RoleEnum> roles = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -91,6 +93,14 @@ public class User implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -125,36 +135,20 @@ public class User implements Serializable{
         this.name = name;
     }
 
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        isOnline = online;
+    }
+
     public String getSurname() {
         return surname;
     }
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public List<Conversation> getConversationList() {
-        return conversationList;
-    }
-
-    public void setConversationList(List<Conversation> conversationList) {
-        this.conversationList = conversationList;
-    }
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
     }
 
     public Date getCreatedDate() {
@@ -173,19 +167,27 @@ public class User implements Serializable{
         this.updatedDate = updatedDate;
     }
 
-    public List<RoleEnum> getRoleEnumList() {
-        return roleEnumList;
+    public Set<Conversation> getConversations() {
+        return conversations;
     }
 
-    public void setRoleEnumList(List<RoleEnum> roleEnumList) {
-        this.roleEnumList = roleEnumList;
+    public void setConversations(Set<Conversation> conversations) {
+        this.conversations = conversations;
     }
 
-    public Boolean getOnline() {
-        return isOnline;
+    public Set<Product> getProducts() {
+        return products;
     }
 
-    public void setOnline(Boolean online) {
-        isOnline = online;
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public Set<RoleEnum> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEnum> roles) {
+        this.roles = roles;
     }
 }

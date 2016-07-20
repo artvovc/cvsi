@@ -15,7 +15,7 @@
     <http auto-config="false"
           entry-point-ref="unauthorizedEntryPoint"
           create-session="stateless"
-          authentication-manager-ref="authenticationManager" >
+          authentication-manager-ref="authenticationManager">
         <custom-filter ref="jwtFilter" position="FORM_LOGIN_FILTER"/>
         <intercept-url pattern="/product" access="hasAnyRole('ROLE_USER')"/>
         <intercept-url pattern="/message" access="hasAnyRole('ROLE_DEV')"/>
@@ -25,7 +25,7 @@
     </http>
 
 
-    <beans:bean id="unauthorizedEntryPoint" class="com.winify.cvsi.server.security.EntryPointUnauthorizedHandler" />
+    <beans:bean id="unauthorizedEntryPoint" class="com.winify.cvsi.server.security.EntryPointUnauthorizedHandler"/>
 
     <beans:bean id="userDetailsService" class="com.winify.cvsi.server.security.UserDetailsServiceImpl"/>
 
@@ -38,9 +38,6 @@
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
     </beans:bean>
-
-
-
 
 
 </beans:beans>

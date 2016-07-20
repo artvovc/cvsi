@@ -9,11 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cvsi-core</artifactId>
-
     <properties>
         <dir>..</dir>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.winify.cvsi</groupId>
@@ -34,5 +32,4 @@
             <version>RELEASE</version>
         </dependency>
     </dependencies>
-
 </project>

@@ -1,33 +1,31 @@
 package com.winify.cvsi.core.dto;
 
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
+import com.winify.cvsi.db.model.enums.ImageType;
 
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
 
-/**
- * Created by Artemie on 28.06.2016.
- */
 public class ImageDto extends ServerResponseStatus implements Serializable {
-    private String imgType;
-    private Blob img;
+    private ImageType imageType;
+    private Blob image;
     private Long createdDate;
 
-    public String getImgType() {
-        return imgType;
+    public ImageType getImageType() {
+        return imageType;
     }
 
-    public void setImgType(String imgType) {
-        this.imgType = imgType;
+    public void setImageType(ImageType imageType) {
+        this.imageType = imageType;
     }
 
-    public Blob getImg() {
-        return img;
+    public Blob getImage() {
+        return image;
     }
 
-    public void setImg(Blob img) {
-        this.img = img;
+    public void setImage(Blob image) {
+        this.image = image;
     }
 
     public Long getCreatedDate() {

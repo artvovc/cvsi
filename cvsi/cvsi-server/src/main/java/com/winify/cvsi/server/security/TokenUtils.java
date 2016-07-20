@@ -1,6 +1,5 @@
 package com.winify.cvsi.server.security;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,18 +12,14 @@ import java.util.Map;
 
 @Component
 public class TokenUtils {
-
-
     private final String AUDIENCE_UNKNOWN = "unknown";
     private final String AUDIENCE_WEB = "web";
     private final String AUDIENCE_MOBILE = "mobile";
     private final String AUDIENCE_TABLET = "tablet";
-
     private String secret = "vovcArtSecret";
-
 //    private Long expiration = 604800L; seven days
 //    formula 1000(miliseconds)*60(seconds)*60(minutes)*24(hours)*10(days)
-    private Long expiration = 60L*60L*24L*7L;
+    private Long expiration = 60L * 60 * 24 * 7;
 
     public String getUsernameFromToken(String token) {
         String username;
@@ -99,7 +94,6 @@ public class TokenUtils {
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
     }
-
 
 
     private Boolean ignoreTokenExpiration(String token) {

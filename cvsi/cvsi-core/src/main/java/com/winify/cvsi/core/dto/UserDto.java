@@ -8,32 +8,29 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
-/**
- * Created by Artemie on 25.06.2016.
- */
 @ApiModel(value = "UserDto", description = "contain user minimal necessary information")
 public class UserDto extends ServerResponseStatus implements Serializable {
-    @ApiModelProperty(name = "id", dataType = "Long",required = true,notes = "contain current user id")
+    @ApiModelProperty(name = "id", dataType = "Long", required = true, notes = "contain current user id")
     private Long id;
-    @ApiModelProperty(name = "userName", dataType = "String",example = "UserName",required = true,notes = "contain current user pseudonym(nickname/username)")
-    private String userName;
-    @ApiModelProperty(name = "name", dataType = "String",example = "Andy",notes = "contain current user name")
+    @ApiModelProperty(name = "username", dataType = "String", example = "UserName", required = true, notes = "contain current user pseudonym(nickname/username)")
+    private String username;
+    @ApiModelProperty(name = "name", dataType = "String", example = "Andy", notes = "contain current user name")
     private String name;
-    @ApiModelProperty(name = "surname", dataType = "String",example = "Tratatori",notes = "contain current user surname")
+    @ApiModelProperty(name = "surname", dataType = "String", example = "Tratatori", notes = "contain current user surname")
     private String surname;
-    @ApiModelProperty(name = "phone", dataType = "String",example = "069922158",required = true,notes = "contain current user phone number")
+    @ApiModelProperty(name = "phone", dataType = "String", example = "069922158", required = true, notes = "contain current user phone number")
     private String phone;
-    @ApiModelProperty(name = "email", dataType = "String",example = "example@mail.com",required = true,notes = "contain current user valid email")
+    @ApiModelProperty(name = "email", dataType = "String", example = "example@mail.com", required = true, notes = "contain current user valid email")
     private String email;
-    @ApiModelProperty(name = "password", dataType = "String",example = "qwerty1234",required = true,notes = "contain current user password")
+    @ApiModelProperty(name = "password", dataType = "String", example = "qwerty1234", required = true, notes = "contain current user password")
     private String password;
 
     public UserDto() {
     }
 
-    public UserDto(ErrorEnum error, String status, String userName, String name, String surname, String phone, String email, String password) {
+    public UserDto(ErrorEnum error, String status, String username, String name, String surname, String phone, String email, String password) {
         super(error, status);
-        this.userName = userName;
+        this.username = username;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -41,9 +38,9 @@ public class UserDto extends ServerResponseStatus implements Serializable {
         this.password = password;
     }
 
-    public UserDto(ServerResponseStatus serverResponseStatus, String userName, String name, String surname, String phone, String email, String password) {
+    public UserDto(ServerResponseStatus serverResponseStatus, String username, String name, String surname, String phone, String email, String password) {
         super(serverResponseStatus);
-        this.userName = userName;
+        this.username = username;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -53,7 +50,7 @@ public class UserDto extends ServerResponseStatus implements Serializable {
 
     public UserDto(ServerResponseStatus serverResponseStatus, User user) {
         super(serverResponseStatus);
-        this.userName = user.getUsername();
+        this.username = user.getUsername();
         this.name = user.getName();
         this.surname = user.getSurname();
         this.phone = user.getPhone();
@@ -101,12 +98,12 @@ public class UserDto extends ServerResponseStatus implements Serializable {
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Long getId() {

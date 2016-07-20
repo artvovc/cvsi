@@ -9,6 +9,8 @@ import com.winify.cvsi.server.security.UserDetailsServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,30 +26,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-/**
- * Created by Artemie on 18.07.2016.
- */
 @Controller
 @Api
 @RequestMapping(name = "authentication controller",
         path = "/auth",
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuthController {
+    private final AuthenticationManager authenticationManager;
+    private final TokenUtils tokenUtils;
+    private final UserDetailsServiceImpl userDetailsService;
+
     @Autowired
-    @Qualifier("authenticationManager")
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private TokenUtils tokenUtils;
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    public AuthController(TokenUtils tokenUtils, UserDetailsServiceImpl userDetailsService, @Qualifier("authenticationManager") AuthenticationManager authenticationManager) {
+        this.tokenUtils = tokenUtils;
+        this.userDetailsService = userDetailsService;
+        this.authenticationManager = authenticationManager;
+    }
 
 
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> authenticationRequest(
+    public HttpEntity<AuthenticationResponseDto> authenticationRequest(
             @RequestBody @Valid AuthenticationClientRequest authenticationClientRequest
-    ) throws AuthenticationException{
+    ) throws AuthenticationException {
         Authentication authentication = this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationClientRequest.getEmail(),
@@ -59,6 +61,6 @@ public class AuthController {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationClientRequest.getEmail());
         String token = this.tokenUtils.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponseDto(new ServerResponseStatus(ErrorEnum.SUCCESS,"OK"),token));
+        return new ResponseEntity<>(new AuthenticationResponseDto(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), token), HttpStatus.OK);
     }
 }

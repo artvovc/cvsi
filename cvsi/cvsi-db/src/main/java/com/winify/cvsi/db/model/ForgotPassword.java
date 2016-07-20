@@ -8,9 +8,6 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Artemie on 30.06.2016.
- */
 @Entity
 @Table(name = "forgot_password")
 public class ForgotPassword implements Serializable {
@@ -18,13 +15,13 @@ public class ForgotPassword implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    @Size(min=1, message = "email.Length min=1")
+    @Size(min = 1, message = "email.Length min=1")
     @Email(message = "bad email address")
     private String email;
     @Column(nullable = false)
-    @Size(min=10, message = "hash.Length min=10")
+    @Size(min = 10, message = "hash.Length min=10")
     private String hash;
-    @Column(name="request_created_date",nullable = false)
+    @Column(name = "request_created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date requestCreatedDate;

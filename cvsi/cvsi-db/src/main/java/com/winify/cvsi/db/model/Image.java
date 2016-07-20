@@ -1,6 +1,6 @@
 package com.winify.cvsi.db.model;
 
-
+import com.winify.cvsi.db.model.enums.ImageType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Past;
@@ -9,9 +9,6 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
 
-/**
- * Created by Artemie on 25.06.2016.
- */
 @Entity
 @Table(
         name = "image")
@@ -19,13 +16,12 @@ public class Image implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="image_type",nullable = false)
-    @Size(min = 1, max = 20, message = "imgtype.Length between 1-20")
-    private String imgType;
+    @Column(name = "image_type", nullable = false)
+    private ImageType imageType;
     //http://www.codejava.net/frameworks/hibernate/hibernate-binary-data-and-blob-mapping-example
     @Column(name = "image")
-    private Blob img;
-    @Column(name = "created_date",nullable = false)
+    private Blob image;
+    @Column(name = "created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date createdDate;
@@ -45,28 +41,20 @@ public class Image implements Serializable {
         this.id = id;
     }
 
-    public String getImgType() {
-        return imgType;
+    public ImageType getImageType() {
+        return imageType;
     }
 
-    public void setImgType(String imgType) {
-        this.imgType = imgType;
+    public void setImageType(ImageType imageType) {
+        this.imageType = imageType;
     }
 
-    public Blob getImg() {
-        return img;
+    public Blob getImage() {
+        return image;
     }
 
-    public void setImg(Blob img) {
-        this.img = img;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setImage(Blob image) {
+        this.image = image;
     }
 
     public Date getCreatedDate() {
@@ -75,5 +63,13 @@ public class Image implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

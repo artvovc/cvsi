@@ -1,8 +1,5 @@
 package com.winify.cvsi.core.dto.templates.request;
 
-/**
- * Created by Artemie on 18.07.2016.
- */
 public class AuthenticationClientRequest {
     private String email;
     private String password;

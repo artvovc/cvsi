@@ -5,10 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by Artemie on 22.06.2016.
- */
-public abstract class AbstractDao<T, I> implements CrudOperations<T, I>{
+public abstract class AbstractDao<T, I> implements CrudOperations<T, I> {
     @Autowired
     protected SessionFactory sessionFactory;
 
@@ -18,16 +15,16 @@ public abstract class AbstractDao<T, I> implements CrudOperations<T, I>{
         this.clazz = clazz;
     }
 
-    public void save(T entity){
+    public void save(T entity) {
         getCurrentSession().save(entity);
     }
 
-    public T findById(I identifier){
+    public T findById(I identifier) {
         return getCurrentSession().find(clazz, identifier);
 
     }
 
-    protected Session getCurrentSession(){
+    protected Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
 }

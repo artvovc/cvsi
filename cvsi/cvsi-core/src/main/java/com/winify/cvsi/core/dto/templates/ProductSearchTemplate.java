@@ -5,21 +5,20 @@ import com.winify.cvsi.db.model.enums.CurrencyEnum;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
-/**
- * Created by Artemie on 01.07.2016.
- */
 @ApiModel
 public class ProductSearchTemplate implements Serializable {
     private String title;
     private CurrencyEnum currency;
     private Long minPrice;
     private Long maxPrice;
-    private List<CategoryEnum> categoryEnumList;
+    private Set<CategoryEnum> categories;
     private Long minCreatedDate;
     private Long maxCreatedDate;
+    private Long offset = 0L;
     private Long count = 50L;
+    private Boolean myProducts = false;
 
     public String getTitle() {
         return title;
@@ -53,12 +52,12 @@ public class ProductSearchTemplate implements Serializable {
         this.maxPrice = maxPrice;
     }
 
-    public List<CategoryEnum> getCategoryEnumList() {
-        return categoryEnumList;
+    public Set<CategoryEnum> getCategories() {
+        return categories;
     }
 
-    public void setCategoryEnumList(List<CategoryEnum> categoryEnumList) {
-        this.categoryEnumList = categoryEnumList;
+    public void setCategories(Set<CategoryEnum> categories) {
+        this.categories = categories;
     }
 
     public Long getMinCreatedDate() {
@@ -77,11 +76,27 @@ public class ProductSearchTemplate implements Serializable {
         this.maxCreatedDate = maxCreatedDate;
     }
 
+    public Long getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Long offset) {
+        this.offset = offset;
+    }
+
     public Long getCount() {
         return count;
     }
 
     public void setCount(Long count) {
         this.count = count;
+    }
+
+    public Boolean getMyProducts() {
+        return myProducts;
+    }
+
+    public void setMyProducts(Boolean myProducts) {
+        this.myProducts = myProducts;
     }
 }

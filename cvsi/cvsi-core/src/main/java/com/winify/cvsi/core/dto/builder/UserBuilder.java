@@ -5,18 +5,13 @@ import com.winify.cvsi.core.dto.templates.request.AuthorizationClientRequest;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.db.model.enums.RoleEnum;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-/**
- * Created by Artemie on 28.06.2016.
- */
 public class UserBuilder {
 
-    public User getUser(UserDto userDto){
+    public User getUser(UserDto userDto) {
         User user = new User();
-        user.setUsername(userDto.getUserName());
+        user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
         user.setPhone(userDto.getPhone());
@@ -24,10 +19,11 @@ public class UserBuilder {
         user.setSurname(userDto.getSurname());
         return user;
     }
-    public UserDto getUserDto(User user){
+
+    public UserDto getUserDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
-        userDto.setUserName(user.getUsername());
+        userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
         userDto.setPassword(user.getPassword());
         userDto.setPhone(user.getPhone());
@@ -35,19 +31,20 @@ public class UserBuilder {
         userDto.setSurname(user.getSurname());
         return userDto;
     }
-    public User getUser(AuthorizationClientRequest authorizationClientRequest)
-    {
+
+    public User getUser(AuthorizationClientRequest authorizationClientRequest) {
         User user = new User();
-        user.setUsername(authorizationClientRequest.getUserName());
+        user.setUsername(authorizationClientRequest.getUsername());
         user.setName(authorizationClientRequest.getName());
         user.setSurname(authorizationClientRequest.getSurname());
         user.setPhone(authorizationClientRequest.getPhone());
         user.setEmail(authorizationClientRequest.getEmail());
         user.setPassword(authorizationClientRequest.getPassword());
         user.setCreatedDate(new Date());
-        List<RoleEnum> roleEnumList = new ArrayList<>();
-        roleEnumList.add(RoleEnum.ROLE_USER);
-        user.setRoleEnumList(roleEnumList);
+        Set<RoleEnum> roles = new HashSet<>();
+        roles.add(RoleEnum.ROLE_USER);
+        user.setRoles(roles);
+        user.setOnline(false);
         return user;
     }
 }

@@ -12,18 +12,14 @@
         <module>cvsi-core</module>
         <module>cvsi-db</module>
     </modules>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <failsafe.version>2.19.1</failsafe.version>
         <jackson.version>2.7.5</jackson.version>
-
         <environment>local</environment>
         <test.environment>ittest</test.environment>
         <dir>.</dir>
     </properties>
-
     <build>
         <filters>
             <filter>${dir}/src/main/filters/app-${environment}.properties</filter>
@@ -111,7 +107,6 @@
             </plugin>
         </plugins>
     </build>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -126,6 +121,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
 </project>

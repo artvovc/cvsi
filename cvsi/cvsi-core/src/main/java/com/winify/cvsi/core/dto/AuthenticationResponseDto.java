@@ -3,10 +3,9 @@ package com.winify.cvsi.core.dto;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
 
-/**
- * Created by Artemie on 18.07.2016.
- */
-public class AuthenticationResponseDto extends ServerResponseStatus{
+import java.io.Serializable;
+
+public class AuthenticationResponseDto extends ServerResponseStatus implements Serializable {
 
     private String token;
 

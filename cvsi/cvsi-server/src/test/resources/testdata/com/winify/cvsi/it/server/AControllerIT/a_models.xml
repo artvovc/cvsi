@@ -1,10 +1,10 @@
 <dataset>
     <user_information id="1" email="alexei.popa@example.com" password="secret"
                       username="Alexei" phone="321323"
-                      created_date="2016-07-07 00:02:34" />
-    <user_role user_id="1" role_enum_list="ROLE_USER"/>
+                      created_date="2016-07-07 00:02:34"/>
+    <user_role user_id="1" role_enum_set="ROLE_USER"/>
 
     <a_table id="1" first_name="Alexei" last_name="Popa" age="22" create_time="2016-07-07 00:02:34"/>
-    <a_table id="2" first_name="Andrei" last_name="Voinicul"  age="22" create_time="2016-07-07 00:02:34"/>
-    <a_table id="3" first_name="Laur" last_name="Balaur"  age="22" create_time="2016-07-07 00:02:34"/>
+    <a_table id="2" first_name="Andrei" last_name="Voinicul" age="22" create_time="2016-07-07 00:02:34"/>
+    <a_table id="3" first_name="Laur" last_name="Balaur" age="22" create_time="2016-07-07 00:02:34"/>
 </dataset>

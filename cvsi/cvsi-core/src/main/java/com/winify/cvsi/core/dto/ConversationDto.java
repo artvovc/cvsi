@@ -4,24 +4,29 @@ import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.db.model.Message;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by Artemie on 02.07.2016.
- */
 public class ConversationDto extends ServerResponseStatus implements Serializable {
     private Long id;
-    private String receptorSurname;
+    private String receptorUsername;
     private String title;
-    private List<Message> messageList = new ArrayList<Message>();
+    private Set<Message> messages = new HashSet<>();
 
-    public String getReceptorSurname() {
-        return receptorSurname;
+    public Long getId() {
+        return id;
     }
 
-    public void setReceptorSurname(String receptorSurname) {
-        this.receptorSurname = receptorSurname;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getReceptorUsername() {
+        return receptorUsername;
+    }
+
+    public void setReceptorUsername(String receptorUsername) {
+        this.receptorUsername = receptorUsername;
     }
 
     public String getTitle() {
@@ -32,19 +37,11 @@ public class ConversationDto extends ServerResponseStatus implements Serializabl
         this.title = title;
     }
 
-    public List<Message> getMessageList() {
-        return messageList;
+    public Set<Message> getMessages() {
+        return messages;
     }
 
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 }

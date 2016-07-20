@@ -4,12 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Artemie on 22.06.2016.
- */
 @Entity
 @Table(name = "a_table")
-public class AModel implements Serializable{
+public class AModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

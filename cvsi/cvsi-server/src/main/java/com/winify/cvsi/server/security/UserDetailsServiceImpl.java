@@ -12,28 +12,31 @@ import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-/**
- * Created by Artemie on 05.07.2016.
- */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
     final static Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
 
+    @Autowired
+    public UserDetailsServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-        log.info(mail);
+        log.warn(mail);
         User user = userDao.findByEmail(mail);
 
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException(mail);
         }
 
-        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-        for (RoleEnum roleEnum : user.getRoleEnumList()) {
+        Set<SimpleGrantedAuthority> simpleGrantedAuthorities = new HashSet<>();
+        for (RoleEnum roleEnum : user.getRoles()) {
             simpleGrantedAuthorities.add(new SimpleGrantedAuthority(roleEnum.toString()));
         }
         return new SpringSecurityUser(

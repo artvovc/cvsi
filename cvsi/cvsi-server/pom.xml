@@ -12,7 +12,6 @@
     <artifactId>cvsi-server</artifactId>
     <packaging>war</packaging>
     <name>cvsi-server Maven Webapp</name>
-
     <properties>
         <springframework.version>4.3.0.RELEASE</springframework.version>
         <security.version>4.1.0.RELEASE</security.version>
@@ -20,17 +19,14 @@
         <slf4j.version>1.5.8</slf4j.version>
         <log4j.version>1.2.14</log4j.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-
         <dir>..</dir>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.winify.cvsi</groupId>
             <artifactId>cvsi-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -47,7 +43,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
@@ -68,7 +63,6 @@
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -89,19 +83,16 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>1.0.0.Final</version>
         </dependency>
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger2.version}</version>
         </dependency>
-
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger2.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -117,7 +108,6 @@
             <artifactId>spring-security-config</artifactId>
             <version>${security.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -130,7 +120,6 @@
             <version>${security.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -143,7 +132,6 @@
             <version>2.2.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.github.springtestdbunit</groupId>
             <artifactId>spring-test-dbunit</artifactId>
@@ -156,7 +144,6 @@
             <version>2.5.2</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -181,7 +168,6 @@
             <version>0.6.0</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -194,7 +180,6 @@
         </plugins>
         <finalName>cvsi-server</finalName>
     </build>
-
     <profiles>
         <profile>
             <id>local</id>
@@ -202,10 +187,8 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-
         <profile>
             <id>dev</id>
-
             <build>
                 <finalName>cvsi-server</finalName>
                 <resources>
@@ -215,7 +198,6 @@
                     </resource>
                 </resources>
             </build>
-
             <properties>
                 <environment>dev</environment>
             </properties>

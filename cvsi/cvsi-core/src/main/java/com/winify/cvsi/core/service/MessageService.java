@@ -4,11 +4,12 @@ import com.winify.cvsi.db.dao.MessageDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Artemie on 28.06.2016.
- */
 @Service
 public class MessageService {
+    private final MessageDao messageDao;
+
     @Autowired
-    private MessageDao messageDao;
+    public MessageService(MessageDao messageDao) {
+        this.messageDao = messageDao;
+    }
 }

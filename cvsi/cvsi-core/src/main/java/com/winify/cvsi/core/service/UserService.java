@@ -6,20 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by Artemie on 25.06.2016.
- */
 @Service
 public class UserService {
+    private final UserDao userDao;
+
     @Autowired
-    private UserDao userDao;
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
-    public User getUser(Long id){
+    public User getUser(Long id) {
         return userDao.findById(id);
     }
+
     @Transactional
-    public void saveUser (User user){ userDao.save(user);}
+    public void saveUser(User user) {
+        userDao.save(user);
+    }
+
     @Transactional
-    public User getUserByMail(String mail) {return userDao.findByEmail(mail);}
+    public User getUserByMail(String mail) {
+        return userDao.findByEmail(mail);
+    }
 }

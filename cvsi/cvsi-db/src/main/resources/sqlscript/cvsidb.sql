@@ -1,41 +1,128 @@
-call PROC_DROP_FOREIGN_KEY('conversation','FK_product_id_conversation');
-call PROC_DROP_FOREIGN_KEY('conversation','FK_user_id_conversation');
-call PROC_DROP_FOREIGN_KEY('image','FK_product_id_image');
-call PROC_DROP_FOREIGN_KEY('message','FK_conversation_id');
-call PROC_DROP_FOREIGN_KEY('product','FK_user_id_product');
-call PROC_DROP_FOREIGN_KEY('product_category','FK_product_id_category');
-call PROC_DROP_FOREIGN_KEY('user_role','FK_user_id_role');
+CALL PROC_DROP_FOREIGN_KEY('conversation', 'FK_product_id_conversation');
+CALL PROC_DROP_FOREIGN_KEY('conversation', 'FK_user_id_conversation');
+CALL PROC_DROP_FOREIGN_KEY('image', 'FK_product_id_image');
+CALL PROC_DROP_FOREIGN_KEY('message', 'FK_conversation_id');
+CALL PROC_DROP_FOREIGN_KEY('product', 'FK_user_id_product');
+CALL PROC_DROP_FOREIGN_KEY('product_category', 'FK_product_id_category');
+CALL PROC_DROP_FOREIGN_KEY('user_role', 'FK_user_id_role');
 
-drop table if exists a_table;
-drop table if exists conversation;
-drop table if exists forgot_password;
-drop table if exists image;
-drop table if exists message;
-drop table if exists product;
-drop table if exists product_category;
-drop table if exists registration;
-drop table if exists user_information;
-drop table if exists user_role;
+DROP TABLE IF EXISTS a_table;
+DROP TABLE IF EXISTS conversation;
+DROP TABLE IF EXISTS forgot_password;
+DROP TABLE IF EXISTS image;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS product_category;
+DROP TABLE IF EXISTS registration;
+DROP TABLE IF EXISTS user_information;
+DROP TABLE IF EXISTS user_role;
 
-create table a_table (id bigint not null auto_increment, age integer not null, create_time datetime not null, first_name varchar(255) not null, last_name varchar(255) not null, primary key (id));
-create table conversation (id bigint not null auto_increment, created_date datetime not null, product_id_conversation bigint, user_id_conversation bigint, primary key (id));
-create table forgot_password (id bigint not null auto_increment, email varchar(255) not null, hash varchar(255) not null, request_created_date datetime not null, primary key (id));
-create table image (id bigint not null auto_increment, created_date datetime not null, image longblob, image_type varchar(20) not null, product_id_image bigint, primary key (id));
-create table message (id bigint not null auto_increment, created_date datetime not null, is_Read bit, message varchar(255) not null, updated_date datetime, conversation_id bigint, primary key (id));
-create table product (id bigint not null auto_increment, created_date datetime not null, currency integer, description varchar(255), is_archived bit, borrow_or_lend bit, limit_date datetime, price bigint, title varchar(100) not null, updated_date datetime, user_id_product bigint, primary key (id));
-create table product_category (product_id bigint not null, category_enum_list varchar(255));
-create table registration (id bigint not null auto_increment, email varchar(255) not null, hash varchar(255) not null, name varchar(30), password varchar(255) not null, phone varchar(25) not null, request_created_date datetime not null, surname varchar(30), username varchar(30) not null, primary key (id));
-create table user_information (id bigint not null auto_increment, created_date datetime not null, email varchar(255) not null, is_online bit, name varchar(30), password varchar(255) not null, phone varchar(25) not null, surname varchar(30), updated_date datetime, username varchar(30) not null, primary key (id));
-create table user_role (user_id bigint not null, role_enum_list varchar(255));
+CREATE TABLE a_table (
+  id          BIGINT       NOT NULL AUTO_INCREMENT,
+  age         INTEGER      NOT NULL,
+  create_time DATETIME     NOT NULL,
+  first_name  VARCHAR(255) NOT NULL,
+  last_name   VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE conversation (
+  id                      BIGINT   NOT NULL AUTO_INCREMENT,
+  created_date            DATETIME NOT NULL,
+  product_id_conversation BIGINT,
+  user_id_conversation    BIGINT,
+  PRIMARY KEY (id)
+);
+CREATE TABLE forgot_password (
+  id                   BIGINT       NOT NULL AUTO_INCREMENT,
+  email                VARCHAR(255) NOT NULL,
+  hash                 VARCHAR(255) NOT NULL,
+  request_created_date DATETIME     NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE image (
+  id               BIGINT   NOT NULL AUTO_INCREMENT,
+  created_date     DATETIME NOT NULL,
+  image            LONGBLOB,
+  image_type       INTEGER  NOT NULL,
+  product_id_image BIGINT,
+  PRIMARY KEY (id)
+);
+CREATE TABLE message (
+  id              BIGINT       NOT NULL AUTO_INCREMENT,
+  created_date    DATETIME     NOT NULL,
+  is_Read         BIT,
+  message         VARCHAR(255) NOT NULL,
+  updated_date    DATETIME,
+  conversation_id BIGINT,
+  PRIMARY KEY (id)
+);
+CREATE TABLE product (
+  id              BIGINT       NOT NULL AUTO_INCREMENT,
+  created_date    DATETIME     NOT NULL,
+  currency        INTEGER,
+  description     VARCHAR(255),
+  is_archived     BIT,
+  borrow_or_lend  BIT,
+  limit_date      DATETIME,
+  price           BIGINT,
+  title           VARCHAR(100) NOT NULL,
+  updated_date    DATETIME,
+  user_id_product BIGINT,
+  PRIMARY KEY (id)
+);
+CREATE TABLE product_category (
+  product_id        BIGINT NOT NULL,
+  category_enum_set VARCHAR(255)
+);
+CREATE TABLE registration (
+  id                   BIGINT       NOT NULL AUTO_INCREMENT,
+  email                VARCHAR(255) NOT NULL,
+  hash                 VARCHAR(255) NOT NULL,
+  name                 VARCHAR(30),
+  password             VARCHAR(255) NOT NULL,
+  phone                VARCHAR(25)  NOT NULL,
+  request_created_date DATETIME     NOT NULL,
+  surname              VARCHAR(30),
+  username             VARCHAR(30)  NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE user_information (
+  id           BIGINT       NOT NULL AUTO_INCREMENT,
+  created_date DATETIME     NOT NULL,
+  email        VARCHAR(255) NOT NULL,
+  is_online    BIT,
+  name         VARCHAR(30),
+  password     VARCHAR(255) NOT NULL,
+  phone        VARCHAR(25)  NOT NULL,
+  surname      VARCHAR(30),
+  updated_date DATETIME,
+  username     VARCHAR(30)  NOT NULL,
+  PRIMARY KEY (id)
+);
+CREATE TABLE user_role (
+  user_id       BIGINT NOT NULL,
+  role_enum_set VARCHAR(255)
+);
 
-alter table registration add constraint UK_email_registration unique (email);
-alter table registration add constraint UK_username_registration unique (username);
-alter table user_information add constraint UK_email unique (email);
-alter table user_information add constraint UK_username unique (username);
-alter table conversation add constraint FK_product_id_conversation foreign key (product_id_conversation) references product (id);
-alter table conversation add constraint FK_user_id_conversation foreign key (user_id_conversation) references user_information (id);
-alter table image add constraint FK_product_id_image foreign key (product_id_image) references product (id);
-alter table message add constraint FK_conversation_id foreign key (conversation_id) references conversation (id);
-alter table product add constraint FK_user_id_product foreign key (user_id_product) references user_information (id);
-alter table product_category add constraint FK_product_id_category foreign key (product_id) references product (id);
-alter table user_role add constraint FK_user_id_role foreign key (user_id) references user_information (id);
+ALTER TABLE registration
+  ADD CONSTRAINT UK_email_registration UNIQUE (email);
+ALTER TABLE registration
+  ADD CONSTRAINT UK_username_registration UNIQUE (username);
+ALTER TABLE user_information
+  ADD CONSTRAINT UK_email UNIQUE (email);
+ALTER TABLE user_information
+  ADD CONSTRAINT UK_username UNIQUE (username);
+ALTER TABLE conversation
+  ADD CONSTRAINT FK_product_id_conversation FOREIGN KEY (product_id_conversation) REFERENCES product (id);
+ALTER TABLE conversation
+  ADD CONSTRAINT FK_user_id_conversation FOREIGN KEY (user_id_conversation) REFERENCES user_information (id);
+ALTER TABLE image
+  ADD CONSTRAINT FK_product_id_image FOREIGN KEY (product_id_image) REFERENCES product (id);
+ALTER TABLE message
+  ADD CONSTRAINT FK_conversation_id FOREIGN KEY (conversation_id) REFERENCES conversation (id);
+ALTER TABLE product
+  ADD CONSTRAINT FK_user_id_product FOREIGN KEY (user_id_product) REFERENCES user_information (id);
+ALTER TABLE product_category
+  ADD CONSTRAINT FK_product_id_category FOREIGN KEY (product_id) REFERENCES product (id);
+ALTER TABLE user_role
+  ADD CONSTRAINT FK_user_id_role FOREIGN KEY (user_id) REFERENCES user_information (id);

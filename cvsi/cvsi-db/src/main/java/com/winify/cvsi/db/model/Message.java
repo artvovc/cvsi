@@ -7,9 +7,6 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Artemie on 25.06.2016.
- */
 @Entity
 @Table(
         name = "message")
@@ -18,13 +15,13 @@ public class Message implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    @Size(min=1, message = "message.Length min=1")
+    @Size(min = 1, message = "message.Length min=1")
     private String message;
-    @Column(name="created_date",nullable = false)
+    @Column(name = "created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date createdDate;
-    @Column(name="updated_date")
+    @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date updatedDate;

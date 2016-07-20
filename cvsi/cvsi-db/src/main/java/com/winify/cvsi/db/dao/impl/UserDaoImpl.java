@@ -5,9 +5,6 @@ import com.winify.cvsi.db.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by Artemie on 25.06.2016.
- */
 @Repository
 @Transactional
 public class UserDaoImpl extends AbstractDao<User, Long> implements UserDao {
@@ -16,11 +13,10 @@ public class UserDaoImpl extends AbstractDao<User, Long> implements UserDao {
     }
 
     public User findByEmail(String uName) {
-        User user = getCurrentSession()
+        User user = this.getCurrentSession()
                 .createQuery("select u from User u where u.email= :pEmail", clazz)
                 .setParameter("pEmail", uName)
                 .getSingleResult();
-
         return user;
     }
 }

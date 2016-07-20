@@ -8,15 +8,13 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Artemie on 25.06.2016.
- */
+
 @Entity
 @Table(
         name = "registration",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "email",name = "UK_email_registration"),
-                @UniqueConstraint(columnNames = "username",name = "UK_username_registration")
+                @UniqueConstraint(columnNames = "email", name = "UK_email_registration"),
+                @UniqueConstraint(columnNames = "username", name = "UK_username_registration")
         }
 )
 public class Registration implements Serializable {
@@ -24,28 +22,28 @@ public class Registration implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    @Size(min=1,max=30, message = "username.Length between 1-30")
+    @Size(min = 1, max = 30, message = "username.Length between 1-30")
     private String username;
     @Column(nullable = false)
-    @Size(min=1, message = "email.Length min=1")
+    @Size(min = 1, message = "email.Length min=1")
     @Email(message = "bad email address")
     private String email;
     @Column(nullable = false)
-    @Size(min=9, message = "password.Length min = 9")
+    @Size(min = 9, message = "password.Length min = 9")
     private String password;
     @Column(nullable = false)
-    @Size(min=9, max=25, message = "phone.Length between 9-20")
+    @Size(min = 9, max = 25, message = "phone.Length between 9-20")
     private String phone;
     @Column
-    @Size(min=1, max=30, message = "name.Length between 1-30")
+    @Size(min = 1, max = 30, message = "name.Length between 1-30")
     private String name;
     @Column
-    @Size(min=1, max=30, message = "surname.Length between 1-30")
+    @Size(min = 1, max = 30, message = "surname.Length between 1-30")
     private String surname;
     @Column(nullable = false)
-    @Size(min=10, message = "hash.Length min=10")
+    @Size(min = 10, message = "hash.Length min=10")
     private String hash;
-    @Column(name="request_created_date",nullable = false)
+    @Column(name = "request_created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date requestCreatedDate;

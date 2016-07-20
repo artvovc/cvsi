@@ -4,13 +4,8 @@ import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
-/**
- * Created by Artemie on 01.07.2016.
- */
-// Clasa template pentru un item din lista de producte
 public class ProductTemplate implements Serializable {
     private Long id;
     private String title;
@@ -19,9 +14,8 @@ public class ProductTemplate implements Serializable {
     private Long price;
     private Boolean isBorrow;
     private Long limitDate;
-    private List<CategoryEnum> categoryEnumList;
+    private Set<CategoryEnum> categories;
     private String userName;
-
     private Long createdDate;
     private Long updatedDate;
 
@@ -81,12 +75,20 @@ public class ProductTemplate implements Serializable {
         this.limitDate = limitDate;
     }
 
-    public List<CategoryEnum> getCategoryEnumList() {
-        return categoryEnumList;
+    public Set<CategoryEnum> getCategories() {
+        return categories;
     }
 
-    public void setCategoryEnumList(List<CategoryEnum> categoryEnumList) {
-        this.categoryEnumList = categoryEnumList;
+    public void setCategories(Set<CategoryEnum> categories) {
+        this.categories = categories;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Long getCreatedDate() {
@@ -103,13 +105,5 @@ public class ProductTemplate implements Serializable {
 
     public void setUpdatedDate(Long updatedDate) {
         this.updatedDate = updatedDate;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 }

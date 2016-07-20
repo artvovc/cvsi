@@ -3,21 +3,16 @@ package com.winify.cvsi.db.model;
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-/**
- * Created by Artemie on 25.06.2016.
- */
 @Entity
 @Table(
         name = "conversation")
-public class Conversation implements Serializable{
+public class Conversation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="created_date",nullable = false)
+    @Column(name = "created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date createdDate;
@@ -26,7 +21,7 @@ public class Conversation implements Serializable{
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
-    private List<Message> messageList = new ArrayList<Message>();
+    private Set<Message> messages = new HashSet<>();
     @ManyToOne
     @JoinColumn(
             name = "user_id_conversation",
@@ -47,20 +42,20 @@ public class Conversation implements Serializable{
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public List<Message> getMessageList() {
-        return messageList;
+    public Set<Message> getMessages() {
+        return messages;
     }
 
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
     }
 
     public User getUser() {
@@ -71,11 +66,11 @@ public class Conversation implements Serializable{
         this.user = user;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

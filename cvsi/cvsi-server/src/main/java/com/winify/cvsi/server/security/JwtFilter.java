@@ -18,17 +18,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Artemie on 18.07.2016.
- */
 public class JwtFilter extends UsernamePasswordAuthenticationFilter {
-
-    @Autowired
     private TokenUtils tokenUtils;
-    @Autowired
     private UserDetailsServiceImpl userDetailsService;
-
     private Logger log = Logger.getLogger(JwtFilter.class);
+
+    @Autowired
+    public JwtFilter(UserDetailsServiceImpl userDetailsService, TokenUtils tokenUtils) {
+        this.userDetailsService = userDetailsService;
+        this.tokenUtils = tokenUtils;
+    }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {

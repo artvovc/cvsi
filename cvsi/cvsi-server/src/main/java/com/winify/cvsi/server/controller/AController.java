@@ -24,21 +24,21 @@ public class AController {
     final static Logger log = Logger.getLogger(AController.class);
 
     @GetMapping(path = "/me/{modelId}")
-    public HttpEntity<ASimpleDto> getAModel(@PathVariable Long modelId){
+    public HttpEntity<ASimpleDto> getAModel(@PathVariable Long modelId) {
         log.info("get by id try to get something");
 
         return new ResponseEntity(aFacade.getAModel(modelId), HttpStatus.OK);
     }
 
-    @PostMapping (path = "/me")
-    public HttpEntity<ServerResponseStatus> saveAModel(@RequestBody ASimpleDto userdto ){
+    @PostMapping(path = "/me")
+    public HttpEntity<ServerResponseStatus> saveAModel(@RequestBody ASimpleDto userdto) {
         aFacade.saveAModel(userdto);
 
         return new ResponseEntity(new ServerResponseStatus(), HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/admin")
-    public HttpEntity<ServerResponseStatus> getHim(){
+    public HttpEntity<ServerResponseStatus> getHim() {
         log.info("da ladnoooo");
 
         return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "NOK"), HttpStatus.OK);
