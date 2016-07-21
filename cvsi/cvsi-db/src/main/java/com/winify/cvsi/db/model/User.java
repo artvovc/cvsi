@@ -64,19 +64,19 @@ public class User implements Serializable {
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true)
     private Set<Conversation> conversations = new HashSet<>();
 
     @OneToMany(
             mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
             orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
 
     @Column(name = "role_enum_set")
-    @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(
@@ -190,4 +190,5 @@ public class User implements Serializable {
     public void setRoles(Set<RoleEnum> roles) {
         this.roles = roles;
     }
+
 }

@@ -29,7 +29,8 @@ public class Product implements Serializable {
     @Column
     @Digits(integer = 13, fraction = 2)
     private Long price;
-    @Column
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CurrencyEnum currency;
     @Column(name = "borrow_or_lend")
     private Boolean isBorrow;
@@ -51,7 +52,7 @@ public class Product implements Serializable {
     @Column(name = "category_enum_set")
     @ElementCollection(
             targetClass = CategoryEnum.class,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(
@@ -65,11 +66,11 @@ public class Product implements Serializable {
     @OneToMany(
             mappedBy = "product",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             orphanRemoval = true)
     private Set<Image> images = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "user_id_product",
             foreignKey = @ForeignKey(

@@ -9,10 +9,8 @@ import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
 import com.winify.cvsi.core.dto.templates.request.CreateProductClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
-import com.winify.cvsi.db.model.Image;
 import com.winify.cvsi.db.model.Product;
-import com.winify.cvsi.db.model.enums.CategoryEnum;
-import com.winify.cvsi.db.model.enums.CurrencyEnum;
+import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.ImageFacade;
 import com.winify.cvsi.server.facade.ProductFacade;
 import com.winify.cvsi.server.facade.UserFacade;
@@ -30,9 +28,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 @Api
@@ -100,129 +95,23 @@ public class ProductController {
             @ModelAttribute @Valid ProductSearchTemplate productSearchTemplate,
             HttpServletRequest request
     ) {
-        SetDto<ProductTemplate> productSetDto = null;
-        if (!productSearchTemplate.getMyProducts()) {
-            int n = productSearchTemplate.getCount().intValue();
-
-            if (n != 20) {
-                Set<ProductTemplate> productTemplateSet = new HashSet<>();
-                for (int i = 0; i < n; ++i) {
-                    ProductTemplate productTemplate = new ProductTemplate();
-                    productTemplate.setId((long) i);
-                    productTemplate.setTitle("title_" + i);
-                    productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
-                    productTemplate.setCurrency(CurrencyEnum.EUR);
-                    productTemplate.setPrice((long) (i * 100));
-                    productTemplate.setBorrow(true);
-                    productTemplate.setLimitDate(new Date().getTime());
-                    productTemplate.setUserName("vasea_" + i);
-
-                    Set<CategoryEnum> categories = new HashSet<>();
-                    categories.add(CategoryEnum.BORROW);
-                    categories.add(CategoryEnum.SELL);
-                    categories.add(CategoryEnum.BUY);
-
-                    productTemplate.setCategories(categories);
-                    productTemplate.setCreatedDate(new Date().getTime());
-                    productTemplate.setUpdatedDate(new Date().getTime());
-                    productTemplateSet.add(productTemplate);
-                }
-
-                productSetDto = new SetDto<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), productTemplateSet);
-
-            } else {
-                Set<ProductTemplate> productTemplateSet = new HashSet<>();
-                for (int i = 0; i < 5; ++i) {
-                    ProductTemplate productTemplate = new ProductTemplate();
-                    productTemplate.setId((long) i);
-                    productTemplate.setTitle("title_" + i);
-                    productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
-                    productTemplate.setCurrency(CurrencyEnum.EUR);
-                    productTemplate.setPrice((long) (i * 100));
-                    productTemplate.setBorrow(true);
-                    productTemplate.setLimitDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUserName("vasea_" + i);
-
-                    Set<CategoryEnum> categories = new HashSet<>();
-                    categories.add(CategoryEnum.BORROW);
-
-                    productTemplate.setCategories(categories);
-                    productTemplate.setCreatedDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUpdatedDate(new Date().getTime());
-                    productTemplateSet.add(productTemplate);
-                }
-                for (int i = 5; i < 10; ++i) {
-                    ProductTemplate productTemplate = new ProductTemplate();
-                    productTemplate.setId((long) i);
-                    productTemplate.setTitle("title_" + i);
-                    productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
-                    productTemplate.setCurrency(CurrencyEnum.EUR);
-                    productTemplate.setPrice((long) (i * 100));
-                    productTemplate.setBorrow(true);
-                    productTemplate.setLimitDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUserName("vasea_" + i);
-
-                    Set<CategoryEnum> categories = new HashSet<>();
-                    categories.add(CategoryEnum.SELL);
-
-                    productTemplate.setCategories(categories);
-                    productTemplate.setCreatedDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUpdatedDate(new Date().getTime());
-                    productTemplateSet.add(productTemplate);
-                }
-                for (int i = 10; i < 15; ++i) {
-                    ProductTemplate productTemplate = new ProductTemplate();
-                    productTemplate.setId((long) i);
-                    productTemplate.setTitle("title_" + i);
-                    productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
-                    productTemplate.setCurrency(CurrencyEnum.MDL);
-                    productTemplate.setPrice((long) (i * 100));
-                    productTemplate.setBorrow(false);
-                    productTemplate.setLimitDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUserName("vasea_" + i);
-
-                    Set<CategoryEnum> categories = new HashSet<>();
-                    categories.add(CategoryEnum.BUY);
-
-                    productTemplate.setCategories(categories);
-                    productTemplate.setCreatedDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUpdatedDate(new Date().getTime());
-                    productTemplateSet.add(productTemplate);
-                }
-                for (int i = 15; i < 20; ++i) {
-                    ProductTemplate productTemplate = new ProductTemplate();
-                    productTemplate.setId((long) i);
-                    productTemplate.setTitle("title_" + i);
-                    productTemplate.setDescription("long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text long long long text .");
-                    productTemplate.setCurrency(CurrencyEnum.USD);
-                    productTemplate.setPrice((long) (i * 100));
-                    productTemplate.setBorrow(false);
-                    productTemplate.setLimitDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUserName("vasea_" + i);
-
-
-                    Set<CategoryEnum> categories = new HashSet<>();
-                    categories.add(CategoryEnum.BORROW);
-                    categories.add(CategoryEnum.SELL);
-
-                    productTemplate.setCategories(categories);
-                    productTemplate.setCreatedDate(new Date().getTime() + i * 1000);
-                    productTemplate.setUpdatedDate(new Date().getTime());
-                    productTemplateSet.add(productTemplate);
-                }
-
-
-                productSetDto = new SetDto<>(
-                        new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"),
-                        productTemplateSet);
-            }
-        }else {
-            Long userId = userFacade.getUserByMail(new TokenUtils().getUsernameFromToken(request.getHeader("X-Auth-Token"))).getId();
-            productSetDto.setSet(new ProductBuilder().getProductTemplates(productFacade.getMyProducts(userId)));
+        SetDto<ProductTemplate> productSetDto = new SetDto<>();
+        if (productSearchTemplate.getMyProducts()) {
+            productSetDto.setSet(
+                    new ProductBuilder().getProductTemplates(
+                            productFacade.getMyProducts(userFacade.getUserByMail(
+                                    new TokenUtils().getUsernameFromToken(request.getHeader("X-Auth-Token"))).getId())));
             productSetDto.setError(ErrorEnum.SUCCESS);
             productSetDto.setStatus("OK");
-        }
+        } else {
 
+            productSetDto.setSet(
+                    new ProductBuilder().getProductTemplates(
+                            productFacade.getProducts(productSearchTemplate)));
+            productSetDto.setError(ErrorEnum.SUCCESS);
+            productSetDto.setStatus("OK");
+
+        }
         return new ResponseEntity<>(productSetDto, HttpStatus.OK);
     }
 

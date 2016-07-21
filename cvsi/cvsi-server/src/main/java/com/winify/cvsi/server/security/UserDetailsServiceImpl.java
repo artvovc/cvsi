@@ -18,7 +18,6 @@ import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
     private final UserDao userDao;
     final static Logger log = Logger.getLogger(UserDetailsServiceImpl.class);
 
@@ -30,6 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
         log.warn(mail);
         User user = userDao.findByEmail(mail);
+        user.setRoles(userDao.getRoles(user.getId()));
 
         if (user == null) {
             throw new UsernameNotFoundException(mail);

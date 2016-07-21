@@ -1,5 +1,6 @@
 package com.winify.cvsi.server.facade;
 
+import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
 import com.winify.cvsi.core.service.ProductService;
 import com.winify.cvsi.db.model.Product;
 import org.apache.log4j.Logger;
@@ -28,5 +29,9 @@ public class ProductFacade {
 
     public void saveProduct(Product prod) {
         productService.saveProduct(prod);
+    }
+
+    public Set<Product> getProducts(ProductSearchTemplate productSearchTemplate) {
+        return productService.getProducts(productSearchTemplate);
     }
 }

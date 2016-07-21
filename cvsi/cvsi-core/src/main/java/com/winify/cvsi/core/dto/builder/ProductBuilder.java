@@ -42,8 +42,7 @@ public class ProductBuilder {
 
     public Set<ProductTemplate> getProductTemplates(Set<Product> products) {
         Set<ProductTemplate> productTemplates = new HashSet<>();
-
-        for (Product product : products) {
+        products.forEach((product)->{
             ProductTemplate productTemplate = new ProductTemplate();
             productTemplate.setId(product.getId());
             productTemplate.setTitle(product.getTitle());
@@ -55,8 +54,9 @@ public class ProductBuilder {
             productTemplate.setCategories(product.getCategories());
             productTemplate.setCreatedDate(product.getCreatedDate().getTime());
             productTemplate.setUpdatedDate(product.getUpdatedDate()==null?null:product.getUpdatedDate().getTime());
+            productTemplate.setUserName(product.getUser().getUsername());
             productTemplates.add(productTemplate);
-        }
+        });
         return productTemplates;
     }
 }

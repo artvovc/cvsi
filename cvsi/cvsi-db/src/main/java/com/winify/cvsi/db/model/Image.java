@@ -17,6 +17,7 @@ public class Image implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "image_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ImageType imageType;
     //http://www.codejava.net/frameworks/hibernate/hibernate-binary-data-and-blob-mapping-example
     @Column(name = "image")
@@ -26,7 +27,7 @@ public class Image implements Serializable {
     @Past(message = "incorrect date")
     private Date createdDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "product_id_image",
             foreignKey = @ForeignKey(name = "FK_product_id_image")

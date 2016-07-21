@@ -40,10 +40,10 @@ CREATE TABLE forgot_password (
   PRIMARY KEY (id)
 );
 CREATE TABLE image (
-  id               BIGINT   NOT NULL AUTO_INCREMENT,
-  created_date     DATETIME NOT NULL,
+  id               BIGINT       NOT NULL AUTO_INCREMENT,
+  created_date     DATETIME     NOT NULL,
   image            LONGBLOB,
-  image_type       INTEGER  NOT NULL,
+  image_type       VARCHAR(255) NOT NULL,
   product_id_image BIGINT,
   PRIMARY KEY (id)
 );
@@ -59,7 +59,7 @@ CREATE TABLE message (
 CREATE TABLE product (
   id              BIGINT       NOT NULL AUTO_INCREMENT,
   created_date    DATETIME     NOT NULL,
-  currency        INTEGER,
+  currency        VARCHAR(255) NOT NULL,
   description     VARCHAR(255),
   is_archived     BIT,
   borrow_or_lend  BIT,

@@ -19,6 +19,8 @@ public class ProductSearchTemplate implements Serializable {
     private Long offset = 0L;
     private Long count = 50L;
     private Boolean myProducts = false;
+    private Boolean orderByPrice = false;
+    private Boolean orderByCreatedDate = false;
 
     public String getTitle() {
         return title;
@@ -98,5 +100,21 @@ public class ProductSearchTemplate implements Serializable {
 
     public void setMyProducts(Boolean myProducts) {
         this.myProducts = myProducts;
+    }
+
+    public Boolean getOrderByPrice() {
+        return orderByPrice;
+    }
+
+    public void setOrderByPrice(Boolean orderByPrice) {
+        this.orderByPrice = orderByPrice;
+    }
+
+    public Boolean getOrderByCreatedDate() {
+        return orderByCreatedDate;
+    }
+
+    public void setOrderByCreatedDate(Boolean orderByCreatedDate) {
+        this.orderByCreatedDate = orderByCreatedDate;
     }
 }
