@@ -7,6 +7,7 @@ import com.winify.cvsi.core.dto.templates.request.AuthorizationClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.UserFacade;
+import com.winify.cvsi.server.security.SpringSecurityUser;
 import com.winify.cvsi.server.security.TokenUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,13 +65,9 @@ public class UserController {
                     required = true,
                     value = "registration model"
             )
-            @RequestBody @Valid AuthorizationClientRequest authorizationClientRequest,
-            HttpServletRequest request
+            @RequestBody @Valid AuthorizationClientRequest authorizationClientRequest
     ) {
-        log.warn(authorizationClientRequest.getEmail());
-        User user = new UserBuilder().getUser(authorizationClientRequest);
-        userFacade.saveUser(user);
-        log.warn("ZAPISALOSI NNA");
+        userFacade.saveUser(authorizationClientRequest);
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 
@@ -82,11 +80,9 @@ public class UserController {
             response = UserDto.class,
             nickname = "getUserInfo")
     public HttpEntity<UserDto> getUserInfo(
-            HttpServletRequest request
     ) {
-        String email = new TokenUtils().getUsernameFromToken(request.getHeader("X-Auth-Token"));
-        User user = userFacade.getUserByMail(email);
-        UserDto userDto = new UserBuilder().getUserDto(user);
+        SpringSecurityUser springSecurityUser = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto userDto = userFacade.getUserDtoByMail(springSecurityUser.getEmail());
         userDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }

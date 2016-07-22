@@ -1,5 +1,8 @@
 package com.winify.cvsi.server.facade;
 
+import com.winify.cvsi.core.dto.UserDto;
+import com.winify.cvsi.core.dto.builder.UserBuilder;
+import com.winify.cvsi.core.dto.templates.request.AuthorizationClientRequest;
 import com.winify.cvsi.core.service.UserService;
 import com.winify.cvsi.db.model.User;
 import org.apache.log4j.Logger;
@@ -20,12 +23,15 @@ public class UserFacade {
         return userService.getUser(id);
     }
 
-    public User getUserByMail(String mail) {
-        log.warn(mail);
-        return userService.getUserByMail(mail);
+    public UserDto getUserDtoByMail(String email) {
+        return new UserBuilder().getUserDto(userService.getUserByMail(email));
     }
 
-    public void saveUser(User user) {
-        userService.saveUser(user);
+    public User getUserByMail(String email) {
+        return userService.getUserByMail(email);
+    }
+
+    public void saveUser(AuthorizationClientRequest user) {
+        userService.saveUser(new UserBuilder().getUser(user));
     }
 }

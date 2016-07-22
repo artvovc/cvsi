@@ -10,11 +10,10 @@ import com.winify.cvsi.core.dto.templates.ProductTemplate;
 import com.winify.cvsi.core.dto.templates.request.CreateProductClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Product;
-import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.ImageFacade;
 import com.winify.cvsi.server.facade.ProductFacade;
 import com.winify.cvsi.server.facade.UserFacade;
-import com.winify.cvsi.server.security.TokenUtils;
+import com.winify.cvsi.server.security.SpringSecurityUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import org.apache.log4j.Logger;
@@ -23,6 +22,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,10 +80,11 @@ public class ProductController {
                     required = true,
                     value = "create product model"
             )
-            @RequestBody @Valid CreateProductClientRequest createProductClientRequest, HttpServletRequest request
+            @RequestBody @Valid CreateProductClientRequest createProductClientRequest
     ) {
+        SpringSecurityUser springSecurityUser = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Product product = new ProductBuilder().getProduct(createProductClientRequest);
-        product.setUser(userFacade.getUserByMail(new TokenUtils().getUsernameFromToken(request.getHeader("X-Auth-Token"))));
+        product.setUser(userFacade.getUserByMail(springSecurityUser.getEmail()));
         productFacade.saveProduct(product);
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
@@ -92,26 +93,16 @@ public class ProductController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     private HttpEntity<SetDto<ProductTemplate>> getProduct(
-            @ModelAttribute @Valid ProductSearchTemplate productSearchTemplate,
-            HttpServletRequest request
+            @ModelAttribute @Valid ProductSearchTemplate productSearchTemplate
     ) {
         SetDto<ProductTemplate> productSetDto = new SetDto<>();
-        if (productSearchTemplate.getMyProducts()) {
-            productSetDto.setSet(
-                    new ProductBuilder().getProductTemplates(
-                            productFacade.getMyProducts(userFacade.getUserByMail(
-                                    new TokenUtils().getUsernameFromToken(request.getHeader("X-Auth-Token"))).getId())));
-            productSetDto.setError(ErrorEnum.SUCCESS);
-            productSetDto.setStatus("OK");
-        } else {
-
-            productSetDto.setSet(
-                    new ProductBuilder().getProductTemplates(
-                            productFacade.getProducts(productSearchTemplate)));
-            productSetDto.setError(ErrorEnum.SUCCESS);
-            productSetDto.setStatus("OK");
-
-        }
+        if (productSearchTemplate.getMyProducts()){
+            SpringSecurityUser springSecurityUser = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            productSetDto.setSet(productFacade.getMyProducts(springSecurityUser.getId()));
+        } else
+            productSetDto.setSet(productFacade.getProducts(productSearchTemplate));
+        productSetDto.setError(ErrorEnum.SUCCESS);
+        productSetDto.setStatus("OK");
         return new ResponseEntity<>(productSetDto, HttpStatus.OK);
     }
 

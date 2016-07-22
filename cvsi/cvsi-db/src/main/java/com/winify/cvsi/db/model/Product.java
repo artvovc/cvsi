@@ -70,7 +70,9 @@ public class Product implements Serializable {
             orphanRemoval = true)
     private Set<Image> images = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            targetEntity = User.class)
     @JoinColumn(
             name = "user_id_product",
             foreignKey = @ForeignKey(

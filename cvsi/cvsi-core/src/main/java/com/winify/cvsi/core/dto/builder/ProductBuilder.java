@@ -3,6 +3,7 @@ package com.winify.cvsi.core.dto.builder;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
 import com.winify.cvsi.core.dto.templates.request.CreateProductClientRequest;
 import com.winify.cvsi.db.model.Product;
+import com.winify.cvsi.db.model.User;
 
 import java.util.Date;
 import java.util.HashSet;

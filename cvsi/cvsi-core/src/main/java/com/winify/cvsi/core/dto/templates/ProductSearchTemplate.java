@@ -5,6 +5,7 @@ import com.winify.cvsi.db.model.enums.CurrencyEnum;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @ApiModel
@@ -16,11 +17,23 @@ public class ProductSearchTemplate implements Serializable {
     private Set<CategoryEnum> categories;
     private Long minCreatedDate;
     private Long maxCreatedDate;
-    private Long offset = 0L;
-    private Long count = 50L;
-    private Boolean myProducts = false;
-    private Boolean orderByPrice = false;
-    private Boolean orderByCreatedDate = false;
+    private Long offset;
+    private Long count;
+    private Boolean myProducts;
+    private Boolean orderByPrice;
+    private Boolean orderByCreatedDate;
+
+    public ProductSearchTemplate() {
+        this.minPrice = 0L;
+        this.maxPrice = Long.MAX_VALUE;
+        this.minCreatedDate = new Date().getTime() - (1000L*60*60*24*30);// 30 days earlier
+        this.maxCreatedDate = new Date().getTime();
+        this.offset = 0L;
+        this.count = 50L;
+        this.myProducts = false;
+        this.orderByPrice = false;
+        this.orderByCreatedDate = false;
+    }
 
     public String getTitle() {
         return title;

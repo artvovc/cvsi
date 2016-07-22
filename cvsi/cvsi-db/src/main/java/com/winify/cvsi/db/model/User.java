@@ -70,9 +70,10 @@ public class User implements Serializable {
 
     @OneToMany(
             mappedBy = "user",
-//            cascade = CascadeType.ALL,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
-            orphanRemoval = true)
+            orphanRemoval = true
+    )
     private Set<Product> products = new HashSet<>();
 
     @Column(name = "role_enum_set")

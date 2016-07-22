@@ -4,6 +4,7 @@ import com.winify.cvsi.core.dto.AuthenticationResponseDto;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.request.AuthenticationClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
+import com.winify.cvsi.server.security.SpringSecurityUser;
 import com.winify.cvsi.server.security.TokenUtils;
 import com.winify.cvsi.server.security.UserDetailsServiceImpl;
 import io.swagger.annotations.Api;
@@ -34,15 +35,12 @@ import javax.validation.Valid;
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final TokenUtils tokenUtils;
-    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public AuthController(TokenUtils tokenUtils, UserDetailsServiceImpl userDetailsService, @Qualifier("authenticationManager") AuthenticationManager authenticationManager) {
+    public AuthController(TokenUtils tokenUtils, @Qualifier("authenticationManager") AuthenticationManager authenticationManager) {
         this.tokenUtils = tokenUtils;
-        this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
     }
-
 
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE
@@ -57,10 +55,8 @@ public class AuthController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationClientRequest.getEmail());
-        String token = this.tokenUtils.generateToken(userDetails);
-
+        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String token = this.tokenUtils.generateToken(user);
         return new ResponseEntity<>(new AuthenticationResponseDto(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), token), HttpStatus.OK);
     }
 }
