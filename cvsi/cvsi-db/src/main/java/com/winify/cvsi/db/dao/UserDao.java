@@ -6,6 +6,6 @@ import com.winify.cvsi.db.model.enums.RoleEnum;
 import java.util.Set;
 
 public interface UserDao extends CrudOperations<User, Long> {
-    User findByEmail(String uName);
+    User findByEmail(String email);
     Set<RoleEnum> getRoles(Long userId);
 }

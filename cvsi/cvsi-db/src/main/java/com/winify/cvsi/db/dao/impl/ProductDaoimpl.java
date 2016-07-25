@@ -42,7 +42,7 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
             Set<CategoryEnum> categories) {
         String queryBuild = "SELECT p.* " +
                 "FROM product AS p ";
-        queryBuild = addPriceQuery(queryBuild);
+        queryBuild = addPriceQuery(queryBuild, minPrice);
         queryBuild = addCreatedDateQuery(queryBuild);
         queryBuild = addCurrencyQuery(currency, queryBuild);
         queryBuild = addCategoriesQuery(categories, queryBuild);
@@ -87,9 +87,13 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
         return categories;
     }
 
-    private String addPriceQuery(String queryBuild) {
+    private String addPriceQuery(String queryBuild, Long minPrice) {
         queryBuild += "WHERE " +
-                "(p.price BETWEEN :minPrice AND :maxPrice) ";
+                "( (p.price BETWEEN IFNULL(:minPrice,0) AND :maxPrice) ";
+        if (minPrice == null)
+            queryBuild += "OR"+
+                    "(p.price IS NULL) ";
+        queryBuild += ") ";
         return queryBuild;
     }
 

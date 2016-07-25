@@ -26,7 +26,16 @@ public class UserService {
     }
 
     @Transactional
-    public User getUserByMail(String mail) {
-        return userDao.findByEmail(mail);
+    public User getUserByMail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    @Transactional
+    public void updateUser(User user) {
+        userDao.update(user);
+    }
+    @Transactional
+    public void deleteUser(User user){
+        userDao.delete(user);
     }
 }

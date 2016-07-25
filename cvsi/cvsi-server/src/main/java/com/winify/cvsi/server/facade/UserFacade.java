@@ -34,4 +34,12 @@ public class UserFacade {
     public void saveUser(AuthorizationClientRequest user) {
         userService.saveUser(new UserBuilder().getUser(user));
     }
+
+    public void updateUser(User user) {
+        userService.updateUser(user);
+    }
+
+    public void deleteUser(User user){
+        userService.deleteUser(user);
+    }
 }

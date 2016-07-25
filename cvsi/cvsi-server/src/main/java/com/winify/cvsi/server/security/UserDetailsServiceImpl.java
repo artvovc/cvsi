@@ -26,15 +26,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userDao = userDao;
     }
 
-    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-        log.warn(mail);
-        User user = userDao.findByEmail(mail);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userDao.findByEmail(email);
         user.setRoles(userDao.getRoles(user.getId()));
-
         if (user == null) {
-            throw new UsernameNotFoundException(mail);
+            throw new UsernameNotFoundException(email);
         }
-
         Set<SimpleGrantedAuthority> simpleGrantedAuthorities = new HashSet<>();
         for (RoleEnum roleEnum : user.getRoles()) {
             simpleGrantedAuthorities.add(new SimpleGrantedAuthority(roleEnum.toString()));
@@ -47,14 +44,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 null,
                 simpleGrantedAuthorities
         );
-//        return new SpringSecurityUser(
-//                user.getEmail(),
-//                user.getPassword(),
-//                simpleGrantedAuthorities);
-//        return new org.springframework.security.core.userdetails.User(
-//                user.getEmail(),
-//                user.getPassword(),
-//                simpleGrantedAuthorities
-//        );
     }
 }

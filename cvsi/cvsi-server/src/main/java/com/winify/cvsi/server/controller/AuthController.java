@@ -4,9 +4,10 @@ import com.winify.cvsi.core.dto.AuthenticationResponseDto;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.request.AuthenticationClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
+import com.winify.cvsi.db.model.User;
+import com.winify.cvsi.server.facade.UserFacade;
 import com.winify.cvsi.server.security.SpringSecurityUser;
 import com.winify.cvsi.server.security.TokenUtils;
-import com.winify.cvsi.server.security.UserDetailsServiceImpl;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +20,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,11 +35,13 @@ import javax.validation.Valid;
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final TokenUtils tokenUtils;
+    private final UserFacade userFacade;
 
     @Autowired
-    public AuthController(TokenUtils tokenUtils, @Qualifier("authenticationManager") AuthenticationManager authenticationManager) {
+    public AuthController(TokenUtils tokenUtils, @Qualifier("authenticationManager") AuthenticationManager authenticationManager, UserFacade userFacade) {
         this.tokenUtils = tokenUtils;
         this.authenticationManager = authenticationManager;
+        this.userFacade = userFacade;
     }
 
     @PostMapping(
@@ -57,6 +59,9 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String token = this.tokenUtils.generateToken(user);
+        User userTemp = userFacade.getUser(user.getId());
+        userTemp.setOnline(true);
+        userFacade.updateUser(userTemp);
         return new ResponseEntity<>(new AuthenticationResponseDto(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), token), HttpStatus.OK);
     }
 }

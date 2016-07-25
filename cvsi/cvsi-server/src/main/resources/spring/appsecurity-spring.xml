@@ -24,20 +24,12 @@
         <csrf disabled="true"/>
     </http>
 
-
     <beans:bean id="unauthorizedEntryPoint" class="com.winify.cvsi.server.security.EntryPointUnauthorizedHandler"/>
 
     <beans:bean id="userDetailsService" class="com.winify.cvsi.server.security.UserDetailsServiceImpl"/>
 
     <authentication-manager alias="authenticationManager">
-        <authentication-provider user-service-ref="userDetailsService">
-            <!--<password-encoder ref="encoder"/>-->
-        </authentication-provider>
+        <authentication-provider user-service-ref="userDetailsService"/>
     </authentication-manager>
-
-    <beans:bean id="encoder"
-                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-    </beans:bean>
-
 
 </beans:beans>

@@ -4,6 +4,7 @@ import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.request.AuthorizationClientRequest;
+import com.winify.cvsi.core.dto.templates.request.UpdateUserClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.UserFacade;
@@ -20,13 +21,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 @Api(
@@ -52,14 +52,15 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
-            value = "saveNewUser",
+            value = "postUser",
             notes = "save new user into database",
             produces = "application/json",
             consumes = "application/json",
             httpMethod = "POST",
             response = ServerResponseStatus.class,
-            nickname = "saveNewUser")
-    public HttpEntity<ServerResponseStatus> saveNewUser(
+            nickname = "postUser"
+    )
+    public HttpEntity<ServerResponseStatus> postUser(
             @ApiParam(
                     name = "authorizationClientRequest",
                     required = true,
@@ -73,18 +74,76 @@ public class UserController {
 
     @GetMapping
     @ApiOperation(
-            value = "getUserInfo",
+            value = "getUser",
             notes = "get user info by token",
             produces = "application/json",
             httpMethod = "GET",
             response = UserDto.class,
-            nickname = "getUserInfo")
-    public HttpEntity<UserDto> getUserInfo(
+            nickname = "getUser"
+    )
+    public HttpEntity<UserDto> getUser(
     ) {
-        SpringSecurityUser springSecurityUser = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto userDto = userFacade.getUserDtoByMail(springSecurityUser.getEmail());
+        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto userDto = userFacade.getUserDtoByMail(user.getUsername());
         userDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
         return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @PutMapping
+    @ApiOperation(
+            value = "updateUser",
+            notes = "update user into database",
+            produces = "application/json",
+            consumes = "application/json",
+            httpMethod = "PUT",
+            response = ServerResponseStatus.class,
+            nickname = "updateUser"
+    )
+    public HttpEntity<ServerResponseStatus> updateUser(
+            @ApiParam(
+                    name = "updateUserClientRequest",
+                    value = "update user model"
+            )
+            @RequestBody @Valid UpdateUserClientRequest updateUserClientRequest
+    ) {
+        ServerResponseStatus serverResponseStatus = null;
+        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userTemp = userFacade.getUser(user.getId());
+        userTemp.setUpdatedDate(new Date());
+        userTemp.setUsername(updateUserClientRequest.getUsername());
+        userTemp.setName(updateUserClientRequest.getName());
+        userTemp.setSurname(updateUserClientRequest.getSurname());
+        userTemp.setPhone(updateUserClientRequest.getPhone());
+        userTemp.setPassword(updateUserClientRequest.getPassword());
+        userFacade.updateUser(userTemp);
+//        try{
+//            userFacade.updateUser(userTemp);
+//            serverResponseStatus = new ServerResponseStatus(ErrorEnum.SUCCESS, "OK");
+//        }
+//        catch (ConstraintViolationException cve){
+//            serverResponseStatus = new ServerResponseStatus(ErrorEnum.FAILURE, cve.getMessage());
+//            return new ResponseEntity<>(serverResponseStatus, HttpStatus.BAD_REQUEST);
+//        }
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    @ApiOperation(
+            value = "deleteUser",
+            notes = "delete user from database",
+            produces = "application/json",
+            consumes = "application/json",
+            httpMethod = "DELETE",
+            response = ServerResponseStatus.class,
+            nickname = "deleteUser"
+    )
+    public HttpEntity<ServerResponseStatus> deleteUser(
+    ) {
+        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userTemp = userFacade.getUser(user.getId());
+        if (userTemp != null)
+            userFacade.deleteUser(userTemp);
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 }
 

@@ -24,7 +24,7 @@ public class ProductSearchTemplate implements Serializable {
     private Boolean orderByCreatedDate;
 
     public ProductSearchTemplate() {
-        this.minPrice = 0L;
+        this.minPrice = null;//0L;
         this.maxPrice = Long.MAX_VALUE;
         this.minCreatedDate = new Date().getTime() - (1000L*60*60*24*30);// 30 days earlier
         this.maxCreatedDate = new Date().getTime();

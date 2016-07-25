@@ -1,7 +1,7 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ImageDto;
-import com.winify.cvsi.core.dto.SetDto;
+import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.builder.ImageBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
@@ -36,11 +36,11 @@ public class ImageController {
     }
 
     @GetMapping
-    public HttpEntity<SetDto<ImageDto>> getImage(
+    public HttpEntity<ListDto<ImageDto>> getImage(
             @RequestParam Long productId
     ) {
 
-        SetDto<ImageDto> images = new SetDto<>();
+        ListDto<ImageDto> images = new ListDto<>();
         Set<ImageDto> imageDtoSet = new HashSet<>();
         for (int i = 0; i < 10; i++) {
             Image image = new Image();
@@ -51,7 +51,7 @@ public class ImageController {
             imageDtoSet.add(imageDto);
         }
 
-        images.setSet(imageDtoSet);
+        images.setList(imageDtoSet);
         images.setError(ErrorEnum.UNKNOWN_ERROR);
         images.setStatus("OK");
 

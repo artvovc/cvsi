@@ -21,7 +21,13 @@ public abstract class AbstractDao<T, I> implements CrudOperations<T, I> {
 
     public T findById(I identifier) {
         return getCurrentSession().find(clazz, identifier);
+    }
 
+    public void update(T entity) {
+        getCurrentSession().update(entity);
+    }
+    public void delete(T entity){
+        getCurrentSession().delete(entity);
     }
 
     protected Session getCurrentSession() {

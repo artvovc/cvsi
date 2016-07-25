@@ -1,9 +1,10 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ImageDto;
-import com.winify.cvsi.core.dto.SetDto;
+import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.builder.ImageBuilder;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
+import com.winify.cvsi.core.dto.comparator.PriceComparator;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
 import com.winify.cvsi.core.dto.templates.ProductTemplate;
@@ -53,7 +54,7 @@ public class ProductController {
             path = "/{productId}/image",
             produces = {MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
-    public HttpEntity<SetDto<ImageDto>> getImages(
+    public HttpEntity<ListDto<ImageDto>> getImages(
             @ApiParam(
                     name = "productId",
                     required = true
@@ -66,8 +67,8 @@ public class ProductController {
             HttpServletRequest request
     ) {
         Product product = productFacade.getProductById(productId);
-        SetDto<ImageDto> images = new SetDto<>();
-        images.setSet(new ImageBuilder().getImageDto(product.getImages()));
+        ListDto<ImageDto> images = new ListDto<>();
+        images.setList(new ImageBuilder().getImageDto(product.getImages()));
         return new ResponseEntity<>(images, HttpStatus.OK);
     }
 
@@ -82,9 +83,9 @@ public class ProductController {
             )
             @RequestBody @Valid CreateProductClientRequest createProductClientRequest
     ) {
-        SpringSecurityUser springSecurityUser = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Product product = new ProductBuilder().getProduct(createProductClientRequest);
-        product.setUser(userFacade.getUserByMail(springSecurityUser.getEmail()));
+        product.setUser(userFacade.getUserByMail(user.getUsername()));
         productFacade.saveProduct(product);
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
@@ -92,19 +93,18 @@ public class ProductController {
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private HttpEntity<SetDto<ProductTemplate>> getProduct(
+    private HttpEntity<ListDto<ProductTemplate>> getProduct(
             @ModelAttribute @Valid ProductSearchTemplate productSearchTemplate
     ) {
-        SetDto<ProductTemplate> productSetDto = new SetDto<>();
-        if (productSearchTemplate.getMyProducts()){
-            SpringSecurityUser springSecurityUser = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            productSetDto.setSet(productFacade.getMyProducts(springSecurityUser.getId()));
+        ListDto<ProductTemplate> productListDto = new ListDto<>();
+        if (productSearchTemplate.getMyProducts()) {
+            SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            productListDto.setList(productFacade.getMyProducts(user.getId())).sortBy(new PriceComparator());
         } else
-            productSetDto.setSet(productFacade.getProducts(productSearchTemplate));
-        productSetDto.setError(ErrorEnum.SUCCESS);
-        productSetDto.setStatus("OK");
-        return new ResponseEntity<>(productSetDto, HttpStatus.OK);
+            productListDto.setList(productFacade.getProducts(productSearchTemplate)).sortBy(new PriceComparator());
+        productListDto.setError(ErrorEnum.SUCCESS);
+        productListDto.setStatus("OK");
+        return new ResponseEntity<>(productListDto, HttpStatus.OK);
     }
-
 
 }

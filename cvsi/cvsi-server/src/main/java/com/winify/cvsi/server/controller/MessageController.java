@@ -1,6 +1,6 @@
 package com.winify.cvsi.server.controller;
 
-import com.winify.cvsi.core.dto.SetDto;
+import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.MessageDto;
 import com.winify.cvsi.core.dto.builder.MessageBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
@@ -33,11 +33,11 @@ public class MessageController {
     }
 
     @GetMapping
-    public HttpEntity<SetDto<MessageDto>> getMessage(
+    public HttpEntity<ListDto<MessageDto>> getMessage(
             @RequestParam("conversation_id") Long conversation_id
     ) {
-        SetDto<MessageDto> messages = new SetDto<>();
-        messages.setSet(new HashSet<>());
+        ListDto<MessageDto> messages = new ListDto<>();
+        messages.setList(new HashSet<>());
         for (int i = 0; i < 10; i++) {
             Message message = new Message();
             message.setId((long) i);
@@ -45,7 +45,7 @@ public class MessageController {
             message.setCreatedDate(new Date());
             message.setRead(true);
             MessageBuilder messageBuilder = new MessageBuilder();
-            messages.getSet().add(messageBuilder.getMessageDto(message));
+            messages.getList().add(messageBuilder.getMessageDto(message));
         }
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }

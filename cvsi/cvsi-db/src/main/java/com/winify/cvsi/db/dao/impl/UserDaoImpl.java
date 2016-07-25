@@ -18,10 +18,10 @@ public class UserDaoImpl extends AbstractDao<User, Long> implements UserDao {
         super(User.class);
     }
 
-    public User findByEmail(String uName) {
+    public User findByEmail(String email) {
         User user = this.getCurrentSession()
-                .createQuery("select u from User u where u.email= :pEmail", clazz)
-                .setParameter("pEmail", uName)
+                .createQuery("SELECT u FROM User u WHERE u.email = :pEmail", clazz)
+                .setParameter("pEmail", email)
                 .getSingleResult();
         return user;
     }

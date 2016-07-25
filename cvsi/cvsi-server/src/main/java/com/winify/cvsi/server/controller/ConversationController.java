@@ -1,7 +1,7 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ConversationDto;
-import com.winify.cvsi.core.dto.SetDto;
+import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.builder.ConversationBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
@@ -42,7 +42,7 @@ public class ConversationController {
     }
 
     @GetMapping
-    public HttpEntity<SetDto<ConversationDto>> getConversation(
+    public HttpEntity<ListDto<ConversationDto>> getConversation(
     ) {
 
         User user = new User();
@@ -98,9 +98,9 @@ public class ConversationController {
             conversationDtoSet.add(conversationBuilder.getConversationDto(conversation1));
         }
 
-        SetDto<ConversationDto> conversationDtos = new SetDto<>();
+        ListDto<ConversationDto> conversationDtos = new ListDto<>();
 
-        conversationDtos.setSet(conversationDtoSet);
+        conversationDtos.setList(conversationDtoSet);
 
         conversationDtos.setError(ErrorEnum.UNKNOWN_ERROR);
         conversationDtos.setStatus("OK");
