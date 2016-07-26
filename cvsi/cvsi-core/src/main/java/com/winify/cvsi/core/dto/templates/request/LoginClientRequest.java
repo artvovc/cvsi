@@ -1,13 +1,13 @@
 package com.winify.cvsi.core.dto.templates.request;
 
-public class AuthenticationClientRequest {
+public class LoginClientRequest {
     private String email;
     private String password;
 
-    public AuthenticationClientRequest() {
+    public LoginClientRequest() {
     }
 
-    public AuthenticationClientRequest(String email, String password) {
+    public LoginClientRequest(String email, String password) {
         this.email = email;
         this.password = password;
     }

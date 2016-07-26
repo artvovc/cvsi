@@ -15,8 +15,8 @@ public abstract class AbstractDao<T, I> implements CrudOperations<T, I> {
         this.clazz = clazz;
     }
 
-    public void save(T entity) {
-        getCurrentSession().save(entity);
+    public Long save(T entity) {
+        return (Long) getCurrentSession().save(entity);
     }
 
     public T findById(I identifier) {
@@ -26,7 +26,8 @@ public abstract class AbstractDao<T, I> implements CrudOperations<T, I> {
     public void update(T entity) {
         getCurrentSession().update(entity);
     }
-    public void delete(T entity){
+
+    public void delete(T entity) {
         getCurrentSession().delete(entity);
     }
 

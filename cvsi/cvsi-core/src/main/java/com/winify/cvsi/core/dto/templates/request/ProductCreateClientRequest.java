@@ -1,13 +1,14 @@
-package com.winify.cvsi.core.dto.templates;
+package com.winify.cvsi.core.dto.templates.request;
 
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
+import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
 import java.util.Set;
 
-public class ProductTemplate implements Serializable {
-    private Long id;
+@ApiModel(value = "ProductCreateClientRequest")
+public class ProductCreateClientRequest implements Serializable {
     private String title;
     private String description;
     private CurrencyEnum currency;
@@ -15,17 +16,8 @@ public class ProductTemplate implements Serializable {
     private Boolean isBorrow;
     private Long limitDate;
     private Set<CategoryEnum> categories;
-    private String userName;
     private Long createdDate;
     private Long updatedDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -81,14 +73,6 @@ public class ProductTemplate implements Serializable {
 
     public void setCategories(Set<CategoryEnum> categories) {
         this.categories = categories;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public Long getCreatedDate() {

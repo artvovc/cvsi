@@ -8,7 +8,6 @@ import java.util.Set;
 
 public interface ProductDao extends CrudOperations<Product, Long> {
     Set<Product> getMyProducts(Long userId);
-
     Set<Product> getProducts(
             String title,
             Long count,

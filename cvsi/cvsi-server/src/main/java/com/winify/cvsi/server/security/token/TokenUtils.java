@@ -1,5 +1,6 @@
-package com.winify.cvsi.server.security;
+package com.winify.cvsi.server.security.token;
 
+import com.winify.cvsi.server.security.userdetail.CustomUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -102,8 +103,10 @@ public class TokenUtils {
     }
 
     public String generateToken(UserDetails userDetails) {
+        if(((CustomUserDetails)userDetails).getArchived())
+            return null;
         Map<String, Object> claims = new HashMap<>();
-        claims.put("sub", userDetails.getUsername());
+        claims.put("sub", ((CustomUserDetails)userDetails).getEmail());
         claims.put("audience", "web");
         claims.put("created", this.generateCurrentDate());
         return this.generateToken(claims);
@@ -136,13 +139,14 @@ public class TokenUtils {
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        SpringSecurityUser user = (SpringSecurityUser) userDetails;
+        CustomUserDetails user = (CustomUserDetails) userDetails;
         final String username = this.getUsernameFromToken(token);
         final Date created = this.getCreatedDateFromToken(token);
         final Date expiration = this.getExpirationDateFromToken(token);
-        return (username.equals(user.getUsername())
+        return (username.equals(user.getEmail())
                 && !(this.isTokenExpired(token))
-                && !(this.isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset())));
+                && !(this.isCreatedBeforeLastPasswordReset(created, user.getLastPasswordReset()))
+                && !(user.getArchived()));
     }
 
 }

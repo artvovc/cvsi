@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @Component(value = "authenticationEntryPoint")
 public class EntryPointUnauthorizedHandler implements AuthenticationEntryPoint {
-
     @Override
     public void commence(HttpServletRequest httpServletRequest,
                          HttpServletResponse httpServletResponse,

@@ -1,4 +1,4 @@
-package com.winify.cvsi.core.dto.templates;
+package com.winify.cvsi.core.dto.templates.request;
 
 import com.winify.cvsi.db.model.enums.CategoryEnum;
 import com.winify.cvsi.db.model.enums.CurrencyEnum;
@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Set;
 
 @ApiModel
-public class ProductSearchTemplate implements Serializable {
+public class ProductSearchClientRequest implements Serializable {
     private String title;
     private CurrencyEnum currency;
     private Long minPrice;
@@ -23,7 +23,7 @@ public class ProductSearchTemplate implements Serializable {
     private Boolean orderByPrice;
     private Boolean orderByCreatedDate;
 
-    public ProductSearchTemplate() {
+    public ProductSearchClientRequest() {
         this.minPrice = null;//0L;
         this.maxPrice = Long.MAX_VALUE;
         this.minCreatedDate = new Date().getTime() - (1000L*60*60*24*30);// 30 days earlier

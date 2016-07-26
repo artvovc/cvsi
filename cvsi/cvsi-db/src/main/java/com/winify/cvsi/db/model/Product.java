@@ -52,7 +52,7 @@ public class Product implements Serializable {
     @Column(name = "category_enum_set")
     @ElementCollection(
             targetClass = CategoryEnum.class,
-            fetch = FetchType.LAZY)
+            fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(
@@ -71,7 +71,7 @@ public class Product implements Serializable {
     private Set<Image> images = new HashSet<>();
 
     @ManyToOne(
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             targetEntity = User.class)
     @JoinColumn(
             name = "user_id_product",

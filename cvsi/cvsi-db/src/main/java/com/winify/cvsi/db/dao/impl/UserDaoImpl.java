@@ -25,26 +25,4 @@ public class UserDaoImpl extends AbstractDao<User, Long> implements UserDao {
                 .getSingleResult();
         return user;
     }
-
-    public Set<RoleEnum> getRoles(Long userId) {
-        Set<RoleEnum> roles = new HashSet<>();
-        List<String> rolesList = this.getCurrentSession()
-                .createNativeQuery("SELECT ur.role_enum_set " +
-                                   "FROM user_role AS ur " +
-                                   "WHERE ur.user_id = :userId")
-                .setParameter("userId", userId)
-                .getResultList();
-        this.convertRolesFromListToSet(rolesList, roles);
-        return roles;
-    }
-
-    private void convertRolesFromListToSet(List<String> rolesList, Set<RoleEnum> roles) {
-        for (String role : rolesList) {
-            for (RoleEnum roleEnum : RoleEnum.values()) {
-                if (Objects.equals(roleEnum.toString(), role)) {
-                    roles.add(roleEnum);
-                }
-            }
-        }
-    }
 }

@@ -8,7 +8,7 @@
                     http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 
 
-    <beans:bean id="jwtFilter" class="com.winify.cvsi.server.security.JwtFilter">
+    <beans:bean id="jwtFilter" class="com.winify.cvsi.server.security.jwt.JwtFilter">
         <beans:property name="authenticationManager" ref="authenticationManager"/>
     </beans:bean>
 
@@ -17,8 +17,14 @@
           create-session="stateless"
           authentication-manager-ref="authenticationManager">
         <custom-filter ref="jwtFilter" position="FORM_LOGIN_FILTER"/>
-        <intercept-url pattern="/product" access="hasAnyRole('ROLE_USER')"/>
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/product" method="GET" access="permitAll"/>
+        <intercept-url pattern="/product" method="POST" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_DEV', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/message" access="hasAnyRole('ROLE_DEV')"/>
+        <intercept-url pattern="/user" method="GET" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_DEV', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/user" method="POST" access="permitAll"/>
+        <intercept-url pattern="/user" method="PUT" access="hasAnyRole('ROLE_USER', 'ROLE_DEV')"/>
+        <intercept-url pattern="/user" method="DELETE" access="hasAnyRole('ROLE_USER', 'ROLE_DEV', 'ROLE_MANAGER')"/>
         <!--<form-login default-target-url="/product"/>-->
         <logout/>
         <csrf disabled="true"/>
@@ -26,7 +32,7 @@
 
     <beans:bean id="unauthorizedEntryPoint" class="com.winify.cvsi.server.security.EntryPointUnauthorizedHandler"/>
 
-    <beans:bean id="userDetailsService" class="com.winify.cvsi.server.security.UserDetailsServiceImpl"/>
+    <beans:bean id="userDetailsService" class="com.winify.cvsi.server.security.userdetail.UserDetailsServiceImpl"/>
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider user-service-ref="userDetailsService"/>

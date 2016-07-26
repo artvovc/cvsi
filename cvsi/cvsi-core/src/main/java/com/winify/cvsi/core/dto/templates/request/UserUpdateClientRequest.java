@@ -2,10 +2,7 @@ package com.winify.cvsi.core.dto.templates.request;
 
 import java.io.Serializable;
 
-/**
- * Created by Artemie on 25.07.2016.
- */
-public class UpdateUserClientRequest implements Serializable {
+public class UserUpdateClientRequest implements Serializable {
     private String username;
     private String name;
     private String surname;

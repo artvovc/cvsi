@@ -21,8 +21,8 @@ public class UserService {
     }
 
     @Transactional
-    public void saveUser(User user) {
-        userDao.save(user);
+    public Long saveUser(User user) {
+        return userDao.save(user);
     }
 
     @Transactional
@@ -34,8 +34,9 @@ public class UserService {
     public void updateUser(User user) {
         userDao.update(user);
     }
+
     @Transactional
-    public void deleteUser(User user){
+    public void deleteUser(User user) {
         userDao.delete(user);
     }
 }

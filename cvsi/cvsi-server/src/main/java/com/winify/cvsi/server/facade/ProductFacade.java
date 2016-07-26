@@ -1,8 +1,9 @@
 package com.winify.cvsi.server.facade;
 
+import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
-import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
-import com.winify.cvsi.core.dto.templates.ProductTemplate;
+import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
+import com.winify.cvsi.core.dto.templates.response.ProductTemplateResponse;
 import com.winify.cvsi.core.service.ProductService;
 import com.winify.cvsi.db.model.Product;
 import org.apache.log4j.Logger;
@@ -21,19 +22,23 @@ public class ProductFacade {
         this.productService = productService;
     }
 
+    public ProductDto getProductDtoById(Long id) {
+        return new ProductBuilder().getProductDto(productService.getProductById(id));
+    }
+
     public Product getProductById(Long id) {
         return productService.getProductById(id);
     }
 
-    public Set<ProductTemplate> getMyProducts(Long userId) {
+    public Long saveProduct(Product prod) {
+        return productService.saveProduct(prod);
+    }
+
+    public Set<ProductTemplateResponse> getMyProducts(Long userId) {
         return new ProductBuilder().getProductTemplates(productService.getMyProducts(userId));
     }
 
-    public void saveProduct(Product prod) {
-        productService.saveProduct(prod);
-    }
-
-    public Set<ProductTemplate> getProducts(ProductSearchTemplate productSearchTemplate) {
-        return new ProductBuilder().getProductTemplates(productService.getProducts(productSearchTemplate));
+    public Set<ProductTemplateResponse> getProducts(ProductSearchClientRequest productSearchClientRequest) {
+        return new ProductBuilder().getProductTemplates(productService.getProducts(productSearchClientRequest));
     }
 }

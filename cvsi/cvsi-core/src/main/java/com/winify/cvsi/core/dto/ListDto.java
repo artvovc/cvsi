@@ -1,12 +1,14 @@
 package com.winify.cvsi.core.dto;
 
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.*;
-
+@ApiModel(value = "ListDto<T>")
 public class ListDto<T> extends ServerResponseStatus implements Serializable {
-
+    @ApiModelProperty(name = "list", dataType = "List<T>", required = true)
     private List<T> list;
 
     public ListDto() {

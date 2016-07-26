@@ -1,5 +1,7 @@
-package com.winify.cvsi.server.security;
+package com.winify.cvsi.server.security.jwt;
 
+import com.winify.cvsi.server.security.token.TokenUtils;
+import com.winify.cvsi.server.security.userdetail.UserDetailsServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtFilter extends UsernamePasswordAuthenticationFilter {
@@ -30,7 +31,6 @@ public class JwtFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-
         tokenUtils = WebApplicationContextUtils
                 .getRequiredWebApplicationContext(this.getServletContext())
                 .getBean(TokenUtils.class);
@@ -38,20 +38,12 @@ public class JwtFilter extends UsernamePasswordAuthenticationFilter {
                 .getRequiredWebApplicationContext(this.getServletContext())
                 .getBean(UserDetailsServiceImpl.class);
 
-
-        HttpServletResponse resp = (HttpServletResponse) res;
-        resp.setHeader("Access-Control-Allow-Origin", "*");
-        resp.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE, PATCH");
-        resp.setHeader("Access-Control-Max-Age", "3600");
-        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, " + "X-Auth-Token");
-
-
         HttpServletRequest httpRequest = (HttpServletRequest) req;
         String authToken = httpRequest.getHeader("X-Auth-Token");
         String username = this.tokenUtils.getUsernameFromToken(authToken);
-
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
             if (this.tokenUtils.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -59,7 +51,6 @@ public class JwtFilter extends UsernamePasswordAuthenticationFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
-
         chain.doFilter(req, res);
     }
 }

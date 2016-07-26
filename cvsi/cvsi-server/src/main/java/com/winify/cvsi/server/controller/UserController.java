@@ -1,15 +1,14 @@
 package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.UserDto;
-import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
-import com.winify.cvsi.core.dto.templates.request.AuthorizationClientRequest;
-import com.winify.cvsi.core.dto.templates.request.UpdateUserClientRequest;
+import com.winify.cvsi.core.dto.templates.request.RegistrationClientRequest;
+import com.winify.cvsi.core.dto.templates.request.UserUpdateClientRequest;
+import com.winify.cvsi.core.dto.validator.RegistrationValidator;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.UserFacade;
-import com.winify.cvsi.server.security.SpringSecurityUser;
-import com.winify.cvsi.server.security.TokenUtils;
+import com.winify.cvsi.server.security.userdetail.CustomUserDetails;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -23,10 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import java.util.Date;
 
 @Controller
 @Api(
@@ -62,14 +58,20 @@ public class UserController {
     )
     public HttpEntity<ServerResponseStatus> postUser(
             @ApiParam(
-                    name = "authorizationClientRequest",
+                    name = "registrationClientRequest",
                     required = true,
                     value = "registration model"
             )
-            @RequestBody @Valid AuthorizationClientRequest authorizationClientRequest
+            @RequestBody @Valid RegistrationClientRequest registrationClientRequest
     ) {
-        userFacade.saveUser(authorizationClientRequest);
-        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
+        RegistrationValidator registrationValidator = new RegistrationValidator();
+        if (registrationValidator.isValid(registrationClientRequest))
+            try {
+                userFacade.saveUser(registrationClientRequest);
+            } catch (Exception exp) {
+                registrationValidator.setMessage(exp.getMessage());
+            }
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, registrationValidator.getMessage()), HttpStatus.OK);
     }
 
     @GetMapping
@@ -83,8 +85,8 @@ public class UserController {
     )
     public HttpEntity<UserDto> getUser(
     ) {
-        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto userDto = userFacade.getUserDtoByMail(user.getUsername());
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDto userDto = userFacade.getUserDto(user);
         userDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
@@ -96,35 +98,22 @@ public class UserController {
             produces = "application/json",
             consumes = "application/json",
             httpMethod = "PUT",
-            response = ServerResponseStatus.class,
+            response = UserDto.class,
             nickname = "updateUser"
     )
-    public HttpEntity<ServerResponseStatus> updateUser(
+    public HttpEntity<UserDto> updateUser(
             @ApiParam(
-                    name = "updateUserClientRequest",
+                    name = "userUpdateClientRequest",
                     value = "update user model"
             )
-            @RequestBody @Valid UpdateUserClientRequest updateUserClientRequest
+            @RequestBody @Valid UserUpdateClientRequest userUpdateClientRequest
     ) {
-        ServerResponseStatus serverResponseStatus = null;
-        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userTemp = userFacade.getUser(user.getId());
-        userTemp.setUpdatedDate(new Date());
-        userTemp.setUsername(updateUserClientRequest.getUsername());
-        userTemp.setName(updateUserClientRequest.getName());
-        userTemp.setSurname(updateUserClientRequest.getSurname());
-        userTemp.setPhone(updateUserClientRequest.getPhone());
-        userTemp.setPassword(updateUserClientRequest.getPassword());
-        userFacade.updateUser(userTemp);
-//        try{
-//            userFacade.updateUser(userTemp);
-//            serverResponseStatus = new ServerResponseStatus(ErrorEnum.SUCCESS, "OK");
-//        }
-//        catch (ConstraintViolationException cve){
-//            serverResponseStatus = new ServerResponseStatus(ErrorEnum.FAILURE, cve.getMessage());
-//            return new ResponseEntity<>(serverResponseStatus, HttpStatus.BAD_REQUEST);
-//        }
-        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
+        userFacade.updateUser(userTemp, userUpdateClientRequest);
+        UserDto userDto = userFacade.getUserDto(user.getId());
+        userDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
     @DeleteMapping
@@ -139,10 +128,12 @@ public class UserController {
     )
     public HttpEntity<ServerResponseStatus> deleteUser(
     ) {
-        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userTemp = userFacade.getUser(user.getId());
-        if (userTemp != null)
-            userFacade.deleteUser(userTemp);
+        if (userTemp != null){
+            userTemp.setArchived(true);
+            userFacade.updateUser(userTemp);
+        }
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 }

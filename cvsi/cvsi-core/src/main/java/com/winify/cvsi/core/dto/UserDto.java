@@ -2,7 +2,6 @@ package com.winify.cvsi.core.dto;
 
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.enums.ErrorEnum;
-import com.winify.cvsi.db.model.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -22,40 +21,10 @@ public class UserDto extends ServerResponseStatus implements Serializable {
     private String phone;
     @ApiModelProperty(name = "email", dataType = "String", example = "example@mail.com", required = true, notes = "contain current user valid email")
     private String email;
-    @ApiModelProperty(name = "password", dataType = "String", example = "qwerty1234", required = true, notes = "contain current user password")
-    private String password;
+//    @ApiModelProperty(name = "password", dataType = "String", example = "qwerty1234", required = true, notes = "contain current user password")
+//    private String password;
 
     public UserDto() {
-    }
-
-    public UserDto(ErrorEnum error, String status, String username, String name, String surname, String phone, String email, String password) {
-        super(error, status);
-        this.username = username;
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserDto(ServerResponseStatus serverResponseStatus, String username, String name, String surname, String phone, String email, String password) {
-        super(serverResponseStatus);
-        this.username = username;
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserDto(ServerResponseStatus serverResponseStatus, User user) {
-        super(serverResponseStatus);
-        this.username = user.getUsername();
-        this.name = user.getName();
-        this.surname = user.getSurname();
-        this.phone = user.getPhone();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
     }
 
     public String getName() {
@@ -90,13 +59,13 @@ public class UserDto extends ServerResponseStatus implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getUsername() {
         return username;

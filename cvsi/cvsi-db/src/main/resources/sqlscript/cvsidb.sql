@@ -90,6 +90,7 @@ CREATE TABLE user_information (
   id           BIGINT       NOT NULL AUTO_INCREMENT,
   created_date DATETIME     NOT NULL,
   email        VARCHAR(255) NOT NULL,
+  is_archived  BIT,
   is_online    BIT,
   name         VARCHAR(30),
   password     VARCHAR(255) NOT NULL,

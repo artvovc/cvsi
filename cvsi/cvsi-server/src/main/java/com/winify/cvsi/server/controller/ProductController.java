@@ -2,20 +2,22 @@ package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ImageDto;
 import com.winify.cvsi.core.dto.ListDto;
+import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.core.dto.builder.ImageBuilder;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
 import com.winify.cvsi.core.dto.comparator.PriceComparator;
-import com.winify.cvsi.core.dto.error.ServerResponseStatus;
-import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
-import com.winify.cvsi.core.dto.templates.ProductTemplate;
-import com.winify.cvsi.core.dto.templates.request.CreateProductClientRequest;
+import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
+import com.winify.cvsi.core.dto.templates.response.ProductTemplateResponse;
+import com.winify.cvsi.core.dto.templates.request.ProductCreateClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Product;
+import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.ImageFacade;
 import com.winify.cvsi.server.facade.ProductFacade;
 import com.winify.cvsi.server.facade.UserFacade;
-import com.winify.cvsi.server.security.SpringSecurityUser;
+import com.winify.cvsi.server.security.userdetail.CustomUserDetails;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,36 +76,54 @@ public class ProductController {
 
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<ServerResponseStatus> saveProduct(
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ApiOperation(
+            value = "postProduct",
+            notes = "save new product into database",
+            produces = "application/json",
+            consumes = "application/json",
+            httpMethod = "POST",
+            response = ProductDto.class,
+            nickname = "postProduct"
+    )
+    public HttpEntity<ProductDto> postProduct(
             @ApiParam(
-                    name = "createProductClientRequest",
+                    name = "productCreateClientRequest",
                     required = true,
                     value = "create product model"
             )
-            @RequestBody @Valid CreateProductClientRequest createProductClientRequest
+            @RequestBody @Valid ProductCreateClientRequest productCreateClientRequest
     ) {
-        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Product product = new ProductBuilder().getProduct(createProductClientRequest);
-        product.setUser(userFacade.getUserByMail(user.getUsername()));
-        productFacade.saveProduct(product);
-        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Product product = new ProductBuilder().getProduct(productCreateClientRequest);
+        product.setUser(userFacade.getUser(user.getId()));
+        Long productId = productFacade.saveProduct(product);
+        ProductDto productDto = productFacade.getProductDtoById(productId);
+        productDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
+        return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    private HttpEntity<ListDto<ProductTemplate>> getProduct(
-            @ModelAttribute @Valid ProductSearchTemplate productSearchTemplate
+    private HttpEntity<ListDto<ProductTemplateResponse>> getProduct(
+            @ModelAttribute @Valid ProductSearchClientRequest productSearchClientRequest
     ) {
-        ListDto<ProductTemplate> productListDto = new ListDto<>();
-        if (productSearchTemplate.getMyProducts()) {
-            SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            productListDto.setList(productFacade.getMyProducts(user.getId())).sortBy(new PriceComparator());
+        ListDto<ProductTemplateResponse> productListDto = new ListDto<>();
+        if (productSearchClientRequest.getMyProducts()) {
+            CustomUserDetails user = new CustomUserDetails();
+            try {
+                user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            } catch (Exception exp) {
+                productListDto.setStatus(exp.getMessage());
+            } finally {
+                productListDto.setList(productFacade.getMyProducts(user.getId())).sortBy(new PriceComparator());
+            }
         } else
-            productListDto.setList(productFacade.getProducts(productSearchTemplate)).sortBy(new PriceComparator());
+            productListDto.setList(productFacade.getProducts(productSearchClientRequest)).sortBy(new PriceComparator());
         productListDto.setError(ErrorEnum.SUCCESS);
-        productListDto.setStatus("OK");
+//        productListDto.setStatus("OK");
         return new ResponseEntity<>(productListDto, HttpStatus.OK);
     }
 

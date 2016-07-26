@@ -1,6 +1,6 @@
 package com.winify.cvsi.core.service;
 
-import com.winify.cvsi.core.dto.templates.ProductSearchTemplate;
+import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
 import com.winify.cvsi.db.dao.ProductDao;
 import com.winify.cvsi.db.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +24,29 @@ public class ProductService {
     }
 
     @Transactional
+    public Long saveProduct(Product prod) {
+        return productDao.save(prod);
+    }
+
+    @Transactional
     public Set<Product> getMyProducts(Long userId) {
         return productDao.getMyProducts(userId);
     }
 
     @Transactional
-    public void saveProduct(Product prod) {
-        productDao.save(prod);
-    }
-
-    @Transactional
-    public Set<Product> getProducts(ProductSearchTemplate productSearchTemplate) {
+    public Set<Product> getProducts(ProductSearchClientRequest productSearchClientRequest) {
         return productDao.getProducts(
-                productSearchTemplate.getTitle(),
-                productSearchTemplate.getCount(),
-                productSearchTemplate.getOffset(),
-                productSearchTemplate.getMinPrice(),
-                productSearchTemplate.getMaxPrice(),
-                productSearchTemplate.getMinCreatedDate(),
-                productSearchTemplate.getMaxCreatedDate(),
-                productSearchTemplate.getOrderByPrice(),
-                productSearchTemplate.getOrderByCreatedDate(),
-                productSearchTemplate.getCurrency(),
-                productSearchTemplate.getCategories()
+                productSearchClientRequest.getTitle(),
+                productSearchClientRequest.getCount(),
+                productSearchClientRequest.getOffset(),
+                productSearchClientRequest.getMinPrice(),
+                productSearchClientRequest.getMaxPrice(),
+                productSearchClientRequest.getMinCreatedDate(),
+                productSearchClientRequest.getMaxCreatedDate(),
+                productSearchClientRequest.getOrderByPrice(),
+                productSearchClientRequest.getOrderByCreatedDate(),
+                productSearchClientRequest.getCurrency(),
+                productSearchClientRequest.getCategories()
         );
     }
 }

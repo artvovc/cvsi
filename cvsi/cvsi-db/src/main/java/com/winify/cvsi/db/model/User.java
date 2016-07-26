@@ -22,62 +22,52 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     @Size(min = 1, max = 30, message = "username.Length between 1-30")
     private String username;
-
     @Column(nullable = false)
     @Size(min = 1, message = "email.Length min=1")
     @Email(message = "Bad email address")
     private String email;
-
     @Column(nullable = false)
     @Size(min = 9, message = "password.Length min = 9")
     private String password;
-
     @Column(nullable = false)
     @Size(min = 9, max = 25, message = "phone.Length between 9-25")
     private String phone;
-
     @Column
     @Size(min = 1, max = 30, message = "name.Length between 1-30")
     private String name;
-
     @Column(name = "is_online")
     private Boolean isOnline;
-
     @Column
     @Size(min = 1, max = 30, message = "surname.Length between 1-30")
     private String surname;
-
     @Column(name = "created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date createdDate;
-
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
     private Date updatedDate;
-
+    @Column(name = "is_archived")
+    private Boolean isArchived;
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             orphanRemoval = true)
     private Set<Conversation> conversations = new HashSet<>();
-
     @OneToMany(
             mappedBy = "user",
-            cascade = CascadeType.ALL,
+            cascade = {CascadeType.REMOVE},
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
     private Set<Product> products = new HashSet<>();
-
     @Column(name = "role_enum_set")
-    @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.LAZY)
+    @ElementCollection(targetClass = RoleEnum.class, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(
@@ -168,6 +158,14 @@ public class User implements Serializable {
         this.updatedDate = updatedDate;
     }
 
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
+    }
+
     public Set<Conversation> getConversations() {
         return conversations;
     }
@@ -191,5 +189,4 @@ public class User implements Serializable {
     public void setRoles(Set<RoleEnum> roles) {
         this.roles = roles;
     }
-
 }

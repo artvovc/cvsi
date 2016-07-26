@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class ServerResponseStatus implements Serializable {
     @ApiModelProperty(name = "error", dataType = "String", example = "UNKNOWN_ERROR", value = "specify errors")
     private ErrorEnum error;
-    @ApiModelProperty(name = "status", dataType = "String", example = "can't save user, incorrect email", value = "get error status")
+    @ApiModelProperty(name = "status", dataType = "String", example = "error caused", value = "get error status")
     private String status;
 
     public ServerResponseStatus() {

@@ -1,4 +1,4 @@
-package com.winify.cvsi.server.security;
+package com.winify.cvsi.server.security.userdetail;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,10 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
-public class SpringSecurityUser implements UserDetails {
+public class CustomUserDetails implements UserDetails {
     private Long id;
-    private String username;
     private String password;
+    private String username;
+    private String name;
+    private String surname;
+    private String phone;
     private String email;
     private Date lastPasswordReset;
     private Collection<? extends GrantedAuthority> authorities;
@@ -18,25 +21,29 @@ public class SpringSecurityUser implements UserDetails {
     private Boolean accountNonLocked = true;
     private Boolean credentialsNonExpired = true;
     private Boolean enabled = true;
+    private Boolean isArchived = true;
+    private Boolean isOnline = true;
 
-    public SpringSecurityUser() {
+
+    public CustomUserDetails() {
         super();
     }
 
-    public SpringSecurityUser(String password, String email, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(Long id, String password, String username, String name, String surname, String phone, String email, Collection<? extends GrantedAuthority> authorities, Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled, Boolean isArchived, Boolean isOnline) {
+        this.id = id;
         this.password = password;
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
         this.email = email;
         this.authorities = authorities;
-    }
-
-    public SpringSecurityUser(Long id, String username, String password, String email, Date lastPasswordReset,
-                              Collection<? extends GrantedAuthority> authorities) {
-        this.setId(id);
-        this.setUsername(username);
-        this.setPassword(password);
-        this.setEmail(email);
-        this.setLastPasswordReset(lastPasswordReset);
-        this.setAuthorities(authorities);
+        this.accountNonExpired = accountNonExpired;
+        this.accountNonLocked = accountNonLocked;
+        this.credentialsNonExpired = credentialsNonExpired;
+        this.enabled = enabled;
+        this.isArchived = isArchived;
+        this.isOnline = isOnline;
     }
 
     public Long getId() {
@@ -64,8 +71,32 @@ public class SpringSecurityUser implements UserDetails {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -146,4 +177,19 @@ public class SpringSecurityUser implements UserDetails {
         return this.getEnabled();
     }
 
+    public Boolean getArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(Boolean archived) {
+        isArchived = archived;
+    }
+
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        isOnline = online;
+    }
 }

@@ -1,13 +1,12 @@
 package com.winify.cvsi.server.controller;
 
-import com.winify.cvsi.core.dto.AuthenticationResponseDto;
-import com.winify.cvsi.core.dto.error.ServerResponseStatus;
-import com.winify.cvsi.core.dto.templates.request.AuthenticationClientRequest;
+import com.winify.cvsi.core.dto.RegistrationDto;
+import com.winify.cvsi.core.dto.templates.request.LoginClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.UserFacade;
-import com.winify.cvsi.server.security.SpringSecurityUser;
-import com.winify.cvsi.server.security.TokenUtils;
+import com.winify.cvsi.server.security.userdetail.CustomUserDetails;
+import com.winify.cvsi.server.security.token.TokenUtils;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,16 +28,16 @@ import javax.validation.Valid;
 
 @Controller
 @Api
-@RequestMapping(name = "authentication controller",
-        path = "/auth",
+@RequestMapping(name = "login controller",
+        path = "/login",
         produces = MediaType.APPLICATION_JSON_VALUE)
-public class AuthController {
+public class LoginController {
     private final AuthenticationManager authenticationManager;
     private final TokenUtils tokenUtils;
     private final UserFacade userFacade;
 
     @Autowired
-    public AuthController(TokenUtils tokenUtils, @Qualifier("authenticationManager") AuthenticationManager authenticationManager, UserFacade userFacade) {
+    public LoginController(TokenUtils tokenUtils, @Qualifier("authenticationManager") AuthenticationManager authenticationManager, UserFacade userFacade) {
         this.tokenUtils = tokenUtils;
         this.authenticationManager = authenticationManager;
         this.userFacade = userFacade;
@@ -47,21 +46,26 @@ public class AuthController {
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public HttpEntity<AuthenticationResponseDto> authenticationRequest(
-            @RequestBody @Valid AuthenticationClientRequest authenticationClientRequest
+    public HttpEntity<RegistrationDto> authenticationRequest(
+            @RequestBody @Valid LoginClientRequest loginClientRequest
     ) throws AuthenticationException {
         Authentication authentication = this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authenticationClientRequest.getEmail(),
-                        authenticationClientRequest.getPassword()
+                        loginClientRequest.getEmail(),
+                        loginClientRequest.getPassword()
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        SpringSecurityUser user = (SpringSecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String token = this.tokenUtils.generateToken(user);
-        User userTemp = userFacade.getUser(user.getId());
-        userTemp.setOnline(true);
-        userFacade.updateUser(userTemp);
-        return new ResponseEntity<>(new AuthenticationResponseDto(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), token), HttpStatus.OK);
+        RegistrationDto registrationDto = new RegistrationDto();
+        if (token != null) {
+            User userTemp = userFacade.getUser(user.getId());
+            userFacade.updateUser(userTemp);
+            registrationDto.setToken(token);
+            registrationDto.setUserDto(userFacade.getUserDto(user.getId()));
+            registrationDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
+        }
+        return new ResponseEntity<>(registrationDto, HttpStatus.OK);
     }
 }

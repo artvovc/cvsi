@@ -8,8 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 @Repository
@@ -23,9 +21,17 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
                 .createQuery("SELECT p FROM Product AS p WHERE p.user.id = :userId", clazz)
                 .setParameter("userId", userId)
                 .getResultList());
-        this.setProductCategories(products);
         this.setProductUser(products);
         return products;
+    }
+
+    private void setProductUser(Set<Product> products) {
+
+        String query = "SELECT u " +
+                "FROM User AS u WHERE u.id = (SELECT p.user.id FROM Product AS p WHERE p.id = :productId)";
+        products.forEach(product -> product.setUser(
+                this.getCurrentSession().createQuery(query, com.winify.cvsi.db.model.User.class).setParameter("productId", product.getId()).getSingleResult()
+        ));
     }
 
     public Set<Product> getProducts(
@@ -57,41 +63,14 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
             query.setParameter("currencyEnum", currency.name());
         query.setFirstResult(offset.intValue());
         query.setMaxResults(count.intValue());
-        Set<Product> products = new HashSet<>(query.getResultList());
-        this.setProductCategories(products);
-        this.setProductUser(products);
-        return products;
-    }
-
-    private void setProductCategories(Set<Product> products) {
-        products.forEach((product) -> product.setCategories(
-                this.convertCategoriesFromStringToCategoryEnum(
-                        this.getCurrentSession()
-                                .createNativeQuery("SELECT pc.category_enum_set " +
-                                        "FROM product_category AS pc " +
-                                        "WHERE pc.product_id = :productId")
-                                .setParameter("productId", product.getId())
-                                .getResultList()
-                )
-        ));
-    }
-
-    private Set<CategoryEnum> convertCategoriesFromStringToCategoryEnum(List<String> categoriesList) {
-        Set<CategoryEnum> categories = new HashSet<>();
-        categoriesList.forEach((category) -> {
-            for (CategoryEnum categoryEnum : CategoryEnum.values()) {
-                if (Objects.equals(categoryEnum.toString(), category))
-                    categories.add(categoryEnum);
-            }
-        });
-        return categories;
+        return new HashSet<>(query.getResultList());
     }
 
     private String addPriceQuery(String queryBuild, Long minPrice) {
         queryBuild += "WHERE " +
                 "( (p.price BETWEEN IFNULL(:minPrice,0) AND :maxPrice) ";
         if (minPrice == null)
-            queryBuild += "OR"+
+            queryBuild += "OR" +
                     "(p.price IS NULL) ";
         queryBuild += ") ";
         return queryBuild;
@@ -161,14 +140,5 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
             }
         }
         return queryBuild;
-    }
-
-    private void setProductUser(Set<Product> products) {
-
-        String query = "SELECT u " +
-                "FROM User AS u WHERE u.id = (SELECT p.user.id FROM Product AS p WHERE p.id = :productId)";
-        products.forEach(product -> product.setUser(
-                this.getCurrentSession().createQuery(query, com.winify.cvsi.db.model.User.class).setParameter("productId", product.getId()).getSingleResult()
-        ));
     }
 }
