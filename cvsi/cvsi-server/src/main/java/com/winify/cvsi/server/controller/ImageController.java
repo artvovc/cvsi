@@ -1,9 +1,11 @@
 package com.winify.cvsi.server.controller;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import com.winify.cvsi.core.dto.ImageDto;
 import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.builder.ImageBuilder;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
+import com.winify.cvsi.core.dto.templates.request.ImageSaveClientRequest;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Image;
 import com.winify.cvsi.db.model.enums.ImageType;
@@ -18,12 +20,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Decoder;
 
 import javax.sql.rowset.serial.SerialBlob;
+import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.Blob;
@@ -34,7 +35,9 @@ import java.util.Set;
 @Controller
 @RequestMapping(name = "image controller",
         path = "/image",
-        produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE,
+        consumes = MediaType.APPLICATION_JSON_VALUE
+)
 public class ImageController {
     private final ImageFacade imageFacade;
     private final ProductFacade productFacade;
@@ -69,45 +72,68 @@ public class ImageController {
         return new ResponseEntity<>(images, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping()
     public HttpEntity<ServerResponseStatus> setImage(
-            @RequestParam String imageType,
-            @RequestParam byte[] image,
-            @RequestParam Long createdDate,
-            @RequestParam Long productId
+            @RequestBody @Valid ImageSaveClientRequest imageSaveClientRequest
     ) {
-        String path = "A:/Wallpapers/8.jpg";
-        String pathto = "A:/Wallpapers/82.jpg";//IMAGE TYPE JPG PNG RESTU
+        String path = "A:/Wallpapers/1.jpg";
+        String pathto = "A:/Wallpapers/11.jpg";//IMAGE TYPE JPG PNG RESTU
         Image img = new Image();
+
+        InputStream is = null;
+        InputStream isimagefromdb = null;
+        OutputStream out = null;
+
         try {
-            InputStream is = new FileInputStream(new File(path));
-            byte[] bytes = IOUtils.toByteArray(is);
-            log.warn(bytes.length);
-            Blob blob  = new SerialBlob(bytes);
+//            is = new FileInputStream(new File(path));
+//            byte[] bytes = IOUtils.toByteArray(is);
+//            log.warn(bytes.length);
+//            Blob blob  = new SerialBlob(bytes);
+//            Byte[] bytess = imageSaveClientRequest.getImage().toArray(new Byte[imageSaveClientRequest.getImage().size()]);
+            String b64image = imageSaveClientRequest.getImage();
+            String base64Image = b64image.split(",")[1];
+            byte[] bytess = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
 
-//            img.setImageType(ImageType.DEFAULT_IMAGE);
-//            img.setCreatedDate(new Date());
-//            img.setProduct(productFacade.getProductById(10L));
-//            img.setImage(blob);
+            Blob blob = new SerialBlob(bytess);
 
-            Image imageBLOB = imageFacade.getImageById(1L);
+            img.setImageType(ImageType.DEFAULT_IMAGE);
+            img.setCreatedDate(new Date(new Date().getTime() - (1000L * 60)));
+            img.setProduct(productFacade.getProductById(10L));
+            img.setImage(blob);
+            imageFacade.saveImage(img);
+
+            Image imageBLOB = imageFacade.getImageById(15L);
 
             Blob imgblob = imageBLOB.getImage();
 
-            InputStream isimagefromdb = imgblob.getBinaryStream();
+            isimagefromdb = imgblob.getBinaryStream();
 
 
-            OutputStream out = new BufferedOutputStream(new FileOutputStream(pathto));
-            IOUtils.copy(isimagefromdb,out);
+            out = new BufferedOutputStream(new FileOutputStream(pathto));
+            IOUtils.copy(isimagefromdb, out);
 
-//out.write(bytes);
 
             log.warn("OK");
+
+//            is.close();
+            out.close();
+            isimagefromdb.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        imageFacade.saveImage(img);
+
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "OK"), HttpStatus.OK);
+    }
+
+    byte[] toPrimitives(Byte[] oBytes) {
+        byte[] bytes = new byte[oBytes.length];
+
+        for (int i = 0; i < oBytes.length; i++) {
+            bytes[i] = oBytes[i];
+        }
+
+        return bytes;
     }
 
 }
