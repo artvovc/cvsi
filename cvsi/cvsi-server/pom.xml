@@ -19,6 +19,8 @@
         <slf4j.version>1.5.8</slf4j.version>
         <log4j.version>1.2.14</log4j.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <jjwt.version>0.6.0</jjwt.version>
+        <commons-io.version>2.4</commons-io.version>
         <dir>..</dir>
     </properties>
     <dependencies>
@@ -165,7 +167,12 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.6.0</version>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
     </dependencies>
     <build>

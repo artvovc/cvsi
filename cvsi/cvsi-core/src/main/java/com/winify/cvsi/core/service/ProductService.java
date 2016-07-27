@@ -49,4 +49,14 @@ public class ProductService {
                 productSearchClientRequest.getCategories()
         );
     }
+
+    @Transactional
+    public void updateProduct(Product product){
+        productDao.update(product);
+    }
+
+    @Transactional
+    public Long updateProduct(Long userId, Long productId) {
+        return productDao.updateProductByUserIdAndProductId(userId, productId);
+    }
 }

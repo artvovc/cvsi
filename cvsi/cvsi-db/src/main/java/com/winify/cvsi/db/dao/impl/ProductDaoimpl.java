@@ -18,7 +18,7 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
 
     public Set<Product> getMyProducts(Long userId) {
         Set<Product> products = new HashSet<>(this.getCurrentSession()
-                .createQuery("SELECT p FROM Product AS p WHERE p.user.id = :userId", clazz)
+                .createQuery("SELECT p FROM Product AS p WHERE p.user.id = :userId AND p.isArchived = false", clazz)
                 .setParameter("userId", userId)
                 .getResultList());
         this.setProductUser(products);
@@ -48,6 +48,7 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
             Set<CategoryEnum> categories) {
         String queryBuild = "SELECT p.* " +
                 "FROM product AS p ";
+        queryBuild = addArchivedQuery(queryBuild);
         queryBuild = addPriceQuery(queryBuild, minPrice);
         queryBuild = addCreatedDateQuery(queryBuild);
         queryBuild = addCurrencyQuery(currency, queryBuild);
@@ -66,8 +67,14 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
         return new HashSet<>(query.getResultList());
     }
 
-    private String addPriceQuery(String queryBuild, Long minPrice) {
+    private String addArchivedQuery(String queryBuild) {
         queryBuild += "WHERE " +
+                "(p.is_archived = false) ";
+        return queryBuild;
+    }
+
+    private String addPriceQuery(String queryBuild, Long minPrice) {
+        queryBuild += "AND " +
                 "( (p.price BETWEEN IFNULL(:minPrice,0) AND :maxPrice) ";
         if (minPrice == null)
             queryBuild += "OR" +
@@ -140,5 +147,12 @@ public class ProductDaoimpl extends AbstractDao<Product, Long> implements Produc
             }
         }
         return queryBuild;
+    }
+
+    public Long updateProductByUserIdAndProductId(Long userId, Long productId) {
+        return (long) this.getCurrentSession()
+                .createQuery("UPDATE Product AS p SET p.isArchived = true WHERE p.id = :productId AND p.user.id = :userId")
+                .setParameter("productId",productId)
+                .setParameter("userId",userId).executeUpdate();
     }
 }

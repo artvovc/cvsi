@@ -3,6 +3,7 @@ package com.winify.cvsi.server.facade;
 import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
 import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
+import com.winify.cvsi.core.dto.templates.request.ProductUpdateClientRequest;
 import com.winify.cvsi.core.dto.templates.response.ProductTemplateResponse;
 import com.winify.cvsi.core.service.ProductService;
 import com.winify.cvsi.db.model.Product;
@@ -40,5 +41,21 @@ public class ProductFacade {
 
     public Set<ProductTemplateResponse> getProducts(ProductSearchClientRequest productSearchClientRequest) {
         return new ProductBuilder().getProductTemplates(productService.getProducts(productSearchClientRequest));
+    }
+
+    public Set<Product> getMyProductsToArchivate(Long userId) {
+        return productService.getMyProducts(userId);
+    }
+
+    public void updateProductToArchivate(Product product){
+        productService.updateProduct(new ProductBuilder().getProductToArchivate(product));
+    }
+
+    public Long updateProduct(Long userId, Long productId) {
+        return productService.updateProduct(userId,productId);
+    }
+
+    public void updateProduct(Product product,ProductUpdateClientRequest productUpdateClientRequest) {
+        productService.updateProduct(new ProductBuilder().getProduct(product,productUpdateClientRequest));
     }
 }

@@ -21,4 +21,6 @@ public interface ProductDao extends CrudOperations<Product, Long> {
             CurrencyEnum currency,
             Set<CategoryEnum> categories
     );
+
+    Long updateProductByUserIdAndProductId(Long userId, Long productId);
 }

@@ -6,12 +6,13 @@ import com.winify.cvsi.core.dto.ProductDto;
 import com.winify.cvsi.core.dto.builder.ImageBuilder;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
 import com.winify.cvsi.core.dto.comparator.PriceComparator;
-import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
-import com.winify.cvsi.core.dto.templates.response.ProductTemplateResponse;
+import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.core.dto.templates.request.ProductCreateClientRequest;
+import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
+import com.winify.cvsi.core.dto.templates.request.ProductUpdateClientRequest;
+import com.winify.cvsi.core.dto.templates.response.ProductTemplateResponse;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Product;
-import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.ImageFacade;
 import com.winify.cvsi.server.facade.ProductFacade;
 import com.winify.cvsi.server.facade.UserFacade;
@@ -125,6 +126,54 @@ public class ProductController {
         productListDto.setError(ErrorEnum.SUCCESS);
 //        productListDto.setStatus("OK");
         return new ResponseEntity<>(productListDto, HttpStatus.OK);
+    }
+
+    @PutMapping
+    @ApiOperation(
+            value = "putProduct",
+            notes = "update product from database",
+            produces = "application/json",
+            consumes = "application/json",
+            httpMethod = "PUT",
+            response = ProductDto.class,
+            nickname = "putProduct"
+    )
+    public HttpEntity<ProductDto> putProduct(
+            @ApiParam(
+                    name = "productUpdateClientRequest",
+                    required = true,
+                    value = "update product model"
+            )
+            @RequestBody @Valid ProductUpdateClientRequest productUpdateClientRequest
+    ) {
+        CustomUserDetails user = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        productFacade.updateProduct(productFacade.getProductById(productUpdateClientRequest.getProductId()),productUpdateClientRequest);
+        ProductDto productDto = productFacade.getProductDtoById(productUpdateClientRequest.getProductId());
+        productDto.setServerResponseStatus(ErrorEnum.SUCCESS,"OK");
+        return new ResponseEntity<>(productDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{productId}")
+    @ApiOperation(
+            value = "deleteProduct",
+            notes = "delete product from database",
+            produces = "application/json",
+            consumes = "application/json",
+            httpMethod = "DELETE",
+            response = ServerResponseStatus.class,
+            nickname = "deleteProduct"
+    )
+    public HttpEntity<ServerResponseStatus> deleteProduct(
+            @ApiParam(
+                    name = "productId",
+                    required = true,
+                    example = "0"
+            )
+            @PathVariable("productId") @Valid Long productId
+    ) {
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long rowChanges = productFacade.updateProduct(user.getId(), productId);
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 
 }

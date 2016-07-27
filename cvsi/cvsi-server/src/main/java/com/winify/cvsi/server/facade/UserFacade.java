@@ -54,6 +54,7 @@ public class UserFacade {
     public void updateUser(User user, UserUpdateClientRequest userUpdateClientRequest) {
         userService.updateUser(new UserBuilder().getUpdatedUser(user, userUpdateClientRequest));
     }
+
     public void updateUser(User user) {
         userService.updateUser(new UserBuilder().getUpdatedUser(user));
     }

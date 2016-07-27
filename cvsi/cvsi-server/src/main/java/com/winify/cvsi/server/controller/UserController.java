@@ -7,6 +7,7 @@ import com.winify.cvsi.core.dto.templates.request.UserUpdateClientRequest;
 import com.winify.cvsi.core.dto.validator.RegistrationValidator;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.User;
+import com.winify.cvsi.server.facade.ProductFacade;
 import com.winify.cvsi.server.facade.UserFacade;
 import com.winify.cvsi.server.security.userdetail.CustomUserDetails;
 import io.swagger.annotations.Api;
@@ -37,11 +38,13 @@ import javax.validation.Valid;
 )
 public class UserController {
     private final UserFacade userFacade;
+    private final ProductFacade productFacade;
     private final static Logger log = Logger.getLogger(UserController.class);
 
     @Autowired
-    public UserController(UserFacade userFacade) {
+    public UserController(UserFacade userFacade, ProductFacade productFacade) {
         this.userFacade = userFacade;
+        this.productFacade = productFacade;
     }
 
     @PostMapping(
@@ -132,6 +135,7 @@ public class UserController {
         User userTemp = userFacade.getUser(user.getId());
         if (userTemp != null){
             userTemp.setArchived(true);
+            productFacade.getMyProductsToArchivate(user.getId()).forEach(productFacade::updateProductToArchivate);
             userFacade.updateUser(userTemp);
         }
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
