@@ -25,7 +25,6 @@ public class AController {
 
     @GetMapping(path = "/me/{modelId}")
     public HttpEntity<ASimpleDto> getAModel(@PathVariable Long modelId) {
-        log.info("get by id try to get something");
 
         return new ResponseEntity(aFacade.getAModel(modelId), HttpStatus.OK);
     }
@@ -39,7 +38,6 @@ public class AController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/admin")
     public HttpEntity<ServerResponseStatus> getHim() {
-        log.info("da ladnoooo");
 
         return new ResponseEntity(new ServerResponseStatus(ErrorEnum.UNKNOWN_ERROR, "NOK"), HttpStatus.OK);
     }

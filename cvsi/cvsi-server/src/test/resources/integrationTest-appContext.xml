@@ -28,6 +28,6 @@
           class="com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean">
         <property name="databaseConfig" ref="dbUnitDatabaseConfig"/>
         <property name="dataSource" ref="mDataSource"/>
-        <property name="schema" value="${db.schema}"/>
+        <property name="schema" value="${test.db.schema}"/>
     </bean>
 </beans>

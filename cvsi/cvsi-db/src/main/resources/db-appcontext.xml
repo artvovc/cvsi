@@ -3,12 +3,13 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx.xsd">
+       http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
     <context:component-scan base-package="com.winify.cvsi.db.dao.impl"/>
 
@@ -42,5 +43,20 @@
         <property name="packagesToScan" value="com.winify.cvsi.db.model"/>
     </bean>
 
-
+    <!--<mongo:db-factory-->
+            <!--dbname="${mongodb.db}"-->
+            <!--host="${mongodb.host}"-->
+            <!--port="${mongodb.port}"-->
+    <!--/> -->
+    <mongo:db-factory
+            dbname="test"
+            host="127.0.0.1"
+            port="27017"
+    />
+    <mongo:mapping-converter id="converter" />
+    <bean name="gridFsTemplate"
+          class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
+        <constructor-arg ref="mongoDbFactory" />
+        <constructor-arg ref="converter" />
+    </bean>
 </beans>

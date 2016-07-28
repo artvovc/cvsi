@@ -22,6 +22,8 @@
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <ojdbc14.version>10.2.0.4.0</ojdbc14.version>
         <jackson-annotations>2.7.3</jackson-annotations>
+        <spring-data-mongodb.version>1.9.2.RELEASE</spring-data-mongodb.version>
+        <mongodb.version>3.3.0</mongodb.version>
         <dir>..</dir>
     </properties>
     <dependencies>
@@ -70,6 +72,18 @@
             <artifactId>spring-tx</artifactId>
             <version>${spring-tx.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>${spring-data-mongodb.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongodb.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <resources>
