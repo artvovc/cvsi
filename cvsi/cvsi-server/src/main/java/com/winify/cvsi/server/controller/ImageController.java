@@ -1,7 +1,6 @@
 package com.winify.cvsi.server.controller;
 
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
+import com.mongodb.BasicDBObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.winify.cvsi.core.dto.ImageDto;
 import com.winify.cvsi.core.dto.ListDto;
@@ -24,8 +23,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.xml.bind.DatatypeConverter;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Date;
@@ -74,23 +77,35 @@ public class ImageController {
         return new ResponseEntity<>(images, HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public HttpEntity<ServerResponseStatus> setImage(
-            @RequestBody @Valid ImageSaveClientRequest imageSaveClientRequest
+//            @ModelAttribute @Valid ImageSaveClientRequest imageSaveClientRequest,
+            @RequestParam("file") MultipartFile[] file//,
+//            HttpServletRequest req
     ) {
-        try {
-            InputStream in = new FileInputStream("A:\\Wallpapers\\1.jpg");
 
-            String id = gridFsTemplate.store(in,"1.jpg","image/jpg").getId().toString();
+        log.warn("hello");
+
+        try {
+//            InputStream in = new ByteArrayInputStream(
+//                    DatatypeConverter.parseBase64Binary(
+//                            imageSaveClientRequest.getImage().split(",")[1]));
+//
+//            InputStream in = new FileInputStream("A:\\Wallpapers\\1.jpg");
+
+            InputStream in = new ByteArrayInputStream(file[0].getBytes());
+
+            String id = gridFsTemplate.store(in,"1asdasdasd.jpg","image/jpg").getId().toString();
+
 
             GridFSDBFile gridFSDBFile = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
+
 
             gridFSDBFile.writeTo("A:\\Wallpapers\\11.jpg");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
 
