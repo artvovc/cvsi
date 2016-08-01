@@ -62,4 +62,8 @@ public class UserFacade {
     public void deleteUser(User user) {
         userService.deleteUser(user);
     }
+
+    public void updateUser(User user, String id) {
+        userService.updateUser(new UserBuilder().getUpdatedUser(user,id));
+    }
 }

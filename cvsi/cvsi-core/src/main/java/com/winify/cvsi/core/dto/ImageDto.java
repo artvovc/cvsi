@@ -4,12 +4,10 @@ import com.winify.cvsi.core.dto.error.ServerResponseStatus;
 import com.winify.cvsi.db.model.enums.ImageType;
 
 import java.io.Serializable;
-import java.sql.Blob;
-import java.util.Date;
 
 public class ImageDto extends ServerResponseStatus implements Serializable {
     private ImageType imageType;
-    private Blob image;
+    private String image;
     private Long createdDate;
 
     public ImageType getImageType() {
@@ -20,11 +18,11 @@ public class ImageDto extends ServerResponseStatus implements Serializable {
         this.imageType = imageType;
     }
 
-    public Blob getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

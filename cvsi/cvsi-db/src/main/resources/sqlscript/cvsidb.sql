@@ -42,7 +42,7 @@ CREATE TABLE forgot_password (
 CREATE TABLE image (
   id               BIGINT       NOT NULL AUTO_INCREMENT,
   created_date     DATETIME     NOT NULL,
-  image            LONGBLOB,
+  image            VARCHAR(255) NOT NULL,
   image_type       VARCHAR(255) NOT NULL,
   product_id_image BIGINT,
   PRIMARY KEY (id)
@@ -96,6 +96,7 @@ CREATE TABLE user_information (
   password     VARCHAR(255) NOT NULL,
   phone        VARCHAR(25)  NOT NULL,
   surname      VARCHAR(30),
+  image        VARCHAR(255),
   updated_date DATETIME,
   username     VARCHAR(30)  NOT NULL,
   PRIMARY KEY (id)

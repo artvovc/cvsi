@@ -20,6 +20,7 @@
         <intercept-url pattern="/login" access="permitAll"/>
         <intercept-url pattern="/product" method="GET" access="permitAll"/>
         <intercept-url pattern="/product" method="POST" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_DEV', 'ROLE_ADMIN')"/>
+        <intercept-url pattern="/product/{productId}/image" method="POST" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_DEV', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/message" access="hasAnyRole('ROLE_DEV')"/>
         <intercept-url pattern="/user" method="GET" access="hasAnyRole('ROLE_USER', 'ROLE_MANAGER', 'ROLE_DEV', 'ROLE_ADMIN')"/>
         <intercept-url pattern="/user" method="POST" access="permitAll"/>

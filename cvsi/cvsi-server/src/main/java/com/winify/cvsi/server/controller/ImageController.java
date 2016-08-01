@@ -1,165 +1,56 @@
 package com.winify.cvsi.server.controller;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.gridfs.GridFSDBFile;
-import com.winify.cvsi.core.dto.ImageDto;
-import com.winify.cvsi.core.dto.ListDto;
-import com.winify.cvsi.core.dto.builder.ImageBuilder;
-import com.winify.cvsi.core.dto.error.ServerResponseStatus;
-import com.winify.cvsi.core.dto.templates.request.ImageSaveClientRequest;
-import com.winify.cvsi.core.enums.ErrorEnum;
-import com.winify.cvsi.db.model.Image;
-import com.winify.cvsi.db.model.enums.ImageType;
 import com.winify.cvsi.server.facade.ImageFacade;
-import com.winify.cvsi.server.facade.ProductFacade;
+import io.swagger.annotations.ApiParam;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.gridfs.GridFsTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.xml.bind.DatatypeConverter;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.IOException;
 
 @Controller
 @RequestMapping(name = "image controller",
         path = "/image",
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        consumes = MediaType.APPLICATION_JSON_VALUE
+        produces = MediaType.APPLICATION_JSON_VALUE
 )
 public class ImageController {
     private final ImageFacade imageFacade;
-    private final ProductFacade productFacade;
     private final static Logger log = Logger.getLogger(ImageController.class);
-    private final GridFsTemplate gridFsTemplate;
 
     @Autowired
-    public ImageController(ImageFacade imageFacade, ProductFacade productFacade, GridFsTemplate gridFsTemplate) {
+    public ImageController(ImageFacade imageFacade) {
         this.imageFacade = imageFacade;
-        this.productFacade = productFacade;
-        this.gridFsTemplate = gridFsTemplate;
     }
 
-    @GetMapping
-    public HttpEntity<ListDto<ImageDto>> getImage(
-            @RequestParam Long productId
+    @GetMapping(
+            path = "/{imageId}"
+    )
+    public HttpEntity<byte[]> getImage(
+            @ApiParam(
+                    name = "imageId",
+                    required = true,
+                    example = "0"
+            )
+            @PathVariable("imageId") @Valid String imageId
     ) {
-
-        ListDto<ImageDto> images = new ListDto<>();
-        Set<ImageDto> imageDtoSet = new HashSet<>();
-        for (int i = 0; i < 10; i++) {
-            Image image = new Image();
-            image.setImageType(ImageType.ANOTHER_IMAGE);
-            image.setCreatedDate(new Date());
-            ImageBuilder imageBuilder = new ImageBuilder();
-            ImageDto imageDto = imageBuilder.getImageDto(image);
-            imageDtoSet.add(imageDto);
-        }
-
-        images.setList(imageDtoSet);
-        images.setError(ErrorEnum.UNKNOWN_ERROR);
-        images.setStatus("OK");
-
-        return new ResponseEntity<>(images, HttpStatus.OK);
-    }
-
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public HttpEntity<ServerResponseStatus> setImage(
-//            @ModelAttribute @Valid ImageSaveClientRequest imageSaveClientRequest,
-            @RequestParam("file") MultipartFile[] file//,
-//            HttpServletRequest req
-    ) {
-
-        log.warn("hello");
-
+        GridFSDBFile imagefile = imageFacade.getImage(imageId);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(imagefile.getContentType()));
+        headers.setContentLength(imagefile.getLength());
+        byte[] image = new byte[0];
         try {
-//            InputStream in = new ByteArrayInputStream(
-//                    DatatypeConverter.parseBase64Binary(
-//                            imageSaveClientRequest.getImage().split(",")[1]));
-//
-//            InputStream in = new FileInputStream("A:\\Wallpapers\\1.jpg");
-
-            InputStream in = new ByteArrayInputStream(file[0].getBytes());
-
-            String id = gridFsTemplate.store(in,"1asdasdasd.jpg","image/jpg").getId().toString();
-
-
-            GridFSDBFile gridFSDBFile = gridFsTemplate.findOne(new Query(Criteria.where("_id").is(id)));
-
-
-            gridFSDBFile.writeTo("A:\\Wallpapers\\11.jpg");
-
-        } catch (Exception e) {
+            image = IOUtils.toByteArray(imagefile.getInputStream());
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
-//        String path = "A:/Wallpapers/1.jpg";
-//        String pathto = "A:/Wallpapers/11.jpg";//IMAGE TYPE JPG PNG RESTU
-//        Image img = new Image();
-//
-//        InputStream is = null;
-//        InputStream isimagefromdb = null;
-//        OutputStream out = null;
-//
-//        try {
-////            is = new FileInputStream(new File(path));
-////            byte[] bytes = IOUtils.toByteArray(is);
-////            log.warn(bytes.length);
-////            Blob blob  = new SerialBlob(bytes);
-////            Byte[] bytess = imageSaveClientRequest.getImage().toArray(new Byte[imageSaveClientRequest.getImage().size()]);
-
-
-//            String b64image = imageSaveClientRequest.getImage();
-//            String base64Image = b64image.split(",")[1];
-//            byte[] bytess = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
-//
-//            Blob blob = new SerialBlob(bytess);
-//
-//            img.setImageType(ImageType.DEFAULT_IMAGE);
-//            img.setCreatedDate(new Date(new Date().getTime() - (1000L * 60)));
-//            img.setProduct(productFacade.getProductById(10L));
-//            img.setImage(blob);
-//            imageFacade.saveImage(img);
-//
-//            Image imageBLOB = imageFacade.getImageById(15L);
-//
-//            Blob imgblob = imageBLOB.getImage();
-//
-//            isimagefromdb = imgblob.getBinaryStream();
-//
-//
-//            out = new BufferedOutputStream(new FileOutputStream(pathto));
-//            IOUtils.copy(isimagefromdb, out);
-//
-//
-//            log.warn("OK");
-//
-////            is.close();
-//            out.close();
-//            isimagefromdb.close();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
 }

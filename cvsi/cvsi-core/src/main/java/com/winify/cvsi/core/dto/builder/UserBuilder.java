@@ -57,7 +57,7 @@ public class UserBuilder {
         user.setPhone(registrationClientRequest.getPhone());
         user.setEmail(registrationClientRequest.getEmail());
         user.setPassword(registrationClientRequest.getPassword());
-        user.setCreatedDate(new Date(new Date().getTime()-(1000L*60)));
+        user.setCreatedDate(registrationClientRequest.getCreatedDate()==null?new Date(new Date().getTime()-(1000L*60)):new Date(registrationClientRequest.getCreatedDate()));
         user.setArchived(false);
         user.setOnline(false);
         Set<RoleEnum> roles = new HashSet<>();
@@ -73,6 +73,11 @@ public class UserBuilder {
         user.setPhone(userUpdateClientRequest.getPhone());
         user.setPassword(userUpdateClientRequest.getPassword());
         user.setUpdatedDate(new Date(new Date().getTime()-(1000L*60)));
+        return user;
+    }
+
+    public User getUpdatedUser(User user, String id) {
+        user.setImage(id);
         return user;
     }
 

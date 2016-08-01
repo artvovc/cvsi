@@ -13,8 +13,8 @@
     <context:component-scan base-package="com.winify.cvsi.server.controller"/>
     <mvc:annotation-driven/>
 
-    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration" id="swagger2Config">
-    </bean>
+    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration"
+          id="swagger2Config"/>
 
     <mvc:resources mapping="swagger-ui.html" location="swagger-ui.html"/>
     <mvc:resources mapping="/webjars/springfox-swagger-ui/**" location="/webjars/springfox-swagger-ui/"/>

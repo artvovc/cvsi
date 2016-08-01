@@ -19,9 +19,8 @@ public class Image implements Serializable {
     @Column(name = "image_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private ImageType imageType;
-    //http://www.codejava.net/frameworks/hibernate/hibernate-binary-data-and-blob-mapping-example
-    @Column(name = "image")
-    private Blob image;
+    @Column(name = "image",nullable = false)
+    private String image;
     @Column(name = "created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
@@ -50,11 +49,11 @@ public class Image implements Serializable {
         this.imageType = imageType;
     }
 
-    public Blob getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

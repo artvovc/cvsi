@@ -41,6 +41,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getSurname(),
                 user.getPhone(),
                 user.getEmail(),
+                user.getImage(),
                 simpleGrantedAuthorities,
                 true,
                 true,

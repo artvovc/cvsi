@@ -20,7 +20,7 @@ public class ProductBuilder {
         product.setCurrency(productCreateClientRequest.getCurrency());
         product.setBorrow(productCreateClientRequest.getBorrow());
         product.setArchived(false);
-        product.setCreatedDate(new Date(productCreateClientRequest.getCreatedDate()));
+        product.setCreatedDate(productCreateClientRequest.getCreatedDate() == null ? new Date(new Date().getTime() - (1000L * 60)) : new Date(productCreateClientRequest.getCreatedDate()));
         product.setLimitDate(productCreateClientRequest.getLimitDate() == null ? null : new Date(productCreateClientRequest.getLimitDate()));
         product.setUpdatedDate(productCreateClientRequest.getUpdatedDate() == null ? null : new Date(productCreateClientRequest.getUpdatedDate()));
         product.setCategories(productCreateClientRequest.getCategories());

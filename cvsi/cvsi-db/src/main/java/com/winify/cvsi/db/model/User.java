@@ -43,6 +43,8 @@ public class User implements Serializable {
     @Column
     @Size(min = 1, max = 30, message = "surname.Length between 1-30")
     private String surname;
+    @Column
+    private String image;
     @Column(name = "created_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @Past(message = "incorrect date")
@@ -140,6 +142,14 @@ public class User implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Date getCreatedDate() {

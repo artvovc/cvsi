@@ -15,6 +15,7 @@ public class CustomUserDetails implements UserDetails {
     private String surname;
     private String phone;
     private String email;
+    private String image;
     private Date lastPasswordReset;
     private Collection<? extends GrantedAuthority> authorities;
     private Boolean accountNonExpired = true;
@@ -29,7 +30,7 @@ public class CustomUserDetails implements UserDetails {
         super();
     }
 
-    public CustomUserDetails(Long id, String password, String username, String name, String surname, String phone, String email, Collection<? extends GrantedAuthority> authorities, Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled, Boolean isArchived, Boolean isOnline) {
+    public CustomUserDetails(Long id, String password, String username, String name, String surname, String phone, String email, String image, Collection<? extends GrantedAuthority> authorities, Boolean accountNonExpired, Boolean accountNonLocked, Boolean credentialsNonExpired, Boolean enabled, Boolean isArchived, Boolean isOnline) {
         this.id = id;
         this.password = password;
         this.username = username;
@@ -37,6 +38,7 @@ public class CustomUserDetails implements UserDetails {
         this.surname = surname;
         this.phone = phone;
         this.email = email;
+        this.image = image;
         this.authorities = authorities;
         this.accountNonExpired = accountNonExpired;
         this.accountNonLocked = accountNonLocked;
@@ -101,6 +103,14 @@ public class CustomUserDetails implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @JsonIgnore

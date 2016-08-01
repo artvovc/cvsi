@@ -1,18 +1,20 @@
 package com.winify.cvsi.server.controller;
 
+import com.mongodb.gridfs.GridFSDBFile;
 import com.winify.cvsi.core.dto.ImageDto;
 import com.winify.cvsi.core.dto.ListDto;
 import com.winify.cvsi.core.dto.ProductDto;
-import com.winify.cvsi.core.dto.builder.ImageBuilder;
 import com.winify.cvsi.core.dto.builder.ProductBuilder;
 import com.winify.cvsi.core.dto.comparator.PriceComparator;
 import com.winify.cvsi.core.dto.error.ServerResponseStatus;
+import com.winify.cvsi.core.dto.templates.request.ImageUploadClientRequest;
 import com.winify.cvsi.core.dto.templates.request.ProductCreateClientRequest;
 import com.winify.cvsi.core.dto.templates.request.ProductSearchClientRequest;
 import com.winify.cvsi.core.dto.templates.request.ProductUpdateClientRequest;
 import com.winify.cvsi.core.dto.templates.response.ProductTemplateResponse;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Product;
+import com.winify.cvsi.db.model.enums.ImageType;
 import com.winify.cvsi.server.facade.ImageFacade;
 import com.winify.cvsi.server.facade.ProductFacade;
 import com.winify.cvsi.server.facade.UserFacade;
@@ -20,18 +22,17 @@ import com.winify.cvsi.server.security.userdetail.CustomUserDetails;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 @Api
@@ -53,26 +54,69 @@ public class ProductController {
         this.imageFacade = imageFacade;
     }
 
-    @GetMapping(
+    @PostMapping(
             path = "/{productId}/image",
-            produces = {MediaType.IMAGE_GIF_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE, MediaType.APPLICATION_JSON_VALUE}
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    public HttpEntity<ListDto<ImageDto>> getImages(
+    public HttpEntity<ServerResponseStatus> postImages(
             @ApiParam(
                     name = "productId",
                     required = true
             )
             @PathVariable Long productId,
-//            @ApiParam(
-//                    name = "imageId"
-//            )
-//            @PathVariable Long imageId,
-            HttpServletRequest request
+            @ModelAttribute("defaultImageName") String defaultImageName,
+            @ModelAttribute("files") ImageUploadClientRequest files
+
     ) {
-        Product product = productFacade.getProductById(productId);
-        ListDto<ImageDto> images = new ListDto<>();
-        images.setList(new ImageBuilder().getImageDto(product.getImages()));
-        return new ResponseEntity<>(images, HttpStatus.OK);
+        files.getFiles().forEach(multipartFile -> {
+            String imageOriginalName = multipartFile.getOriginalFilename();
+            String id = imageFacade.saveImage(multipartFile, imageOriginalName, multipartFile.getContentType());
+            Product product = productFacade.getProductById(productId);
+            imageFacade.saveImage(
+                    product,
+                    id,
+                    Objects.equals(imageOriginalName, defaultImageName) ? ImageType.DEFAULT_IMAGE : ImageType.ANOTHER_IMAGE
+            );
+        });
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            path = "/{productId}/image",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public HttpEntity<ListDto<ImageDto>> getImages(
+            @PathVariable("productId") Long productId
+    ) {
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ListDto<ImageDto> imageIds;
+        imageIds = imageFacade.getImages(productId, user.getId());
+        imageIds.setError(ErrorEnum.SUCCESS);
+        imageIds.setStatus("OK");
+        return new ResponseEntity<>(imageIds, HttpStatus.OK);
+    }
+
+    @GetMapping(
+            path = "/{productId}/image/default",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public HttpEntity<byte[]> getDefaultImage(
+            @PathVariable("productId") Long productId
+    ) {
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        GridFSDBFile imagefile = imageFacade.getImage(imageFacade.getDefaultImage(productId, user.getId()).getImage());
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(imagefile.getContentType()));
+        headers.setContentLength(imagefile.getLength());
+        byte[] image = new byte[0];
+        try {
+            image = IOUtils.toByteArray(imagefile.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(image,headers, HttpStatus.OK);
     }
 
     @PostMapping(
@@ -102,6 +146,7 @@ public class ProductController {
         Long productId = productFacade.saveProduct(product);
         ProductDto productDto = productFacade.getProductDtoById(productId);
         productDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
+
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
@@ -146,10 +191,10 @@ public class ProductController {
             )
             @RequestBody @Valid ProductUpdateClientRequest productUpdateClientRequest
     ) {
-        CustomUserDetails user = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        productFacade.updateProduct(productFacade.getProductById(productUpdateClientRequest.getProductId()),productUpdateClientRequest);
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        productFacade.updateProduct(productFacade.getProductById(productUpdateClientRequest.getProductId()), productUpdateClientRequest);
         ProductDto productDto = productFacade.getProductDtoById(productUpdateClientRequest.getProductId());
-        productDto.setServerResponseStatus(ErrorEnum.SUCCESS,"OK");
+        productDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
         return new ResponseEntity<>(productDto, HttpStatus.OK);
     }
 
