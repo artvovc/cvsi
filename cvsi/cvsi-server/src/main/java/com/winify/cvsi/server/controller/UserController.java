@@ -74,7 +74,8 @@ public class UserController {
         RegistrationValidator registrationValidator = new RegistrationValidator();
         if (registrationValidator.isValid(registrationClientRequest))
             try {
-                userFacade.saveUser(registrationClientRequest);
+//                userFacade.saveUser(registrationClientRequest);
+                userFacade.sendMail(registrationClientRequest);
             } catch (Exception exp) {
                 registrationValidator.setMessage(exp.getMessage());
             }

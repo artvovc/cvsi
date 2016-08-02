@@ -4,6 +4,7 @@ import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.dto.builder.UserBuilder;
 import com.winify.cvsi.core.dto.templates.request.RegistrationClientRequest;
 import com.winify.cvsi.core.dto.templates.request.UserUpdateClientRequest;
+import com.winify.cvsi.core.service.MailService;
 import com.winify.cvsi.core.service.UserService;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.security.userdetail.CustomUserDetails;
@@ -14,11 +15,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserFacade {
     private final UserService userService;
+    private final MailService mailService;
     Logger log = Logger.getLogger(UserFacade.class);
 
     @Autowired
-    public UserFacade(UserService userService) {
+    public UserFacade(UserService userService, MailService mailService) {
         this.userService = userService;
+        this.mailService = mailService;
     }
 
     public User getUser(Long id) {
@@ -28,6 +31,7 @@ public class UserFacade {
     public UserDto getUserDto(Long id) {
         return new UserBuilder().getUserDto(userService.getUser(id));
     }
+
     public UserDto getUserDto(CustomUserDetails user) {
         return new UserBuilder().getUserDto(
                 user.getId(),
@@ -64,6 +68,11 @@ public class UserFacade {
     }
 
     public void updateUser(User user, String id) {
-        userService.updateUser(new UserBuilder().getUpdatedUser(user,id));
+        userService.updateUser(new UserBuilder().getUpdatedUser(user, id));
     }
+
+    public void sendMail(RegistrationClientRequest registrationClientRequest){
+        this.mailService.sendMail(registrationClientRequest);
+    }
+
 }
