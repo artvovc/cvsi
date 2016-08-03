@@ -89,9 +89,8 @@ public class ProductController {
     public HttpEntity<ListDto<ImageDto>> getImages(
             @PathVariable("productId") Long productId
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ListDto<ImageDto> imageIds;
-        imageIds = imageFacade.getImages(productId, user.getId());
+        imageIds = imageFacade.getImages(productId);
         imageIds.setError(ErrorEnum.SUCCESS);
         imageIds.setStatus("OK");
         return new ResponseEntity<>(imageIds, HttpStatus.OK);
@@ -116,7 +115,7 @@ public class ProductController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(image,headers, HttpStatus.OK);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
     @PostMapping(
@@ -169,7 +168,7 @@ public class ProductController {
         } else
             productListDto.setList(productFacade.getProducts(productSearchClientRequest)).sortBy(new PriceComparator());
         productListDto.setError(ErrorEnum.SUCCESS);
-//        productListDto.setStatus("OK");
+        productListDto.setStatus("OK");
         return new ResponseEntity<>(productListDto, HttpStatus.OK);
     }
 
@@ -191,7 +190,6 @@ public class ProductController {
             )
             @RequestBody @Valid ProductUpdateClientRequest productUpdateClientRequest
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         productFacade.updateProduct(productFacade.getProductById(productUpdateClientRequest.getProductId()), productUpdateClientRequest);
         ProductDto productDto = productFacade.getProductDtoById(productUpdateClientRequest.getProductId());
         productDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");

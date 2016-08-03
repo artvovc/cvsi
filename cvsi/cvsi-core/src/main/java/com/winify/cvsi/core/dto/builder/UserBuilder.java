@@ -3,14 +3,16 @@ package com.winify.cvsi.core.dto.builder;
 import com.winify.cvsi.core.dto.UserDto;
 import com.winify.cvsi.core.dto.templates.request.RegistrationClientRequest;
 import com.winify.cvsi.core.dto.templates.request.UserUpdateClientRequest;
+import com.winify.cvsi.db.model.Registration;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.db.model.enums.RoleEnum;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.*;
 
 public class UserBuilder {
 
-    public User getUser(UserDto userDto) {
+    public User getUserRegistrationData(UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
@@ -49,21 +51,17 @@ public class UserBuilder {
         return userDto;
     }
 
-    public User getUser(RegistrationClientRequest registrationClientRequest) {
-        User user = new User();
-        user.setUsername(registrationClientRequest.getUsername());
-        user.setName(registrationClientRequest.getName());
-        user.setSurname(registrationClientRequest.getSurname());
-        user.setPhone(registrationClientRequest.getPhone());
-        user.setEmail(registrationClientRequest.getEmail());
-        user.setPassword(registrationClientRequest.getPassword());
-        user.setCreatedDate(registrationClientRequest.getCreatedDate()==null?new Date(new Date().getTime()-(1000L*60)):new Date(registrationClientRequest.getCreatedDate()));
-        user.setArchived(false);
-        user.setOnline(false);
-        Set<RoleEnum> roles = new HashSet<>();
-        roles.add(RoleEnum.ROLE_USER);
-        user.setRoles(roles);
-        return user;
+    public Registration getUserRegistrationData(RegistrationClientRequest registrationClientRequest) {
+        Registration registration = new Registration();
+        registration.setUsername(registrationClientRequest.getUsername());
+        registration.setName(registrationClientRequest.getName());
+        registration.setSurname(registrationClientRequest.getSurname());
+        registration.setPhone(registrationClientRequest.getPhone());
+        registration.setEmail(registrationClientRequest.getEmail());
+        registration.setPassword(registrationClientRequest.getPassword());
+        registration.setHash(DigestUtils.md2Hex(registration.getEmail()+registration.getUsername()+registration.getPhone()+registration.getPassword()));
+        registration.setRequestCreatedDate(registrationClientRequest.getCreatedDate()==null?new Date(new Date().getTime()-(1000L*60)):new Date(registrationClientRequest.getCreatedDate()));
+        return registration;
     }
 
     public User getUpdatedUser(User user, UserUpdateClientRequest userUpdateClientRequest) {
@@ -83,6 +81,23 @@ public class UserBuilder {
 
     public User getUpdatedUser(User user) {
         user.setOnline(true);
+        return user;
+    }
+
+    public User getUser(Registration registration) {
+        User user = new User();
+        user.setUsername(registration.getUsername());
+        user.setName(registration.getName());
+        user.setSurname(registration.getSurname());
+        user.setPhone(registration.getPhone());
+        user.setEmail(registration.getEmail());
+        user.setPassword(registration.getPassword());
+        user.setCreatedDate(registration.getRequestCreatedDate());
+        user.setArchived(false);
+        user.setOnline(false);
+        Set<RoleEnum> roles = new HashSet<>();
+        roles.add(RoleEnum.ROLE_USER);
+        user.setRoles(roles);
         return user;
     }
 }

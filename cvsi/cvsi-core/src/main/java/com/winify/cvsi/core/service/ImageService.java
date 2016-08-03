@@ -23,22 +23,12 @@ public class ImageService {
     }
 
     @Transactional
-    public Image getImageById(Long imageId) {
-        return imageDao.findById(imageId);
-    }
-
-    @Transactional
-    public Set<Image> getImages(Long productId, Long userId) {
-        return imageDao.getImages(productId, userId);
-    }
-
-    @Transactional
-    public Image getImages(Long imageId) {
-        return imageDao.findById(imageId);
+    public Set<Image> getImagesByProductId(Long productId) {
+        return imageDao.getImages(productId);
     }
 
     @Transactional
     public Image getDefaultImage(Long productId, Long userId) {
-        return imageDao.getDefaultImage(productId,userId);
+        return imageDao.getDefaultImage(productId, userId);
     }
 }

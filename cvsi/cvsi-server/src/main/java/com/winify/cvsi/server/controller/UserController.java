@@ -7,6 +7,7 @@ import com.winify.cvsi.core.dto.templates.request.RegistrationClientRequest;
 import com.winify.cvsi.core.dto.templates.request.UserUpdateClientRequest;
 import com.winify.cvsi.core.dto.validator.RegistrationValidator;
 import com.winify.cvsi.core.enums.ErrorEnum;
+import com.winify.cvsi.db.model.Registration;
 import com.winify.cvsi.db.model.User;
 import com.winify.cvsi.server.facade.ImageFacade;
 import com.winify.cvsi.server.facade.ProductFacade;
@@ -55,15 +56,15 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(
-            value = "postUser",
-            notes = "save new user into database",
+            value = "postUserRegistrationData",
+            notes = "save new user registration data into database",
             produces = "application/json",
             consumes = "application/json",
             httpMethod = "POST",
             response = ServerResponseStatus.class,
-            nickname = "postUser"
+            nickname = "postUserRegistrationData"
     )
-    public HttpEntity<ServerResponseStatus> postUser(
+    public HttpEntity<ServerResponseStatus> postUserRegistrationData(
             @ApiParam(
                     name = "registrationClientRequest",
                     required = true,
@@ -74,12 +75,43 @@ public class UserController {
         RegistrationValidator registrationValidator = new RegistrationValidator();
         if (registrationValidator.isValid(registrationClientRequest))
             try {
-//                userFacade.saveUser(registrationClientRequest);
+
+                userFacade.saveUserRegistrationData(registrationClientRequest);
                 userFacade.sendMail(registrationClientRequest);
+
             } catch (Exception exp) {
                 registrationValidator.setMessage(exp.getMessage());
             }
-        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, registrationValidator.getMessage()), HttpStatus.OK);
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
+    }
+
+    @GetMapping(
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/{hash}"
+    )
+    @ApiOperation(
+            value = "postUser",
+            notes = "save new user registration data into database",
+            produces = "application/json",
+            consumes = "application/json",
+            httpMethod = "GET",
+            response = ServerResponseStatus.class,
+            nickname = "postUser"
+    )
+    public HttpEntity<ServerResponseStatus> postUser(
+            @ApiParam(
+                    name = "hash",
+                    required = true,
+                    value = "hash"
+            )
+            @PathVariable String hash
+    ) {
+        Registration registration = userFacade.getRegistrationDataByHash(hash);
+        if (registration != null) {
+            userFacade.saveUser(registration);
+            userFacade.deleteUserRegistrationData(registration);
+        }
+        return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 
     @PostMapping(
@@ -99,7 +131,7 @@ public class UserController {
             @ModelAttribute("file") MultipartFile file
     ) {
         CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String id = imageFacade.saveImage(file,file.getOriginalFilename(),file.getContentType());
+        String id = imageFacade.saveImage(file, file.getOriginalFilename(), file.getContentType());
         userFacade.updateUser(userFacade.getUser(user.getId()), id);
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
@@ -142,7 +174,7 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(image,headers, HttpStatus.OK);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
     @PutMapping

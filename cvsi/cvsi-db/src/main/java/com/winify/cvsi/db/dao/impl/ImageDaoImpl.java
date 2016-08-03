@@ -17,11 +17,10 @@ public class ImageDaoImpl extends AbstractDao<Image, Long> implements ImageDao {
     }
 
     @Override
-    public Set<Image> getImages(Long productId, Long userId) {
+    public Set<Image> getImages(Long productId) {
         return new HashSet<>(this.getCurrentSession()
-                .createQuery("SELECT i FROM Image AS i WHERE i.product.id = :productId AND i.product.user.id = :userId")
+                .createQuery("SELECT i FROM Image AS i WHERE i.product.id = :productId")
                 .setParameter("productId", productId)
-                .setParameter("userId", userId)
                 .getResultList());
     }
 

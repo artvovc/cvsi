@@ -48,12 +48,8 @@ public class ImageFacade {
         return this.gridFsTemplate.findOne(new Query(Criteria.where("_id").is(image)));
     }
 
-    public ListDto<ImageDto> getImages(Long productId, Long userId) {
-        return new ImageBuilder().getImages(imageService.getImages(productId,userId));
-    }
-
-    public Image getImage(Long imageId) {
-        return this.imageService.getImages(imageId);
+    public ListDto<ImageDto> getImages(Long productId) {
+        return new ImageBuilder().getImages(imageService.getImagesByProductId(productId));
     }
 
     public Image getDefaultImage(Long productId, Long userId) {

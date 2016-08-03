@@ -27,7 +27,7 @@ public class ImageBuilder {
             ImageDto imageDto = new ImageDto();
             imageDto.setCreatedDate(image.getCreatedDate().getTime());
             imageDto.setImageType(image.getImageType());
-            imageDto.setImage(image.getImage());
+            imageDto.setImage("http://192.168.3.191:8080/cvsi-server/image/"+image.getImage());
             imageDtos.add(imageDto);
         });
         ListDto<ImageDto> imageDtoListDto = new ListDto<>();
