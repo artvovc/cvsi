@@ -46,11 +46,11 @@ public class UserFacade {
                 user.getSurname()
         );
     }
-
+    @Deprecated
     public UserDto getUserDtoByMail(String email) {
         return new UserBuilder().getUserDto(userService.getUserByMail(email));
     }
-
+    @Deprecated
     public User getUserByMail(String email) {
         return userService.getUserByMail(email);
     }
@@ -66,7 +66,7 @@ public class UserFacade {
     public void updateUser(User user) {
         userService.updateUser(new UserBuilder().getUpdatedUser(user));
     }
-
+    @Deprecated
     public void deleteUser(User user) {
         userService.deleteUser(user);
     }
@@ -89,5 +89,9 @@ public class UserFacade {
 
     public void deleteUserRegistrationData(Registration registration) {
         this.registrationService.deleteUserRegistrationData(registration);
+    }
+
+    public UserDto getUserDto(User user) {
+        return new UserBuilder().getUserDto(user);
     }
 }

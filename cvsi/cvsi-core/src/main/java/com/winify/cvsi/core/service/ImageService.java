@@ -28,7 +28,7 @@ public class ImageService {
     }
 
     @Transactional
-    public Image getDefaultImage(Long productId, Long userId) {
-        return imageDao.getDefaultImage(productId, userId);
+    public Image getDefaultImage(Long productId) {
+        return imageDao.getDefaultImage(productId);
     }
 }

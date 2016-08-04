@@ -7,5 +7,5 @@ import java.util.Set;
 public interface ImageDao extends CrudOperations<Image, Long> {
     Set<Image> getImages(Long productId);
 
-    Image getDefaultImage(Long productId, Long userId);
+    Image getDefaultImage(Long productId);
 }

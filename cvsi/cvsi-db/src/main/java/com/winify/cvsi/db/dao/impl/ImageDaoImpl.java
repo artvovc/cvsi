@@ -25,11 +25,10 @@ public class ImageDaoImpl extends AbstractDao<Image, Long> implements ImageDao {
     }
 
     @Override
-    public Image getDefaultImage(Long productId, Long userId) {
+    public Image getDefaultImage(Long productId) {
         return this.getCurrentSession()
-                .createQuery("SELECT i FROM Image AS i WHERE i.product.id = :productId AND i.product.user.id = :userId AND i.imageType = :imageType", clazz)
+                .createQuery("SELECT i FROM Image AS i WHERE i.product.id = :productId AND i.imageType = :imageType", clazz)
                 .setParameter("productId", productId)
-                .setParameter("userId", userId)
                 .setParameter("imageType", ImageType.DEFAULT_IMAGE)
                 .getSingleResult();
     }

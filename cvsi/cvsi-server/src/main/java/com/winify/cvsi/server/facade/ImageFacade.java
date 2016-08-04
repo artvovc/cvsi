@@ -52,7 +52,7 @@ public class ImageFacade {
         return new ImageBuilder().getImages(imageService.getImagesByProductId(productId));
     }
 
-    public Image getDefaultImage(Long productId, Long userId) {
-        return imageService.getDefaultImage(productId,userId);
+    public Image getDefaultImage(Long productId) {
+        return imageService.getDefaultImage(productId);
     }
 }

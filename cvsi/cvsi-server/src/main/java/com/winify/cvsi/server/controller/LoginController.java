@@ -63,7 +63,7 @@ public class LoginController {
             User userTemp = userFacade.getUser(user.getId());
             userFacade.updateUser(userTemp);
             registrationDto.setToken(token);
-            registrationDto.setUserDto(userFacade.getUserDto(user.getId()));
+            registrationDto.setUserDto(userFacade.getUserDto(userTemp));
             registrationDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
         }
         return new ResponseEntity<>(registrationDto, HttpStatus.OK);

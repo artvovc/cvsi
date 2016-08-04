@@ -103,9 +103,7 @@ public class ProductController {
     public HttpEntity<byte[]> getDefaultImage(
             @PathVariable("productId") Long productId
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        GridFSDBFile imagefile = imageFacade.getImage(imageFacade.getDefaultImage(productId, user.getId()).getImage());
+        GridFSDBFile imagefile = imageFacade.getImage(imageFacade.getDefaultImage(productId).getImage());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(imagefile.getContentType()));
         headers.setContentLength(imagefile.getLength());
