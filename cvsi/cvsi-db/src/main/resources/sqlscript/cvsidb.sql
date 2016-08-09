@@ -53,6 +53,7 @@ CREATE TABLE message (
   is_Read         BIT,
   message         VARCHAR(255) NOT NULL,
   updated_date    DATETIME,
+  username        VARCHAR(30)  NOT NULL,
   conversation_id BIGINT,
   PRIMARY KEY (id)
 );
@@ -106,6 +107,8 @@ CREATE TABLE user_role (
   role_enum_set VARCHAR(255)
 );
 
+ALTER TABLE conversation
+  ADD CONSTRAINT UK_user_product UNIQUE (user_id_conversation, product_id_conversation);
 ALTER TABLE registration
   ADD CONSTRAINT UK_email_registration UNIQUE (email);
 ALTER TABLE registration

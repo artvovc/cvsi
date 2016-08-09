@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 
@@ -128,7 +129,8 @@ public class UserController {
             nickname = "postUserImage"
     )
     public HttpEntity<ServerResponseStatus> postImage(
-            @ModelAttribute("file") MultipartFile file
+            @ModelAttribute("file") MultipartFile file,
+            HttpServletRequest request
     ) {
         CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String id = imageFacade.saveImage(file, file.getOriginalFilename(), file.getContentType());

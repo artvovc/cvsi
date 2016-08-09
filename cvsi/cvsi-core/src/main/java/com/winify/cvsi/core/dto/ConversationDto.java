@@ -11,7 +11,14 @@ public class ConversationDto extends ServerResponseStatus implements Serializabl
     private Long id;
     private String receptorUsername;
     private String title;
-    private Set<Message> messages = new HashSet<>();
+    private Long notReadMessages;
+    private Long createdDate;
+//    private Set<Message> messages = new HashSet<>();
+
+
+    public ConversationDto() {
+        notReadMessages = 0L;
+    }
 
     public Long getId() {
         return id;
@@ -37,11 +44,27 @@ public class ConversationDto extends ServerResponseStatus implements Serializabl
         this.title = title;
     }
 
-    public Set<Message> getMessages() {
-        return messages;
+    public Long getNotReadMessages() {
+        return notReadMessages;
     }
 
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
+    public void setNotReadMessages(Long notReadMessages) {
+        this.notReadMessages = notReadMessages;
     }
+
+    public Long getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Long createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    //    public Set<Message> getMessages() {
+//        return messages;
+//    }
+//
+//    public void setMessages(Set<Message> messages) {
+//        this.messages = messages;
+//    }
 }

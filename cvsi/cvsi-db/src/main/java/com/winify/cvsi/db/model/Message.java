@@ -27,6 +27,9 @@ public class Message implements Serializable {
     private Date updatedDate;
     @Column(name = "is_Read")
     private Boolean isRead;
+    @Column(name = "username")
+    @Size(min = 1, max = 30, message = "username.Length between 1-30")
+    private String username;
     @ManyToOne
     @JoinColumn(
             name = "conversation_id",
@@ -48,14 +51,6 @@ public class Message implements Serializable {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public Conversation getConversation() {
-        return conversation;
-    }
-
-    public void setConversation(Conversation conversation) {
-        this.conversation = conversation;
     }
 
     public Date getCreatedDate() {
@@ -80,5 +75,21 @@ public class Message implements Serializable {
 
     public void setRead(Boolean read) {
         isRead = read;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Conversation getConversation() {
+        return conversation;
+    }
+
+    public void setConversation(Conversation conversation) {
+        this.conversation = conversation;
     }
 }

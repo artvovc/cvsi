@@ -3,11 +3,17 @@ package com.winify.cvsi.db.model;
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
-        name = "conversation")
+        name = "conversation",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"user_id_conversation", "product_id_conversation"}, name = "UK_user_product")
+        }
+)
 public class Conversation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
