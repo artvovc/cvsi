@@ -6,10 +6,7 @@ import com.winify.cvsi.db.model.Conversation;
 import com.winify.cvsi.db.model.Product;
 import com.winify.cvsi.db.model.User;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ConversationBuilder {
     public ConversationDto getConversationDto(Conversation conversation) {
@@ -42,8 +39,8 @@ public class ConversationBuilder {
         return conversationDtos;
     }
 
-    public List<ConversationDto> getConversationDtosProductOwner(Set<Conversation> conversations) {
-        List<ConversationDto> conversationDtos = new ArrayList<>();
+    public Set<ConversationDto> getConversationDtosProductOwner(Set<Conversation> conversations) {
+        Set<ConversationDto> conversationDtos = new HashSet<>();
         conversations.forEach(conversation -> {
             ConversationDto conversationDto = new ConversationDto();
             conversationDto.setId(conversation.getId());

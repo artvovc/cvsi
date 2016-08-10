@@ -2,6 +2,7 @@ package com.winify.cvsi.server.controller;
 
 import com.winify.cvsi.core.dto.ConversationDto;
 import com.winify.cvsi.core.dto.ListDto;
+import com.winify.cvsi.core.dto.comparator.CreatedDateComparator2;
 import com.winify.cvsi.core.enums.ErrorEnum;
 import com.winify.cvsi.db.model.Product;
 import com.winify.cvsi.db.model.User;
@@ -47,8 +48,10 @@ public class ConversationController {
     ) {
         CustomUserDetails user = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ListDto<ConversationDto> conversations = conversationFacade.getConversationDtosCreated(user.getId());
-        conversations.getList().addAll(conversationFacade.getConversationDtosProductOwner(user.getId()));
+        conversations.setList(conversationFacade.getConversationDtosProductOwner(user.getId())).sortBy(new CreatedDateComparator2());
         conversations.getList().forEach(conversationDto -> conversationDto.setNotReadMessages(messageFacade.getNotReadMessageCount(conversationDto.getId())));
+        conversations.setError(ErrorEnum.SUCCESS);
+        conversations.setStatus("OK");
         return new ResponseEntity<>(conversations, HttpStatus.OK);
     }
 

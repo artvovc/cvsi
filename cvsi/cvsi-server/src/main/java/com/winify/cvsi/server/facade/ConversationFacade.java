@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ConversationFacade {
@@ -34,7 +35,7 @@ public class ConversationFacade {
         return new ConversationBuilder().getConversationDtosCreated(this.conversationService.getConversationsCreated(userId));
     }
 
-    public List<ConversationDto> getConversationDtosProductOwner(Long userId) {
+    public Set<ConversationDto> getConversationDtosProductOwner(Long userId) {
         return new ConversationBuilder().getConversationDtosProductOwner(this.conversationService.getConversationsProductOwner(userId));
     }
 
