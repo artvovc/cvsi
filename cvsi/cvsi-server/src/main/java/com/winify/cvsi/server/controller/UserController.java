@@ -20,7 +20,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 @Api(
@@ -130,11 +130,11 @@ public class UserController {
     )
     public HttpEntity<ServerResponseStatus> postImage(
             @ModelAttribute("file") MultipartFile file,
+            Principal principal,
             HttpServletRequest request
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String id = imageFacade.saveImage(file, file.getOriginalFilename(), file.getContentType());
-        userFacade.updateUser(userFacade.getUser(user.getId()), id);
+        userFacade.updateUser(userFacade.getUser(((CustomUserDetails) principal).getId()), id);
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 
@@ -148,9 +148,9 @@ public class UserController {
             nickname = "getUser"
     )
     public HttpEntity<UserDto> getUser(
+            Principal principal
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto userDto = userFacade.getUserDto(user);
+        UserDto userDto = userFacade.getUserDto((CustomUserDetails) principal);
         userDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
@@ -164,9 +164,9 @@ public class UserController {
             nickname = "getUserImage"
     )
     public HttpEntity<byte[]> getImage(
+            Principal principal
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        GridFSDBFile imagefile = imageFacade.getImage(user.getImage());
+        GridFSDBFile imagefile = imageFacade.getImage(((CustomUserDetails) principal).getImage());
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(imagefile.getContentType()));
         headers.setContentLength(imagefile.getLength());
@@ -194,12 +194,12 @@ public class UserController {
                     name = "userUpdateClientRequest",
                     value = "update user model"
             )
-            @RequestBody @Valid UserUpdateClientRequest userUpdateClientRequest
+            @RequestBody @Valid UserUpdateClientRequest userUpdateClientRequest,
+            Principal principal
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userTemp = userFacade.getUser(user.getId());
+        User userTemp = userFacade.getUser(((CustomUserDetails) principal).getId());
         userFacade.updateUser(userTemp, userUpdateClientRequest);
-        UserDto userDto = userFacade.getUserDto(user.getId());
+        UserDto userDto = userFacade.getUserDto(((CustomUserDetails) principal).getId());
         userDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
@@ -215,13 +215,13 @@ public class UserController {
             nickname = "deleteUser"
     )
     public HttpEntity<ServerResponseStatus> deleteUser(
+            Principal principal
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userTemp = userFacade.getUser(user.getId());
-        if (userTemp != null) {
-            userTemp.setArchived(true);
-            productFacade.getMyProductsToArchivate(user.getId()).forEach(productFacade::updateProductToArchivate);
-            userFacade.updateUser(userTemp);
+        User user = userFacade.getUser(((CustomUserDetails) principal).getId());
+        if (user != null) {
+            user.setArchived(true);
+            productFacade.getMyProductsToArchivate(((CustomUserDetails) principal).getId()).forEach(productFacade::updateProductToArchivate);
+            userFacade.updateUser(user);
         }
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }

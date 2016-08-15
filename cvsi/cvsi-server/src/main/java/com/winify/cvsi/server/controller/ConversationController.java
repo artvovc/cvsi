@@ -22,6 +22,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 @Api
 @RequestMapping(name = "user controller",
@@ -45,10 +47,10 @@ public class ConversationController {
 
     @GetMapping
     public HttpEntity<ListDto<ConversationDto>> getConversation(
+            Principal principal
     ) {
-        CustomUserDetails user = (CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ListDto<ConversationDto> conversations = conversationFacade.getConversationDtosCreated(user.getId());
-        conversations.setList(conversationFacade.getConversationDtosProductOwner(user.getId())).sortBy(new CreatedDateComparator2());
+        ListDto<ConversationDto> conversations = conversationFacade.getConversationDtosCreated(((CustomUserDetails) principal).getId());
+        conversations.setList(conversationFacade.getConversationDtosProductOwner(((CustomUserDetails) principal).getId())).sortBy(new CreatedDateComparator2());
         conversations.getList().forEach(conversationDto -> conversationDto.setNotReadMessages(messageFacade.getNotReadMessageCount(conversationDto.getId())));
         conversations.setError(ErrorEnum.SUCCESS);
         conversations.setStatus("OK");
@@ -59,10 +61,10 @@ public class ConversationController {
             path = "/{productId}"
     )
     public HttpEntity<ConversationDto> postConversation(
-            @PathVariable Long productId
+            @PathVariable Long productId,
+            Principal principal
     ) {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User usertemp = userFacade.getUser(user.getId());
+        User usertemp = userFacade.getUser(((CustomUserDetails) principal).getId());
         Product product = productFacade.getProductById(productId);
         Long conversationId = conversationFacade.saveConversation(usertemp, product);
         ConversationDto conversationDto = conversationFacade.getConversationDto(conversationId);

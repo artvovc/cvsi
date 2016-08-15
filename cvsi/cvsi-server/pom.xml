@@ -22,6 +22,8 @@
         <jjwt.version>0.6.0</jjwt.version>
         <commons-io.version>2.4</commons-io.version>
         <commons-fileupload.version>1.3.2</commons-fileupload.version>
+        <spring-messaging.version>4.3.2.RELEASE</spring-messaging.version>
+        <spring-websocket.version>4.3.2.RELEASE</spring-websocket.version>
         <dir>..</dir>
     </properties>
     <dependencies>
@@ -66,11 +68,6 @@
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-web</artifactId>-->
-            <!--<version>${springframework.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -179,6 +176,16 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>${commons-fileupload.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${spring-websocket.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>${spring-messaging.version}</version>
         </dependency>
 
     </dependencies>
