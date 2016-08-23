@@ -15,7 +15,7 @@ public class ChatController {
 
     @MessageMapping("/questions/{id}")
     @SendTo("/topic/questions/{id}")
-    public ChatResponse hellowin(
+    public ChatResponse makeChat(
             @DestinationVariable String id,
             ChatRequest chatRequest
     ){
