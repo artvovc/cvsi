@@ -1,12 +1,12 @@
 package com.winify.cvsi.core.dto.templates.request;
 
 
-public class Hello{
+public class ChatRequest {
     private String name;
 
-    public Hello(){}
+    public ChatRequest(){}
 
-    public Hello(String name) {
+    public ChatRequest(String name) {
         this.name=name;
     }
 

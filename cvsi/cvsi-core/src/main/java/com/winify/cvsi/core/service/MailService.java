@@ -17,7 +17,7 @@ public class MailService {
     }
 
     public void sendMail(RegistrationClientRequest registrationClientRequest) {
-        String htmlMsg = "<h1>Hello " + registrationClientRequest.getUsername() + " !</h1>\n" +
+        String htmlMsg = "<h1>ChatRequest " + registrationClientRequest.getUsername() + " !</h1>\n" +
                 "<h1><a href=\"http://192.168.3.191:8080/cvsi-server/user/"+
                 DigestUtils.md2Hex(registrationClientRequest.getEmail()+
                         registrationClientRequest.getUsername()+

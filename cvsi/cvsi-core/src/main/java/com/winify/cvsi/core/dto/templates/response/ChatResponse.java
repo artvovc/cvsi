@@ -1,9 +1,9 @@
 package com.winify.cvsi.core.dto.templates.response;
 
-public class HelloResponse{
+public class ChatResponse {
     private String content;
 
-    public HelloResponse(String content) {
+    public ChatResponse(String content) {
         this.content = content;
     }
 
