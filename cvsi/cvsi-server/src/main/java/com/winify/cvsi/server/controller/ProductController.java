@@ -26,12 +26,12 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Objects;
 
 @Controller
@@ -103,7 +103,11 @@ public class ProductController {
     public HttpEntity<byte[]> getDefaultImage(
             @PathVariable("productId") Long productId
     ) {
-        GridFSDBFile imagefile = imageFacade.getImage(imageFacade.getDefaultImage(productId).getImage());
+        GridFSDBFile imagefile = null;
+        try {
+            imagefile = imageFacade.getImage(imageFacade.getDefaultImage(productId).getImage());
+        } catch (Exception ignored) {
+        }
         if (imagefile != null) {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.parseMediaType(imagefile.getContentType()));
@@ -138,10 +142,11 @@ public class ProductController {
                     required = true,
                     value = "create product model"
             )
-            @RequestBody @Valid ProductCreateClientRequest productCreateClientRequest, Principal principal
+            @RequestBody @Valid ProductCreateClientRequest productCreateClientRequest
     ) {
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Product product = new ProductBuilder().getProduct(productCreateClientRequest);
-        product.setUser(userFacade.getUser(((CustomUserDetails) principal).getId()));
+        product.setUser(userFacade.getUser(userDetails.getId()));
         Long productId = productFacade.saveProduct(product);
         ProductDto productDto = productFacade.getProductDtoById(productId);
         productDto.setServerResponseStatus(ErrorEnum.SUCCESS, "OK");
@@ -153,13 +158,14 @@ public class ProductController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     private HttpEntity<ListDto<ProductTemplateResponse>> getProduct(
-            @ModelAttribute @Valid ProductSearchClientRequest productSearchClientRequest, Principal principal
+            @ModelAttribute @Valid ProductSearchClientRequest productSearchClientRequest
     ) {
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ListDto<ProductTemplateResponse> productListDto = new ListDto<>();
         if (productSearchClientRequest.getMyProducts()) {
             CustomUserDetails user = new CustomUserDetails();
             try {
-                user = (CustomUserDetails) principal;
+                user = userDetails;
             } catch (Exception exp) {
                 productListDto.setStatus(exp.getMessage());
             } finally {
@@ -212,10 +218,10 @@ public class ProductController {
                     required = true,
                     example = "0"
             )
-            @PathVariable("productId") @Valid Long productId,
-            Principal principal
+            @PathVariable("productId") @Valid Long productId
     ) {
-        Long rowChanges = productFacade.updateProduct(((CustomUserDetails) principal).getId(), productId);
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long rowChanges = productFacade.updateProduct(userDetails.getId(), productId);
         return new ResponseEntity<>(new ServerResponseStatus(ErrorEnum.SUCCESS, "OK"), HttpStatus.OK);
     }
 

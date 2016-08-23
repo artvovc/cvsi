@@ -20,9 +20,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Api
@@ -47,10 +48,10 @@ public class ConversationController {
 
     @GetMapping
     public HttpEntity<ListDto<ConversationDto>> getConversation(
-            Principal principal
     ) {
-        ListDto<ConversationDto> conversations = conversationFacade.getConversationDtosCreated(((CustomUserDetails) principal).getId());
-        conversations.setList(conversationFacade.getConversationDtosProductOwner(((CustomUserDetails) principal).getId())).sortBy(new CreatedDateComparator2());
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ListDto<ConversationDto> conversations = conversationFacade.getConversationDtosCreated(userDetails.getId());
+        conversations.setList(conversationFacade.getConversationDtosProductOwner(userDetails.getId())).sortBy(new CreatedDateComparator2());
         conversations.getList().forEach(conversationDto -> conversationDto.setNotReadMessages(messageFacade.getNotReadMessageCount(conversationDto.getId())));
         conversations.setError(ErrorEnum.SUCCESS);
         conversations.setStatus("OK");
@@ -61,10 +62,10 @@ public class ConversationController {
             path = "/{productId}"
     )
     public HttpEntity<ConversationDto> postConversation(
-            @PathVariable Long productId,
-            Principal principal
+            @PathVariable Long productId
     ) {
-        User usertemp = userFacade.getUser(((CustomUserDetails) principal).getId());
+        CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User usertemp = userFacade.getUser(userDetails.getId());
         Product product = productFacade.getProductById(productId);
         Long conversationId = conversationFacade.saveConversation(usertemp, product);
         ConversationDto conversationDto = conversationFacade.getConversationDto(conversationId);
