@@ -1,8 +1,8 @@
-package com.mapsocial.socialmap.activityes
+package android.cvsi.activities
 
 import android.content.Intent
 import android.os.Bundle
-import com.mapsocial.socialmap.R
+import android.cvsi.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivityNoToolbar() {

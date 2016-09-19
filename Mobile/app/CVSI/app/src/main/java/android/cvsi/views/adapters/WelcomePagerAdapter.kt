@@ -1,14 +1,12 @@
-package com.mapsocial.socialmap.views.adapters
+package android.cvsi.views.adapters
 
 import android.content.Context
+import android.cvsi.R
 import android.os.Parcelable
 import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.mapsocial.socialmap.R
-
 
 class WelcomePagerAdapter : PagerAdapter() {
 

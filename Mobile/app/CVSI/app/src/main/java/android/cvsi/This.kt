@@ -1,8 +1,8 @@
-package com.dsdmsa.weather
+package android.cvsi
 
 import android.app.Application
-import com.dsdmsa.weather.controllers.CacheController
-import com.dsdmsa.weather.managers.QueryManager
+import android.cvsi.controllers.CacheController
+import android.cvsi.managers.QueryManager
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import org.greenrobot.eventbus.EventBus

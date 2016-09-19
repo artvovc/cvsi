@@ -1,5 +1,4 @@
-package code.qr.splashscreen
-
+package android.cvsi.activities
 import android.content.Intent
 import android.cvsi.activities.MainActivity
 import android.os.Bundle

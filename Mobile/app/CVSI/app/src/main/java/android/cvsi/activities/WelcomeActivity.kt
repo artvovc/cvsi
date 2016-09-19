@@ -1,12 +1,12 @@
-package com.mapsocial.socialmap.activityes
+package android.cvsi.activities
 
 import android.content.Intent
+import android.cvsi.R
+import android.cvsi.views.adapters.WelcomePagerAdapter
+import android.cvsi.views.transformers.WelcomeViewPagerTransformer
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.view.View
-import com.mapsocial.socialmap.R
-import com.mapsocial.socialmap.utils.WelcomeViewPagerTransformer
-import com.mapsocial.socialmap.views.adapters.WelcomePagerAdapter
 import kotlinx.android.synthetic.main.activity_welcome.*
 
 class WelcomeActivity : BaseActivityNoToolbar() {

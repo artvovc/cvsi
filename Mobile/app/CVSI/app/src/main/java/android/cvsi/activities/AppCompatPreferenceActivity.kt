@@ -1,4 +1,4 @@
-package com.templates.kotlintemplates.activities
+package android.cvsi.activities
 
 import android.content.res.Configuration
 import android.os.Bundle

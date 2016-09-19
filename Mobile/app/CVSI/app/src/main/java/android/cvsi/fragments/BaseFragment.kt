@@ -1,23 +1,23 @@
-package com.templates.kotlintemplates.fragments
+package android.cvsi.fragments
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 
 
-abstract class BaseFragment : DebugFragment() {
+abstract class BaseFragment : Fragment() {
+
+    companion object {
+        private val TAG = BaseFragment::class.java.simpleName
+    }
 
     protected abstract val rootLayout: Int
     protected abstract var rootView: View?
-
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater?.inflate(rootLayout, container, false)
@@ -26,11 +26,6 @@ abstract class BaseFragment : DebugFragment() {
 
     override fun getContext(): Context {
         return this.context
-    }
-
-
-    override fun log(msg: String) {
-        Log.d(TAG, msg)
     }
 
     protected fun toast(msg: String) {
@@ -57,11 +52,6 @@ abstract class BaseFragment : DebugFragment() {
         Snackbar.make(view, msg, Snackbar.LENGTH_INDEFINITE).setAction("Ok") {
             runnable?.run()
         }.show()
-    }
-
-    companion object {
-
-        private val TAG = BaseFragment::class.java.simpleName
     }
 
 }

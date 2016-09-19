@@ -1,4 +1,4 @@
-package com.dsdmsa.weather.controllers
+package android.cvsi.controllers
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,12 +10,11 @@ class CacheController(context: Context) {
     companion object {
         val TAG = "CacheController"
 
-        val PREFIX = "com.dsdmsa.weather"
+        val PREFIX = "android.cvsi"
         val CACHE = "${PREFIX}CHACHE"
         val FIRST_TIME = "${PREFIX}FIRST_TIME"
         val MAX_MIN_TEMP = "${PREFIX}MAX_MIN_TEMP"
         val SUR_RISE_SET = "${PREFIX}SUR_RISE_SET"
-        val WEATHER = "${PREFIX}WEATHER"
 
     }
 
@@ -51,25 +50,4 @@ class CacheController(context: Context) {
         return prefs.getBoolean(SUR_RISE_SET, true)
     }
 
-//    fun saveWeather(weatherData: CachedWeatherDataModel?) {
-//        try {
-//            prefs.edit().putString(WEATHER, JsonMarshaller.toJson(weatherData)).apply()
-//        } catch (e: Exception) {
-//            Log.e(TAG, e.message)
-//        }
-//    }
-//
-//    val weather: CachedWeatherDataModel?
-//        get() {
-//            val jsonData = prefs.getString(WEATHER, null)
-//            if (jsonData != null) {
-//                try {
-//                    return JsonMarshaller.fromJson(CachedWeatherDataModel::class.java, jsonData)
-//                } catch (e: Exception) {
-//                    prefs.edit().remove(WEATHER).apply()
-//                    return null
-//                }
-//            }
-//            return null
-//        }
 }

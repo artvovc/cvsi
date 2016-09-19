@@ -1,15 +1,13 @@
-package com.templates.kotlintemplates.activities
+package android.cvsi.activities
 
 
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.view.Window
-import android.view.WindowManager
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.templates.kotlintemplates.activities.DebugActivity
 
-abstract class BaseActivityNoToolbar: DebugActivity(){
+abstract class BaseActivityNoToolbar: AppCompatActivity(){
     protected abstract var lay: Int
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.dsdmsa.weather.utils
+package android.cvsi.utils
 
 import android.support.v4.view.ViewPager
 

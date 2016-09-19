@@ -1,12 +1,6 @@
-package com.dsdmsa.weather.managers
+package android.cvsi.managers
 
-import android.util.Log
-import com.dsdmsa.weather.This
-import com.dsdmsa.weather.activityes.MainActivity
-import com.dsdmsa.weather.events.Events
-import com.dsdmsa.weather.models.forecats.WeatherForecast
-import com.dsdmsa.weather.services.WeatherService
-import com.google.android.gms.maps.model.LatLng
+import android.cvsi.services.ServicesCVSI
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.Gson
@@ -14,9 +8,6 @@ import com.google.gson.GsonBuilder
 import io.realm.RealmObject
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -24,7 +15,7 @@ class QueryManager() {
 
     private val httpClient: OkHttpClient
     private val retrofit: Retrofit
-    val weatherService: WeatherService
+    val services: ServicesCVSI
     val gson: Gson
 
     init {
@@ -45,12 +36,13 @@ class QueryManager() {
                 .build()
 
         retrofit = Retrofit.Builder()
-                .baseUrl(MainActivity.API_BASE_URL)
+//                .baseUrl(MainActivity.API_BASE_URL)
+                .baseUrl("sbase endpoint")
                 .client(httpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
-        weatherService = retrofit.create(WeatherService::class.java)
+        services = retrofit.create(ServicesCVSI::class.java)
     }
 
 //    fun getWeather(location: LatLng) {
@@ -68,18 +60,18 @@ class QueryManager() {
 //
 //    }
 
-    fun getForecats(location: LatLng) {
-        Log.d("TAGG", "init")
-        weatherService.getForecast(location.longitude, location.latitude,"de").enqueue(object : Callback<WeatherForecast> {
-            override fun onFailure(call: Call<WeatherForecast>?, t: Throwable?) {
-                Log.d("TAGG", "response no succes"+t?.cause)
-            }
-
-            override fun onResponse(call: Call<WeatherForecast>?, response: Response<WeatherForecast>?) {
-                Log.d("TAGG", "response succes")
-                This.bus.post(Events.WeatherInfo(response?.body()))
-            }
-        })
-
-    }
+//    fun getForecats(location: LatLng) {
+//        Log.d("TAGG", "init")
+//        weatherService.getForecast(location.longitude, location.latitude,"de").enqueue(object : Callback<WeatherForecast> {
+//            override fun onFailure(call: Call<WeatherForecast>?, t: Throwable?) {
+//                Log.d("TAGG", "response no succes"+t?.cause)
+//            }
+//
+//            override fun onResponse(call: Call<WeatherForecast>?, response: Response<WeatherForecast>?) {
+//                Log.d("TAGG", "response succes")
+//                This.bus.post(Events.WeatherInfo(response?.body()))
+//            }
+//        })
+//
+//    }
 }

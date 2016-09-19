@@ -1,4 +1,4 @@
-package com.dsdmsa.weather.utils
+package android.cvsi.utils
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator

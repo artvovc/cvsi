@@ -1,4 +1,4 @@
-package com.dsdmsa.weather.utils
+package android.cvsi.utils
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

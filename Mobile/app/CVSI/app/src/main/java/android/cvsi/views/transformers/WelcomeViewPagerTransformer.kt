@@ -1,11 +1,11 @@
-package com.templates.kotlintemplates.views.transformers
+package android.cvsi.views.transformers
 
 
+import android.cvsi.R
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.ImageView
 
-import com.mapsocial.socialmap.R
 
 class WelcomeViewPagerTransformer : ViewPager.PageTransformer {
 
